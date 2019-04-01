@@ -1,0 +1,107 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <p>This website hosts tools intended to make life easier for players of tabletop RPGs. It's a living website,
+    and
+    will continue to receive new tools on a semiregular basis.</p>
+    <p>My name is <a href="https://benovermyer.com">Ben Overmyer</a>. I'm the developer behind this site and the
+    tools it presents. Besides
+    working on these tools, I also act as the art director for <a href="https://silvergryphongames.com">Silver
+        Gryphon Games</a>.</p>
+
+    <h3 class="title is-3">Quick Generators</h3>
+    <p>The following are small generators that you run from this page.</p>
+
+    {% verbatim %}
+    <h4 class="title is-4">Language Generator</h4>
+    <p>This generates a description of a fantasy language for you.</p>
+    <p><button class="button is-primary" v-on:click="generateLanguage">Generate New Language</button></p>
+    <blockquote>{{ languageDescription }}</blockquote>
+
+    <h4 class="title is-4">Town Generator</h4>
+    <p>Need a quick town? Click here.</p>
+    <p><button class="button is-primary" v-on:click="generateTown">Generate New Town</button></p>
+    <blockquote>{{ townDescription }}</blockquote>
+
+    <h4 class="title is-4">Organization Generator</h4>
+    <p>This generates a fantasy organization.</p>
+    <p><button class="button is-primary" v-on:click="generateOrganization">Generate New Organization</button></p>
+    <blockquote>{{ organizationDescription }}</blockquote>
+    {% endverbatim %}
+</div>
+<div class="column is-one-third">
+    <div class="has-text-centered content">
+    <h3 class="title is-3">External Generators</h3>
+    </div>
+    <div class="content">
+    <p>The following is a list of other websites that offer generators like these.</p>
+    <ul>
+        <li><a href="http://www.chaoticshiny.com/">Chaotic Shiny</a></li>
+        <li><a href="https://www.darkestofnights.com/index.php/gensmi.html">Darkest of Nights</a></li>
+        <li><a href="http://donjon.bin.sh/">Donjon</a></li>
+        <li><a href="https://www.trollmystic.com/pub/category/generators/">Eposic</a></li>
+        <li><a href="http://www.fantasynamegenerators.com/">Fantasy Name Generators</a></li>
+        <li><a href="https://www.mithrilandmages.com/">Mithril &amp; Mages</a></li>
+        <li><a href="http://www.rangen.co.uk/">RanGen</a></li>
+        <li><a href="https://www.seventhsanctum.com/">Seventh Sanctum</a></li>
+        <li><a href="http://www.springhole.net/writing_roleplaying_randomators/index.html">Springhole.net</a></li>
+    </ul>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        languageDescription: '',
+        languageName: '',
+        organizationDescription: '',
+        townDescription: ''
+      },
+      methods: {
+        generateLanguage: function (event) {
+          url = 'https://langgen.ironarachne.com/'
+
+          fetch(url)
+            .then(response => response.json())
+            .then(response => {
+              this.languageDescription = response.Description
+            })
+            .catch(error => console.error(error));
+        },
+        generateOrganization: function (event) {
+          id = getRandomInt(1000000)
+          url = 'https://orggen.ironarachne.com/' + id
+
+          fetch(url)
+            .then(response => response.json())
+            .then(response => {
+              this.organizationDescription = 'The ' + response.Name + ', ' + response.Type.Name + '. They are a ' + response.SizeClass.Name + ' group with ' + response.Size + ' members. They are considered to be ' + response.PrimaryTrait + '.'
+            })
+            .catch(error => console.error(error));
+        },
+        generateTown: function (event) {
+          id = getRandomInt(1000000)
+          url = 'https://towngen.ironarachne.com/' + id
+
+          fetch(url)
+            .then(response => response.json())
+            .then(response => {
+              this.townDescription = response.townName + ' is a ' + response.category.name + ' of ' + response.population + ' people. It\'s in a ' + response.climate.Name + ' climate. '
+              exports = Object.keys(response.exports)
+              imports = Object.keys(response.imports)
+              this.townDescription += 'It exports ' + exports[0] + ' and imports ' + imports[0] + '. '
+              this.townDescription += 'The mayor is a ' + response.mayor.Race.Name + ' named ' + response.mayor.FirstName + ' ' + response.mayor.LastName + ', who is motivated by ' + response.mayor.Motivation + '.'
+            })
+            .catch(error => console.error(error));
+        }
+      }
+    })
+
+    app.generateLanguage()
+    app.generateOrganization()
+    app.generateTown()
+{% endblock %}

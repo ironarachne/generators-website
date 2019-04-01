@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% if page.type == "single" %}{{ page.title }} | {% endif %}Iron Arachne</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.subtitle }}">
+  <link rel="stylesheet" href="{{ asset('ironarachne.css') }}" type="text/css">
+</head>
+
+<body>
+  <section class="hero is-dark">
+    <div class="hero-body">
+      <figure class="image is-128x128 is-pulled-left">
+        <img src="{{ asset('img/ia-logo-small.png') }}" alt="Iron Arachne logo">
+      </figure>
+      <h1 class="title">Iron Arachne{% if page.type == "single" %} | {{ page.title }}{% endif %}</h1>
+      <h2 class="subtitle">{{ page.subtitle }}</h2>
+    </div>
+  </section>
+  <div class="container" id="app">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{{ route('index') }}">Home</a>
+        <a class="navbar-item" href="{{ route('culture.index') }}">Culture Generator</a>
+        <a class="navbar-item" href="{{ route('region.index') }}">Region Generator</a>
+        <a class="navbar-item" href="{{ route('heraldry.index') }}">Heraldry Generator</a>
+      </div>
+    </nav>
+    <section class="section">
+      <div class="columns">
+        <div class="column content">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Iron Arachne</strong> is the ongoing project of
+          <a href="https://benovermyer.com">Ben Overmyer</a>. You can find source code for most of these tools on
+          GitHub at
+          <a href="https://github.com/ironarachne/">github.com/ironarachne</a>.
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+  <script>
+    {% block javascript %}{% endblock %}
+  </script>
+</body>
+
+</html>
