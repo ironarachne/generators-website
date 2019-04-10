@@ -24,4 +24,5 @@ Route::get( '/heraldry/{guid}', 'HeraldryController@show' )->name( 'heraldry.sho
 
 Route::get( '/region/', 'RegionController@index' )->name( 'region.index' );
 Route::post( '/region/', 'RegionController@generate' )->name( 'region.generate' );
+Route::get( '/region/{guid}/ruler-device.svg', 'RegionController@device' )->name( 'region.device' );
 Route::get( '/region/{guid}', 'RegionController@show' )->name( 'region.show' );
