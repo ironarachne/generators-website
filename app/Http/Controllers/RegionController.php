@@ -15,7 +15,7 @@ class RegionController extends Controller
     public function show( $guid )
     {
         $region = Cache::rememberForever( "region-$guid", function () {
-            $regionGenerator = new regionGenerator();
+            $regionGenerator = new App\RegionGenerator();
             return $regionGenerator->generate();
         } );
 
