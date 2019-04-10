@@ -1,0 +1,8 @@
+{% extends 'layout' %}
+
+{% block content %}
+<form method="POST" action="/heraldry/">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="submit" class="button is-primary is-large" value="Generate New Heraldry">
+</form>
+{% endblock %}

@@ -7,8 +7,14 @@ services:
       - ./:/srv/www
     working_dir: /var/www
     links:
+      - culturegenapi
       - db
+      - heraldryapi
       - redis
+      - regiongenapi
+
+  culturegenapi:
+    image: ironarachne/culturegend:latest
 
   db:
     image: mariadb:10.3
@@ -16,8 +22,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: onlyfordev
 
+  heraldryapi:
+    image: ironarachne/armsapi:latest
+
   redis:
     image: redis:latest
+
+  regiongenapi:
+    image: ironarachne/regiongend:latest
 
   nginx:
     image: nginx:1.13.12
