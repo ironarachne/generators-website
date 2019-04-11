@@ -12,6 +12,12 @@ version: '3.3'
 services:
   website:
     image: ironarachne/generators-website:latest
+    ports:
+      - "8080:80"
+    environment:
+      CULTUREGENAPI: culturegenapi:9913
+      HERALDRYAPI: heraldryapi:7476
+      REGIONGENAPI: regiongenapi:7970
     networks:
       - ironarachne
 
