@@ -1,6 +1,7 @@
 {% extends 'layout' %}
 
 {% block content %}
+<p>This generator creates a region from a fantasy world.</p>
 <form method="POST" action="/region/">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="submit" class="button is-primary is-large" value="Generate New Region">

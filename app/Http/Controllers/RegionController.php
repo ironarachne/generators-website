@@ -9,7 +9,14 @@ class RegionController extends Controller
 {
     public function index()
     {
-        return view( 'region.index' );
+        $page = [
+            'title' => 'Region Generator',
+            'subtitle' => 'Generate individual regions in a fantasy world',
+            'description' => 'This tool procedurally generates regions for a fantasy world.',
+            'type' => 'single',
+        ];
+        
+        return view( 'region.index', [ 'page' => $page ] );
     }
 
     public function device( $guid )
@@ -32,6 +39,8 @@ class RegionController extends Controller
         $page = [
             'id' => $guid,
             'title' => 'The ' . $region->Class->Name . ' of ' . $region->Name,
+            'subtitle' => 'A ' . $region->Biome . ' region ruled by ' . $region->RulerTitle . ' ' . $region->Ruler->LastName,
+            'description' => 'The fantasy region of ' . $region->Name . '.',
             'type' => 'single',
         ];
 

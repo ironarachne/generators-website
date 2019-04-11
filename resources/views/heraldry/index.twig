@@ -1,6 +1,7 @@
 {% extends 'layout' %}
 
 {% block content %}
+<p>This generator creates a fictional coat-of-arms and accompanying blazon.<p>
 <form method="POST" action="/heraldry/">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="submit" class="button is-primary is-large" value="Generate New Heraldry">

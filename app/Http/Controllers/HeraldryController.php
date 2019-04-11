@@ -9,7 +9,14 @@ class HeraldryController extends Controller
 {
     public function index()
     {
-        return view( 'heraldry.index' );
+        $page = [
+            'title' => 'Heraldry Generator',
+            'subtitle' => 'Generate fictional coats-of-arms and their blazons',
+            'description' => 'This tool procedurally generates fictional coats-of-arms and their blazons.',
+            'type' => 'single',
+        ];
+        
+        return view( 'heraldry.index', [ 'page' => $page ] );
     }
 
     public function device( $guid )
@@ -29,7 +36,13 @@ class HeraldryController extends Controller
             return $heraldryGenerator->generate($guid);
         } );
 
-        return view( 'heraldry.show', [ 'heraldry' => $heraldry ] );
+        $page = [
+            'title' => $heraldry['blazon'],
+            'description' => 'A coat of arms for the blazon "' . $heraldry['blazon'] . '"',
+            'type' => 'single',
+        ];
+
+        return view( 'heraldry.show', [ 'heraldry' => $heraldry, 'page' => $page ] );
     }
 
     public function generate()

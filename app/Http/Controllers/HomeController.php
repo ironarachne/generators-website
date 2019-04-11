@@ -9,11 +9,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $page = [];
-
-        $page['title'] = 'Iron Arachne';
-        $page['subtitle'] = 'Procedural Generation Tools for Tabletop Role-playing Games';
-        $page['type'] = 'home';
+        $page = [
+            'title' => 'Iron Arachne',
+            'subtitle' => 'Procedural Generation Tools for Tabletop Role-playing Games',
+            'description' => 'Procedural Generation Tools for Tabletop Role-playing Games',
+            'type' => 'home',
+        ];
 
         return view( 'index' )->with( [ 'page' => $page ] );
     }
