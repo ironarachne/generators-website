@@ -6,7 +6,7 @@ This is the website that consumes all of the generators produced here.
 
 This is meant to be deployed to Docker. The following is an appropriate stack file:
 
-```
+```YAML
 version: '3.3'
 
 services:
@@ -15,9 +15,11 @@ services:
     ports:
       - "8080:80"
     environment:
+      APP_URL: http://localhost:8080
       CULTUREGENAPI: culturegenapi:9913
       HERALDRYAPI: heraldryapi:7476
       REGIONGENAPI: regiongenapi:7970
+      REDISHOST: redis
     networks:
       - ironarachne
 
@@ -25,14 +27,6 @@ services:
     image: ironarachne/culturegend:latest
     networks:
       - ironarachne
-
-  db:
-    image: mariadb:10.3
-    restart: always
-    networks:
-      - ironarachne
-    environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
 
   heraldryapi:
     image: ironarachne/armsapi:latest

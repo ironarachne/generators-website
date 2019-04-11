@@ -2,7 +2,7 @@
 
 {% block content %}
 <p>This generator creates a fictional human culture from a fantasy world.</p>
-<form method="POST" action="/culture/">
+<form method="POST" action="/culture">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="submit" class="button is-primary is-large" value="Generate New Culture">
 </form>
