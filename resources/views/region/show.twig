@@ -2,7 +2,8 @@
 
 {% block content %}
 <h1 class="is-title is-1">The {{ region.Class.Name }} of {{ region.Name }}</h1>
-<p>The {{ region.Class.Name }} of {{ region.Name }} is ruled by {{ region.RulerTitle }} {{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}. It's a {{ region.Biome }} region, and its capital is {{ region.Capital }}.</p>
+<p>The {{ region.Class.Name }} of {{ region.Name }} is ruled by {{ region.RulerTitle }} {{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}. Its capital is {{ region.Capital }}.</p>
+<p>{{ region.Climate.Description }}</p>
 <div class="box">
     <article class="media">
         <div class="media-left">
@@ -21,7 +22,7 @@
         <p><strong>Weight:</strong> {{ region.Ruler.Weight }} lbs.</p>
         <p><strong>Hair:</strong> {{ region.Ruler.HairColor }} and {{ region.Ruler.HairStyle }}</p>
         <p><strong>Eyes:</strong> {{ region.Ruler.EyeColor }}</p>
-        <p><strong>Hobby:</strong> {{ region.Ruler.Hobby }}</p>
+        <p><strong>Hobby:</strong> {{ region.Ruler.Hobby.Name }}</p>
         <p><strong>Motivation:</strong> {{ region.Ruler.Motivation }}</p>
         <p><strong>Traits: </strong> 
         {% for trait in region.Ruler.PsychologicalTraits %}
@@ -32,30 +33,39 @@
     </article>
 </div>
 
-<div class="columns">
-    <div class="column">
-        <h4 class="title is-4">Notable Towns in {{ region.Name }}</h4>
-        {% for town in region.Towns %}
-        <div class="content">
-            <h5 class="title is-5">{{ town.townName }}{% if town.townName == region.Capital %}<span>, the capital and
-                {{ region.RulerTitle }} {{ region.Ruler.LastName }}'s home</span>{% endif %}</h5>
-            <p><strong>Population:</strong> {{ town.population }} ({{ town.category.name }})</p>
-            <p><strong>Mayor:</strong> {{ town.mayor.FirstName }} {{ town.mayor.LastName }}, a
-                {{ town.mayor.Age }}-year-old {{ town.mayor.Gender }} {{ town.mayor.Race.Name }} motivated by
-                {{ town.mayor.Motivation }}</p>
-        </div>
-        {% endfor %}
-    </div>
-    <div class="column">
-        <h4 class="title is-4">Notable Organizations in {{ region.Name }}</h4>
-        {% for organization in region.Organizations %}
-        <div class="content">
-            <h5 class="title is-5">{{ organization.Name }}</h5>
-            <p><strong>Type:</strong> {{ organization.Type.Name }}</p>
-            <p><strong>Size:</strong> {{ organization.SizeClass.Name }}, with {{ organization.Size }} members</p>
-            <p><strong>Primary Trait:</strong> {{ organization.PrimaryTrait }}</p>
-        </div>
-        {% endfor %}
-    </div>
+<h4 class="title is-4">Notable Towns in {{ region.Name }}</h4>
+{% for town in region.Towns %}
+<div class="content">
+    <h5 class="title is-5">{{ town.Name }}{% if town.Name == region.Capital %}<span>, the capital and
+        {{ region.RulerTitle }} {{ region.Ruler.LastName }}'s home</span>{% endif %}</h5>
+    <p><strong>Population:</strong> {{ town.Population }} ({{ town.Category.Name }})</p>
+    <p><strong>Mayor:</strong> {{ town.Mayor.FirstName }} {{ town.Mayor.LastName }}, a
+        {{ town.Mayor.Age }}-year-old {% if town.Mayor.Gender == "female" %}woman{% else %}man{% endif %} motivated by
+        {{ town.Mayor.Motivation }}</p>
+    <p><strong>Exports</strong></p>
+    <ul>
+    {% for good in town.Exports %}
+    <li>{{ good.Name }}</li>
+    {% endfor %}
+    </ul>
+
+    <p><strong>Imports</strong></p>
+    <ul>
+    {% for good in town.Imports %}
+    <li>{{ good.Name }}</li>
+    {% endfor %}
+    </ul>
 </div>
+{% endfor %}
+
+<h4 class="title is-4">Notable Organizations in {{ region.Name }}</h4>
+{% for organization in region.Organizations %}
+<div class="content">
+    <h5 class="title is-5">{{ organization.Name }}</h5>
+    <p><strong>Type:</strong> {{ organization.Type.Name }}</p>
+    <p><strong>Size:</strong> {{ organization.SizeClass.Name }}, with {{ organization.Size }} members</p>
+    <p><strong>Primary Trait:</strong> {{ organization.PrimaryTrait }}</p>
+</div>
+{% endfor %}
+
 {% endblock %}

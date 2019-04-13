@@ -6,7 +6,7 @@
 <p>This culture is called the <em>{{ culture.Name }}</em>. Its people are the {{ culture.Adjective }}.</p>
 <p>They speak {% if culture.Language.Descriptors[0]|first in ['a', 'e', 'i', 'o', 'u'] %}an{% else %}a{% endif %} {{ culture.Language.Descriptors[0] }} language called {{ culture.Language.Adjective }}. It
 uses {% if culture.Language.WritingSystem.Classification|first in ['a', 'e', 'i', 'o', 'u'] %}an{% else %}a{% endif %} {{ culture.Language.WritingSystem.Classification }}
-writing system with {{ culture.Language.WritingSystem.StrokeType }} strokes.
+writing system with characters composed of {{ culture.Language.WritingSystem.StrokeType }} strokes.
 </p>
 
 <h3 class="title is-3">Common Names</h3>
@@ -46,8 +46,26 @@ include:</p>
     {% endfor %}
 </ul>
 
+<h3 class="title is-3">Appearance</h3>
+<p>The {{ culture.Adjective }} typically have {% for color in culture.Appearance.SkinColors %}
+{% if loop.revindex == 1 %} or{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %} skin. They have
+{{ culture.Appearance.FaceShape }} faces, {{ culture.Appearance.MouthShape }} mouths, and {{ culture.Appearance.NoseShape }} noses.
+Their eyes are usually {% for color in culture.Appearance.EyeColors %}{% if loop.revindex == 1 %} or{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %} in color, and are
+{{ culture.Appearance.EyeShape }} in shape.</p>
+<p>Men have {% for style in culture.Appearance.MaleHairStyles %}{% if loop.revindex == 1 %} or{% endif %} {{ style }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %} hair styles,
+while women wear it {% for style in culture.Appearance.FemaleHairStyles %}{% if loop.revindex == 1 %} or{% endif %} {{ style }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}.
+Common hair colors include {% for color in culture.Appearance.HairColors %}{% if loop.revindex == 1 %} and{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}.
+</p>
+{% if culture.Appearance.UniqueTrait != "none" %}<p>They have a heavy cultural slant towards {{ culture.Appearance.UniqueTrait }}.</p>{% endif %}
+<p><strong>Average Male Height:</strong> 
+{{ ((culture.Appearance.MinMaleHeight + culture.Appearance.MaxMaleHeight) / 24)|round(0, 'floor') }}'
+{{ (((culture.Appearance.MinMaleHeight + culture.Appearance.MaxMaleHeight) / 2) % 12)}}" </p>
+<p><strong>Average Female Height:</strong> 
+{{ ((culture.Appearance.MinFemaleHeight + culture.Appearance.MaxFemaleHeight) / 24)|round(0, 'floor') }}'
+{{ (((culture.Appearance.MinFemaleHeight + culture.Appearance.MaxFemaleHeight) / 2) % 12)}}" </p>
+
 <h3 class="title is-3">Clothing</h3>
-<p>As the {{ culture.Adjective }} hail originally from the {{ culture.HomeClimate.Name }}, their clothing
+<p>As the {{ culture.Adjective }} hail originally from a {{ culture.HomeClimate.Name }}, their clothing
 style is appropriate for that kind of region. They often wear the following:
 </p>
 <h4 class="title is-4">Male Clothing</h4>
