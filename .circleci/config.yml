@@ -13,3 +13,11 @@ jobs:
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ironarachne/generators-website:$TAG
           docker push ironarachne/generators-website:latest
+workflows:
+  version: 2
+  build-and-publish:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
