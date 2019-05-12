@@ -147,7 +147,7 @@ style is appropriate for that kind of region. They often wear the following:
             of {% if deity.Domains %}
                 {% for domain in deity.Domains %}
                 {% if loop.last and deity.Domains|length > 1 %} and {% endif %}
-                {{ domain }}{% if not loop.last and deity.Domains|length > 2 %}, {% endif %}
+                {{ domain.Name }}{% if not loop.last and deity.Domains|length > 2 %}, {% endif %}
                 {% endfor %}
                 {% else %}no particular domain{% endif %}. 
             {% if deity.Gender == "female" %}She{% else %}He{% endif %} is {{ deity.Appearance }}, with a

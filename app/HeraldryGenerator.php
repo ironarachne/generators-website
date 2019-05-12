@@ -7,13 +7,10 @@ use \GuzzleHttp\Client;
 class HeraldryGenerator {
     public function generate($id) {
         $client = new Client();
-        $response = $client->request('GET', 'http://' . env('HERALDRYAPI') . '/device/' . $id);
-        $device = $response->getBody()->getContents();
+        $response = $client->request('GET', 'http://' . env('WORLDAPI') . '/heraldry/' . $id);
+        $heraldry = $response->getBody()->getContents();
 
-        $response = $client->request('GET', 'http://' . env('HERALDRYAPI') . '/blazon/' . $id);
-        $blazon = $response->getBody()->getContents();
-
-        $heraldry = ['blazon' => $blazon, 'device' => $device, 'id' => $id];
+        $heraldry = ['heraldry' => json_decode($heraldry), 'id' => $id];
 
         return $heraldry;
     }

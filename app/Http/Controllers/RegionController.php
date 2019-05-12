@@ -26,7 +26,7 @@ class RegionController extends Controller
             return $regionGenerator->generate($guid);
         } );
 
-        return response($region->RulerHeraldry)->header('Content-Type', 'image/svg+xml');
+        return response($region->Ruler->Heraldry->Device)->header('Content-Type', 'image/svg+xml');
     }
 
     public function show( $guid )
@@ -39,7 +39,7 @@ class RegionController extends Controller
         $page = [
             'id' => $guid,
             'title' => 'The ' . $region->Class->Name . ' of ' . $region->Name,
-            'subtitle' => 'A ' . $region->Biome . ' region ruled by ' . $region->RulerTitle . ' ' . $region->Ruler->LastName,
+            'subtitle' => 'A ' . $region->Biome . ' region ruled by ' . $region->Ruler->Title . ' ' . $region->Ruler->LastName,
             'description' => 'The fantasy region of ' . $region->Name . '.',
             'type' => 'single',
         ];

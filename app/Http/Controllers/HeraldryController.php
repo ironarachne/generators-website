@@ -26,7 +26,7 @@ class HeraldryController extends Controller
             return $heraldryGenerator->generate($guid);
         } );
 
-        return response($heraldry['device'])->header('Content-Type', 'image/svg+xml');
+        return response($heraldry['heraldry']->Device)->header('Content-Type', 'image/svg+xml');
     }
 
     public function show( $guid )
@@ -37,8 +37,8 @@ class HeraldryController extends Controller
         } );
 
         $page = [
-            'title' => $heraldry['blazon'],
-            'description' => 'A coat of arms for the blazon "' . $heraldry['blazon'] . '"',
+            'title' => $heraldry['heraldry']->Blazon,
+            'description' => 'A coat of arms for the blazon "' . $heraldry['heraldry']->Blazon . '"',
             'type' => 'single',
         ];
 
