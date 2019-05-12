@@ -2,30 +2,34 @@
 
 {% block content %}
 <h1 class="is-title is-1">The {{ region.Class.Name }} of {{ region.Name }}</h1>
-<p>The {{ region.Class.Name }} of {{ region.Name }} is ruled by {{ region.RulerTitle }} {{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}. Its capital is {{ region.Capital }}.</p>
+<p>The {{ region.Class.Name }} of {{ region.Name }} is ruled by {{ region.Ruler.Title }} {{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}. Its capital is {{ region.Capital }}.</p>
 <p>{{ region.Climate.Description }}</p>
 <div class="box">
     <article class="media">
         <div class="media-left">
         <figure class="image is-320x420">
             <img src="/region/{{ page.id }}/ruler-device.svg" class="image">
-            <p><em>{{ region.RulerBlazon }}</em></p>
+            <p><em>{{ region.Ruler.Heraldry.Blazon }}</em></p>
         </figure>
         </div>
         <div class="media-content">
         <p class="title">{{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}</p>
-        <p class="subtitle">{{ region.RulerTitle }} of {{ region.Name }}</p>
-        <p><strong>Race:</strong> {{ region.Ruler.Race.Name }}</p>
+        <p class="subtitle">{{ region.Ruler.Title }} of {{ region.Name }}</p>
         <p><strong>Gender:</strong> {{ region.Ruler.Gender }}</p>
-        <p><strong>Age:</strong> {{ region.Ruler.Age }} years ({{ region.Ruler.AgeCategory }})</p>
+        <p><strong>Age:</strong> {{ region.Ruler.Age }} years ({{ region.Ruler.AgeCategory.Name }})</p>
         <p><strong>Height:</strong> {{ region.Ruler.Height }} in.</p>
         <p><strong>Weight:</strong> {{ region.Ruler.Weight }} lbs.</p>
         <p><strong>Hair:</strong> {{ region.Ruler.HairColor }} and {{ region.Ruler.HairStyle }}</p>
         <p><strong>Eyes:</strong> {{ region.Ruler.EyeColor }}</p>
         <p><strong>Hobby:</strong> {{ region.Ruler.Hobby.Name }}</p>
         <p><strong>Motivation:</strong> {{ region.Ruler.Motivation }}</p>
-        <p><strong>Traits: </strong> 
-        {% for trait in region.Ruler.PsychologicalTraits %}
+        <p><strong>Positive Traits: </strong> 
+        {% for trait in region.Ruler.PositiveTraits %}
+        <span>{{ trait }}{% if not loop.last %}, {% endif %}</span>
+        {% endfor %}
+        </p>
+        <p><strong>Negative Traits: </strong> 
+        {% for trait in region.Ruler.NegativeTraits %}
         <span>{{ trait }}{% if not loop.last %}, {% endif %}</span>
         {% endfor %}
         </p>
@@ -38,7 +42,7 @@
 <div class="content">
     <h5 class="title is-5">{{ town.Name }}{% if town.Name == region.Capital %}<span>, the capital and
         {{ region.RulerTitle }} {{ region.Ruler.LastName }}'s home</span>{% endif %}</h5>
-    <p><strong>Population:</strong> {{ town.Population }} ({{ town.Category.Name }})</p>
+    <p><strong>Population:</strong> {{ town.Population|number_format }} ({{ town.Category.Name }})</p>
     <p><strong>Mayor:</strong> {{ town.Mayor.FirstName }} {{ town.Mayor.LastName }}, a
         {{ town.Mayor.Age }}-year-old {% if town.Mayor.Gender == "female" %}woman{% else %}man{% endif %} motivated by
         {{ town.Mayor.Motivation }}</p>
