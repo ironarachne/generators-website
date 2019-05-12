@@ -15,7 +15,7 @@
         <div class="media-content">
         <p class="title">{{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}</p>
         <p class="subtitle">{{ region.Ruler.Title }} of {{ region.Name }}</p>
-        <p><strong>Gender:</strong> {{ region.Ruler.Gender }}</p>
+        <p><strong>Gender:</strong> {{ region.Ruler.Gender.Name }}</p>
         <p><strong>Age:</strong> {{ region.Ruler.Age }} years ({{ region.Ruler.AgeCategory.Name }})</p>
         <p><strong>Height:</strong> {{ region.Ruler.Height }} in.</p>
         <p><strong>Weight:</strong> {{ region.Ruler.Weight }} lbs.</p>
@@ -44,8 +44,7 @@
         {{ region.RulerTitle }} {{ region.Ruler.LastName }}'s home</span>{% endif %}</h5>
     <p><strong>Population:</strong> {{ town.Population|number_format }} ({{ town.Category.Name }})</p>
     <p><strong>Mayor:</strong> {{ town.Mayor.FirstName }} {{ town.Mayor.LastName }}, a
-        {{ town.Mayor.Age }}-year-old {% if town.Mayor.Gender == "female" %}woman{% else %}man{% endif %} motivated by
-        {{ town.Mayor.Motivation }}</p>
+        {{ town.Mayor.Age }}-year-old {{ town.Mayor.Gender.Noun }} motivated by {{ town.Mayor.Motivation }}</p>
     <p><strong>Exports</strong></p>
     <ul>
     {% for good in town.Exports %}

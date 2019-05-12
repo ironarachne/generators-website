@@ -90,7 +90,7 @@ function getRandomInt(max) {
             .then(response => {
               this.townDescription = response.Name + ' is a ' + response.Category.Name + ' of ' + response.Population + ' people. It\'s in a ' + response.Climate.Name + ' climate. '
               this.townDescription += 'It exports ' + response.Exports[0].Quality + ' ' + response.Exports[0].Name + ' and imports ' + response.Imports[0].Name + '. '
-              this.townDescription += 'The mayor is a ' + response.Mayor.Gender + ' named ' + response.Mayor.FirstName + ' ' + response.Mayor.LastName + ', who is motivated by ' + response.Mayor.Motivation + '.'
+              this.townDescription += 'The mayor is a ' + response.Mayor.Gender.Noun + ' named ' + response.Mayor.FirstName + ' ' + response.Mayor.LastName + ', who is motivated by ' + response.Mayor.Motivation + '.'
             })
             .catch(error => console.error(error));
         }
