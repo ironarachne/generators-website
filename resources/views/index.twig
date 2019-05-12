@@ -83,16 +83,14 @@ function getRandomInt(max) {
         },
         generateTown: function (event) {
           id = getRandomInt(1000000)
-          url = 'https://towngen.ironarachne.com/' + id
+          url = 'https://worldapi.ironarachne.com/town/' + id
 
           fetch(url)
             .then(response => response.json())
             .then(response => {
-              this.townDescription = response.townName + ' is a ' + response.category.name + ' of ' + response.population + ' people. It\'s in a ' + response.climate.Name + ' climate. '
-              exports = Object.keys(response.exports)
-              imports = Object.keys(response.imports)
-              this.townDescription += 'It exports ' + exports[0] + ' and imports ' + imports[0] + '. '
-              this.townDescription += 'The mayor is a ' + response.mayor.Race.Name + ' named ' + response.mayor.FirstName + ' ' + response.mayor.LastName + ', who is motivated by ' + response.mayor.Motivation + '.'
+              this.townDescription = response.Name + ' is a ' + response.Category.Name + ' of ' + response.Population + ' people. It\'s in a ' + response.Climate.Name + ' climate. '
+              this.townDescription += 'It exports ' + response.Exports[0].Quality + ' ' + response.Exports[0].Name + ' and imports ' + response.Imports[0].Name + '. '
+              this.townDescription += 'The mayor is a ' + response.Mayor.Gender + ' named ' + response.Mayor.FirstName + ' ' + response.Mayor.LastName + ', who is motivated by ' + response.Mayor.Motivation + '.'
             })
             .catch(error => console.error(error));
         }
