@@ -10,7 +10,7 @@ class HeraldryGenerator {
         $response = $client->request('GET', 'http://' . env('WORLDAPI') . '/heraldry/' . $id);
         $heraldry = $response->getBody()->getContents();
 
-        $heraldry = ['heraldry' => $heraldry, 'id' => $id];
+        $heraldry = ['heraldry' => json_decode($heraldry), 'id' => $id];
 
         return $heraldry;
     }
