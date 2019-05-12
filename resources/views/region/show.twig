@@ -7,32 +7,30 @@
 <div class="box">
     <article class="media">
         <div class="media-left">
-        <figure class="image is-320x420">
-            <img src="/region/{{ page.id }}/ruler-device.svg" class="image">
-            <p><em>{{ region.Ruler.Heraldry.Blazon }}</em></p>
-        </figure>
+            <figure class="image is-320x420">
+                <img src="/region/{{ page.id }}/ruler-device.svg" class="image">
+                <p><em>{{ region.Ruler.Heraldry.Blazon }}</em></p>
+            </figure>
         </div>
         <div class="media-content">
-        <p class="title">{{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}</p>
-        <p class="subtitle">{{ region.Ruler.Title }} of {{ region.Name }}</p>
-        <p><strong>Gender:</strong> {{ region.Ruler.Gender.Name }}</p>
-        <p><strong>Age:</strong> {{ region.Ruler.Age }} years ({{ region.Ruler.AgeCategory.Name }})</p>
-        <p><strong>Height:</strong> {{ region.Ruler.Height }} in.</p>
-        <p><strong>Weight:</strong> {{ region.Ruler.Weight }} lbs.</p>
-        <p><strong>Hair:</strong> {{ region.Ruler.HairColor }} and {{ region.Ruler.HairStyle }}</p>
-        <p><strong>Eyes:</strong> {{ region.Ruler.EyeColor }}</p>
-        <p><strong>Hobby:</strong> {{ region.Ruler.Hobby.Name }}</p>
-        <p><strong>Motivation:</strong> {{ region.Ruler.Motivation }}</p>
-        <p><strong>Positive Traits: </strong> 
-        {% for trait in region.Ruler.PositiveTraits %}
-        <span>{{ trait }}{% if not loop.last %}, {% endif %}</span>
-        {% endfor %}
-        </p>
-        <p><strong>Negative Traits: </strong> 
-        {% for trait in region.Ruler.NegativeTraits %}
-        <span>{{ trait }}{% if not loop.last %}, {% endif %}</span>
-        {% endfor %}
-        </p>
+            <p class="title">{{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}</p>
+            <p class="subtitle">{{ region.Ruler.Title }} of {{ region.Name }}</p>
+            <hr>
+            <p>{{ region.Ruler.Title }} {{ region.Ruler.LastName }} is a {{ region.Ruler.Gender.Noun }} of {{ region.Ruler.Age }} years. 
+            {{ region.Ruler.Gender.SubjectPronoun|title }} is {{ region.Ruler.Height // 12 }}'{{ region.Ruler.Height % 12 }}" tall and weighs {{ region.Ruler.Weight }} pounds, 
+            with {{ region.Ruler.HairColor }} hair in a {{ region.Ruler.HairStyle }} style.</p>
+            <p>{{ region.Ruler.Gender.SubjectPronoun|title }} has {{ region.Ruler.SkinColor }} skin and {{ region.Ruler.EyeColor }} eyes. 
+            {{ region.Ruler.Gender.PossessivePronoun|title }} {{ region.Ruler.FaceShape }} face bears a {{ region.Ruler.NoseShape }} nose and {{ region.Ruler.MouthShape }} mouth.</p>
+            <p>{{ region.Ruler.Gender.PossessivePronoun|title }} hobby is {{ region.Ruler.Hobby.Name }}, and {{ region.Ruler.Gender.SubjectPronoun }}'s motivated by {{ region.Ruler.Motivation }}. 
+            Most people say {{ region.Ruler.Gender.SubjectPronoun }} is 
+            {% for trait in region.Ruler.PositiveTraits %}
+            {% if loop.last and loop.length > 1 %}and {% endif %}{{ trait }}, 
+            {% endfor %}
+            but also 
+            {% for trait in region.Ruler.NegativeTraits %}
+            {% if loop.last and loop.length > 1 %}and {% endif %}{{ trait }}{% if not loop.last and loop.length > 2 %}, {% endif %}
+            {% endfor %}.
+            </p>
         </div>
     </article>
 </div>
@@ -48,7 +46,7 @@
     <p><strong>Exports</strong></p>
     <ul>
     {% for good in town.Exports %}
-    <li>{{ good.Name }}</li>
+    <li>{{ good.Quality }} {{ good.Name }}</li>
     {% endfor %}
     </ul>
 
@@ -68,6 +66,8 @@
     <p><strong>Type:</strong> {{ organization.Type.Name }}</p>
     <p><strong>Size:</strong> {{ organization.SizeClass.Name }}, with {{ organization.Size }} members</p>
     <p><strong>Primary Trait:</strong> {{ organization.PrimaryTrait }}</p>
+    <p><strong>Leader:</strong> {{ organization.Leader.Title|title }} {{ organization.Leader.FirstName }} {{ organization.Leader.LastName }}, a
+        {{ organization.Leader.Age }}-year-old {{ organization.Leader.Culture.Adjective }} {{ organization.Leader.Gender.Noun }} motivated by {{ organization.Leader.Motivation }}</p>
 </div>
 {% endfor %}
 
