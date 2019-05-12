@@ -49,7 +49,7 @@ class RegionController extends Controller
 
     public function generate()
     {
-        $guid = rand(10, 100000);
+        $guid = Uuid::uuid4();
 
         return redirect()->route( 'region.show', [ 'guid' => $guid ] );
     }
