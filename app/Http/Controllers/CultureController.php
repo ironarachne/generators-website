@@ -28,9 +28,9 @@ class CultureController extends Controller
 
         $page = [
             'id' => $guid,
-            'title' => 'The ' . $culture->Adjective . ' Culture',
-            'subtitle' => 'A fictional people from a ' . $culture->HomeClimate->Name . ' climate',
-            'description' => 'The ' . $culture->Adjective . ', a fictional culture from a ' . $culture->HomeClimate->Name . ' climate.',
+            'title' => 'The ' . $culture->adjective . ' Culture',
+            'subtitle' => 'A fictional people from a ' . $culture->home_climate->Name . ' climate',
+            'description' => 'The ' . $culture->adjective . ', a fictional culture from a ' . $culture->home_climate->Name . ' climate.',
             'type' => 'single',
         ];
 
