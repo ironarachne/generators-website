@@ -1,73 +1,53 @@
 {% extends 'layout' %}
 
 {% block content %}
-<h1 class="is-title is-1">The {{ region.Class.Name }} of {{ region.Name }}</h1>
-<p>The {{ region.Class.Name }} of {{ region.Name }} is ruled by {{ region.Ruler.Title }} {{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}. Its capital is {{ region.Capital }}.</p>
-<p>{{ region.Climate.Description }}</p>
+<h1 class="is-title is-1">{{ region.name }}</h1>
+<p>{{ region.name }} is ruled by {{ region.ruler.name }}. Its capital is {{ region.capital }}.</p>
+<p>{{ region.climate }}</p>
 <div class="box">
     <article class="media">
         <div class="media-left">
             <figure class="image is-320x420">
                 <img src="/region/{{ page.id }}/ruler-device.svg" class="image">
-                <p><em>{{ region.Ruler.Heraldry.Blazon }}</em></p>
+                <p><em>{{ region.ruler.blazon }}</em></p>
             </figure>
         </div>
         <div class="media-content">
-            <p class="title">{{ region.Ruler.FirstName }} {{ region.Ruler.LastName }}</p>
-            <p class="subtitle">{{ region.Ruler.Title }} of {{ region.Name }}</p>
+            <p class="title">{{ region.ruler.name }}</p>
             <hr>
-            <p>{{ region.Ruler.Title }} {{ region.Ruler.LastName }} is a {{ region.Ruler.Gender.Noun }} of {{ region.Ruler.Age }} years. 
-            {{ region.Ruler.Gender.SubjectPronoun|title }} is {{ region.Ruler.Height // 12 }}'{{ region.Ruler.Height % 12 }}" tall and weighs {{ region.Ruler.Weight }} pounds, 
-            with {{ region.Ruler.HairColor }} hair in a {{ region.Ruler.HairStyle }} style.</p>
-            <p>{{ region.Ruler.Gender.SubjectPronoun|title }} has {{ region.Ruler.SkinColor }} skin and {{ region.Ruler.EyeColor }} eyes. 
-            {{ region.Ruler.Gender.PossessivePronoun|title }} {{ region.Ruler.FaceShape }} face bears a {{ region.Ruler.NoseShape }} nose and {{ region.Ruler.MouthShape }} mouth.</p>
-            <p>{{ region.Ruler.Gender.PossessivePronoun|title }} hobby is {{ region.Ruler.Hobby.Name }}, and {{ region.Ruler.Gender.SubjectPronoun }}'s motivated by {{ region.Ruler.Motivation }}. 
-            Most people say {{ region.Ruler.Gender.SubjectPronoun }} is 
-            {% for trait in region.Ruler.PositiveTraits %}
-            {% if loop.last and loop.length > 1 %}and {% endif %}{{ trait }}, 
-            {% endfor %}
-            but also 
-            {% for trait in region.Ruler.NegativeTraits %}
-            {% if loop.last and loop.length > 1 %}and {% endif %}{{ trait }}{% if not loop.last and loop.length > 2 %}, {% endif %}
-            {% endfor %}.
-            </p>
+            <p>{{ region.ruler.description }}</p>
         </div>
     </article>
 </div>
 
-<h4 class="title is-4">Notable Towns in {{ region.Name }}</h4>
-{% for town in region.Towns %}
+<h4 class="title is-4">Notable Towns in {{ region.name }}</h4>
+{% for town in region.towns %}
 <div class="content">
-    <h5 class="title is-5">{{ town.Name }}{% if town.Name == region.Capital %}<span>, the capital and
-        {{ region.RulerTitle }} {{ region.Ruler.LastName }}'s home</span>{% endif %}</h5>
-    <p><strong>Population:</strong> {{ town.Population|number_format }} ({{ town.Category.Name }})</p>
-    <p><strong>Mayor:</strong> {{ town.Mayor.FirstName }} {{ town.Mayor.LastName }}, a
-        {{ town.Mayor.Age }}-year-old {{ town.Mayor.Gender.Noun }} motivated by {{ town.Mayor.Motivation }}</p>
+    <h5 class="title is-5">{{ town.name }}{% if town.name == region.capital %}<span>, the capital and
+        {{ region.ruler.name }}'s home</span>{% endif %}</h5>
+    <p><strong>Population:</strong> {{ town.population|number_format }} ({{ town.category }})</p>
+    <p><strong>Mayor:</strong> {{ town.mayor.description }}</p>
     <p><strong>Exports</strong></p>
     <ul>
-    {% for good in town.Exports %}
-    <li>{{ good.Quality }} {{ good.Name }}</li>
+    {% for good in town.exports %}
+    <li>{{ good }}</li>
     {% endfor %}
     </ul>
 
     <p><strong>Imports</strong></p>
     <ul>
-    {% for good in town.Imports %}
-    <li>{{ good.Name }}</li>
+    {% for good in town.imports %}
+    <li>{{ good }}</li>
     {% endfor %}
     </ul>
 </div>
 {% endfor %}
 
-<h4 class="title is-4">Notable Organizations in {{ region.Name }}</h4>
-{% for organization in region.Organizations %}
+<h4 class="title is-4">Notable Organizations in {{ region.name }}</h4>
+{% for organization in region.organizations %}
 <div class="content">
-    <h5 class="title is-5">{{ organization.Name }}</h5>
-    <p><strong>Type:</strong> {{ organization.Type.Name }}</p>
-    <p><strong>Size:</strong> {{ organization.SizeClass.Name }}, with {{ organization.Size }} members</p>
-    <p><strong>Primary Trait:</strong> {{ organization.PrimaryTrait }}</p>
-    <p><strong>Leader:</strong> {{ organization.Leader.Title|title }} {{ organization.Leader.FirstName }} {{ organization.Leader.LastName }}, a
-        {{ organization.Leader.Age }}-year-old {{ organization.Leader.Culture.Adjective }} {{ organization.Leader.Gender.Noun }} motivated by {{ organization.Leader.Motivation }}</p>
+    <h5 class="title is-5">{{ organization.name }}</h5>
+    <p>{{ organization.description }} {{ organization.leader.description }}</p>
 </div>
 {% endfor %}
 

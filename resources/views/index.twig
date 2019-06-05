@@ -61,23 +61,23 @@ function getRandomInt(max) {
       },
       methods: {
         generateLanguage: function (event) {
-          url = 'https://langgen.ironarachne.com/'
+          url = 'https://worldapi.ironarachne.com/language'
 
           fetch(url)
             .then(response => response.json())
             .then(response => {
-              this.languageDescription = response.Description
+              this.languageDescription = response.description
             })
             .catch(error => console.error(error));
         },
         generateOrganization: function (event) {
           id = getRandomInt(1000000)
-          url = 'https://orggen.ironarachne.com/' + id
+          url = 'https://worldapi.ironarachne.com/organization/' + id
 
           fetch(url)
             .then(response => response.json())
             .then(response => {
-              this.organizationDescription = 'The ' + response.Name + ', ' + response.Type.Name + '. They are a ' + response.SizeClass.Name + ' group with ' + response.Size + ' members. They are considered to be ' + response.PrimaryTrait + '.'
+              this.organizationDescription = response.description
             })
             .catch(error => console.error(error));
         },
@@ -88,9 +88,9 @@ function getRandomInt(max) {
           fetch(url)
             .then(response => response.json())
             .then(response => {
-              this.townDescription = response.Name + ' is a ' + response.Category.Name + ' of ' + response.Population + ' people. It\'s in a ' + response.Climate.Name + ' climate. '
-              this.townDescription += 'It exports ' + response.Exports[0].Quality + ' ' + response.Exports[0].Name + ' and imports ' + response.Imports[0].Name + '. '
-              this.townDescription += 'The mayor is a ' + response.Mayor.Gender.Noun + ' named ' + response.Mayor.FirstName + ' ' + response.Mayor.LastName + ', who is motivated by ' + response.Mayor.Motivation + '.'
+              this.townDescription = response.name + ' is a ' + response.category + ' of ' + response.population + ' people. '
+              this.townDescription += 'It exports ' + response.exports[0] + ' and imports ' + response.imports[0] + '. '
+              this.townDescription += 'The mayor is ' + response.mayor.name + '. ' + response.mayor.description
             })
             .catch(error => console.error(error));
         }

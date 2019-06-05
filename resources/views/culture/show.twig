@@ -1,20 +1,17 @@
 {% extends 'layout' %}
 
 {% block content %}
-<h2 class="title is-2">The {{ culture.Name }} Culture</h2>
+<h2 class="title is-2">The {{ culture.name }} Culture</h2>
 
-<p>This culture is called the <em>{{ culture.Name }}</em>. Its people are the {{ culture.Adjective }}.</p>
-<p>They speak {% if culture.Language.Descriptors[0]|first in ['a', 'e', 'i', 'o', 'u'] %}an{% else %}a{% endif %} {{ culture.Language.Descriptors[0] }} language called {{ culture.Language.Adjective }}. It
-uses {% if culture.Language.WritingSystem.Classification|first in ['a', 'e', 'i', 'o', 'u'] %}an{% else %}a{% endif %} {{ culture.Language.WritingSystem.Classification }}
-writing system with characters composed of {{ culture.Language.WritingSystem.StrokeType }} strokes.
-</p>
+<p>This culture is called the <em>{{ culture.name }}</em>. Its people are the {{ culture.adjective }}.</p>
+<p>They speak {{ culture.language.name }}. {{ culture.language.description }}</p>
 
 <h3 class="title is-3">Common Names</h3>
 <div class="columns">
     <div class="column">
         <h4 class="title is-4">Male Names</h4>
         <ul>
-            {% for name in culture.CommonMaleNames %}
+            {% for name in culture.common_male_names %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>
@@ -22,7 +19,7 @@ writing system with characters composed of {{ culture.Language.WritingSystem.Str
     <div class="column">
         <h4 class="title is-4">Female Names</h4>
         <ul>
-            {% for name in culture.CommonFemaleNames %}
+            {% for name in culture.common_female_names %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>
@@ -30,7 +27,7 @@ writing system with characters composed of {{ culture.Language.WritingSystem.Str
     <div class="column">
         <h4 class="title is-4">Family Names</h4>
         <ul>
-            {% for name in culture.CommonFamilyNames %}
+            {% for name in culture.common_family_names %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>
@@ -38,135 +35,95 @@ writing system with characters composed of {{ culture.Language.WritingSystem.Str
 </div>
 
 <h3 class="title is-3">Music</h3>
-<p>Music of the {{ culture.Adjective }} is mostly {{ culture.MusicStyle.Descriptors[0] }}. Common instruments
+<p>{{ culture.music.description }}. Common instruments
 include:</p>
 <ul>
-    {% for instrument in culture.MusicStyle.Instruments %}
-    <li>{{ instrument.Description }}</li>
+    {% for instrument in culture.music_style.instruments %}
+    <li>{{ instrument.description }}</li>
     {% endfor %}
 </ul>
 
-<h3 class="title is-3">Appearance</h3>
-<p>The {{ culture.Adjective }} typically have {% for color in culture.Appearance.SkinColors %}
-{% if loop.revindex == 1 %} or{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %} skin. They have
-{{ culture.Appearance.FaceShape }} faces, {{ culture.Appearance.MouthShape }} mouths, and {{ culture.Appearance.NoseShape }} noses.
-Their eyes are usually {% for color in culture.Appearance.EyeColors %}{% if loop.revindex == 1 %} or{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %} in color, and are
-{{ culture.Appearance.EyeShape }} in shape.</p>
-<p>Men have {% for style in culture.Appearance.MaleHairStyles %}{% if loop.revindex == 1 %} or{% endif %} {{ style }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %} hair styles,
-while women wear it {% for style in culture.Appearance.FemaleHairStyles %}{% if loop.revindex == 1 %} or{% endif %} {{ style }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}.
-Common hair colors include {% for color in culture.Appearance.HairColors %}{% if loop.revindex == 1 %} and{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}.
-</p>
-{% if culture.Appearance.UniqueTrait != "none" %}<p>They have a heavy cultural slant towards {{ culture.Appearance.UniqueTrait }}.</p>{% endif %}
-<p><strong>Average Male Height:</strong> 
-{{ ((culture.Appearance.MinMaleHeight + culture.Appearance.MaxMaleHeight) / 24)|round(0, 'floor') }}'
-{{ (((culture.Appearance.MinMaleHeight + culture.Appearance.MaxMaleHeight) / 2) % 12)}}" </p>
-<p><strong>Average Female Height:</strong> 
-{{ ((culture.Appearance.MinFemaleHeight + culture.Appearance.MaxFemaleHeight) / 24)|round(0, 'floor') }}'
-{{ (((culture.Appearance.MinFemaleHeight + culture.Appearance.MaxFemaleHeight) / 2) % 12)}}" </p>
-
 <h3 class="title is-3">Clothing</h3>
-<p>As the {{ culture.Adjective }} hail originally from a {{ culture.HomeClimate.Name }}, their clothing
+<p>As the {{ culture.adjective }} hail originally from a {{ culture.home_climate.name }}, their clothing
 style is appropriate for that kind of region. They often wear the following:
 </p>
 <h4 class="title is-4">Male Clothing</h4>
 <ul>
-    {% for item in culture.ClothingStyle.CommonMaleItems %}
-    <li>{{ item.Name }}</li>
+    {% for item in culture.clothing_style.common_male_items %}
+    <li>{{ item }}</li>
     {% endfor %}
 </ul>
 <h4 class="title is-4">Female Clothing</h4>
 <ul>
-    {% for item in culture.ClothingStyle.CommonFemaleItems %}
-    <li>{{ item.Name }}</li>
-    {% endfor %}
-</ul>
-<p>Common colors include {% for color in culture.ClothingStyle.CommonColors %}
-    {% if loop.revindex == 1 %} and{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}. 
-    Decoration tends towards {{ culture.ClothingStyle.DecorativeStyle }}.</p>
-<p>Clothing is most often made of the following materials:</p>
-<ul>
-    {% for item in culture.ClothingStyle.CommonMaterials %}
+    {% for item in culture.clothing_style.common_female_items %}
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
-<div v-if="culture.ClothingStyle.CommonJewelry != null">
+<p>Common colors include {% for color in culture.clothing_style.common_colors %}
+    {% if loop.revindex == 1 %} and{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}. 
+    Decoration tends towards {{ culture.clothing_style.decorative_style }}.</p>
+<p>Clothing is most often made of the following materials:</p>
+<ul>
+    {% for item in culture.clothing_style.common_materials %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+<div v-if="culture.clothing_style.CommonJewelry != null">
 <p>For jewelry, some of the following are common:</p>
 <ul>
-    {% for item in culture.ClothingStyle.CommonJewelry %}
+    {% for item in culture.clothing_style.CommonJewelry %}
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
 </div>
 
 <h3 class="title is-3">Food and Drink</h3>
-<p>Common dishes for the {{ culture.Adjective }} include:</p>
+<p>Common dishes for the {{ culture.adjective }} include:</p>
 <ul>
-{% for item in culture.FoodStyle.CommonDishes %}
+{% for item in culture.food_style.common_dishes %}
 <li>{{ item }}</li>
 {% endfor %}
 </ul>
 <p>As far as eating customs go, they have the following:</p>
 <ul>
-{% for item in culture.FoodStyle.EatingTraits %}
+{% for item in culture.food_style.eating_traits %}
 <li>{{ item }}</li>
 {% endfor %}
 </ul>
-{% if culture.FoodStyle.Breads %}
+{% if culture.food_style.breads %}
 <div>
     <p>Common breads include:</p>
     <ul>
-        {% for item in culture.FoodStyle.Breads %}
+        {% for item in culture.food_style.breads %}
         <li>{{ item }}</li>
         {% endfor %}
     </ul>
 </div>
 {% endif %}
-{% if culture.FoodStyle.AlcoholicDrinks %}
+{% if culture.food_style.alcoholic_drinks %}
 <div>
     <p>The most common alcoholic beverages are:</p>
     <ul>
-        {% for item in culture.FoodStyle.Breads %}
-        <li>{{ item.Strength }} {{ item.Name }}</li>
+        {% for item in culture.food_style.alcoholic_drinks %}
+        <li>{{ item }}</li>
         {% endfor %}
     </ul>
 </div>
 {% endif %}
 
 <h3 class="title is-3">Religion</h3>
-<p>The {{ culture.Adjective }} have a {{ culture.Religion.Class.Name }} outlook. They gather in
-{{ culture.Religion.GatheringPlaceName }}s.</p>
-{% if culture.Religion.Class.PantheonMaxSize > 0 %}
+<p>The {{ culture.adjective }} have a {{ culture.religion.type }} outlook. They gather in
+{{ culture.religion.gathering_place }}s.</p>
+{% if culture.religion.pantheon.deities|length > 0 %}
     <div class="content">
         <h4 class="title is-4">Deities</h4>
-        <p>The deities of the {{ culture.Adjective }} are as follows:</p>
-        {% for deity in culture.Religion.Pantheon.Deities %}
+        <p>The deities of the {{ culture.adjective }} are as follows:</p>
+        {% for deity in culture.religion.pantheon.deities %}
         <div class="content">
-            <h5 class="title is-5">{{ deity.Name }}</h5>
-            <p>
-            {{ deity.Name }} is the {% if deity.Gender == "female" %}goddess{% else %}god{% endif %}
-            of {% if deity.Domains %}
-                {% for domain in deity.Domains %}
-                {% if loop.last and deity.Domains|length > 1 %} and {% endif %}
-                {{ domain.Name }}{% if not loop.last and deity.Domains|length > 2 %}, {% endif %}
-                {% endfor %}
-                {% else %}no particular domain{% endif %}. 
-            {% if deity.Gender == "female" %}She{% else %}He{% endif %} is {{ deity.Appearance }}, with a
-            {% for trait in deity.PersonalityTraits %}
-            {{ trait }}{% if not loop.last %} and {% endif %}
-            {% endfor %} personality.
-            </p>
+            <h5 class="title is-5">{{ deity.name }}</h5>
+            <p>{{ deity.description }}</p>
         </div>
         {% endfor %}
-        {% if culture.Religion.Pantheon.Deities|length > 1 %}
-        <div class="content">
-            <h4 class="title is-4">Relationships of the Gods</h4>
-            <p>The following are the notable relationships between {{ culture.Adjective }} deities.</p>
-            <ul>
-            {% for relationship in culture.Religion.Pantheon.Relationships %}
-            <li>{{ relationship.Origin.Name }} {{ relationship.Descriptor }} {{ relationship.Target.Name }}</li>
-            {% endfor %}
-            </ul>
-        </div>
     </div>
     {% endif %}
 {% endif %}
