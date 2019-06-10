@@ -89,6 +89,7 @@ function getRandomInt(max) {
             .then(response => response.json())
             .then(response => {
               this.townDescription = response.name + ' is a ' + response.category + ' of ' + response.population + ' people. '
+              this.townDescription = response.building_style + ' '
               this.townDescription += 'It exports ' + response.exports[0] + ' and imports ' + response.imports[0] + '. '
               this.townDescription += 'The mayor is ' + response.mayor.name + '. ' + response.mayor.description
             })
