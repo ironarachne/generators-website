@@ -14,7 +14,8 @@
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",
         "ramsey/uuid": "^3.7",
-        "rcrowe/twigbridge": "^0.9.6"
+        "rcrowe/twigbridge": "^0.9.6",
+        "sentry/sentry-laravel": "1.0.2"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
