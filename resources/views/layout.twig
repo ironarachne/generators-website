@@ -48,6 +48,21 @@
       </div>
     </div>
   </footer>
+  <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom -->
+    <script>
+    (function(f, a, t, h, o, m){
+        a[h]=a[h]||function(){
+            (a[h].q=a[h].q||[]).push(arguments)
+        };
+        o=f.createElement('script'),
+        m=f.getElementsByTagName('script')[0];
+        o.async=1; o.src=t; o.id='fathom-script';
+        m.parentNode.insertBefore(o,m)
+    })(document, window, '//fathom.benovermyer.com/tracker.js', 'fathom');
+    fathom('set', 'siteId', 'KQMKI');
+    fathom('trackPageview');
+    </script>
+    <!-- / Fathom -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
   <script>
     {% block javascript %}{% endblock %}
