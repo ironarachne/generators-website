@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.2.1 (2019-06-26)
+
+This is a typography release.
+
+### Change List
+
+- Add website icons
+- Increase font size across the board
+- Replace typefaces with new ones
+
 ## 0.2.0 (2019-06-26)
 
 This version moves to using manual semantic versioning. The previous
@@ -8,7 +18,7 @@ scheme used 0.1.X versioning, where X was the CircleCI build number.
 The version number 0.2.0 was chosen to differentiate it from that
 process.
 
-### Change List:
+### Change List
 
 - Tag the current version of the Iron Arachne website as v0.2.0
 - Update the CI/CD configuration for CircleCI to reflect the new scheme

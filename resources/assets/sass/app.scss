@@ -1,48 +1,69 @@
 @charset 'utf-8';
 
 @font-face {
-    font-family: 'armwrestler';
-    src: url('../fonts/ArmWrestler-webfont.woff') format('woff');
-    font-weight: normal;
+    font-family: 'libre_baskerville';
+    src: url('../fonts/librebaskerville-bold-webfont.woff2') format('woff2'),
+         url('../fonts/librebaskerville-bold-webfont.woff') format('woff');
+    font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'vollkorn';
-    src: url('../fonts/vollkorn-bold-webfont.woff2') format('woff2'),
-         url('../fonts/vollkorn-bold-webfont.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'vollkorn';
-    src: url('../fonts/vollkorn-bolditalic-webfont.woff2') format('woff2'),
-         url('../fonts/vollkorn-bolditalic-webfont.woff') format('woff');
-    font-weight: 700;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'vollkorn';
-    src: url('../fonts/vollkorn-italic-webfont.woff2') format('woff2'),
-         url('../fonts/vollkorn-italic-webfont.woff') format('woff');
+    font-family: 'libre_baskerville';
+    src: url('../fonts/librebaskerville-italic-webfont.woff2') format('woff2'),
+         url('../fonts/librebaskerville-italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'vollkorn';
-    src: url('../fonts/vollkorn-regular-webfont.woff2') format('woff2'),
-         url('../fonts/vollkorn-regular-webfont.woff') format('woff');
+    font-family: 'libre_baskerville';
+    src: url('../fonts/librebaskerville-regular-webfont.woff2') format('woff2'),
+         url('../fonts/librebaskerville-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
-$family-serif: 'vollkorn';
+@font-face {
+    font-family: 'eczar';
+    src: url('../fonts/Eczar-Bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
 
-$family-sans-serif: 'armwrestler';
+@font-face {
+    font-family: 'eczar';
+    src: url('../fonts/Eczar-ExtraBold-webfont.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'eczar';
+    src: url('../fonts/Eczar-Medium-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'eczar';
+    src: url('../fonts/Eczar-Regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'eczar';
+    src: url('../fonts/Eczar-SemiBold-webfont.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+$family-serif: 'libre-baskerville';
+
+$family-sans-serif: 'eczar';
 $family-primary: $family-serif;
+$body-size: 24px;
 
 h1, h2, h3, h4, h5 {
     font-family: $family-sans-serif;
