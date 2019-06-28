@@ -16,6 +16,7 @@ Route::get( '/', 'HomeController@index' )->name( 'index' );
 Route::get( '/culture/', 'CultureController@index' )->name( 'culture.index' );
 Route::post( '/culture/', 'CultureController@generate' )->name( 'culture.generate' );
 Route::get( '/culture/{guid}', 'CultureController@show' )->name( 'culture.show' );
+Route::get( '/culture/{guid}/pdf', 'CultureController@pdf' )->name( 'culture.pdf' );
 
 Route::get( '/heraldry/', 'HeraldryController@index' )->name( 'heraldry.index' );
 Route::post( '/heraldry/', 'HeraldryController@generate' )->name( 'heraldry.generate' );

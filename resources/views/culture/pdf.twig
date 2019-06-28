@@ -1,40 +1,33 @@
-{% extends 'layout' %}
+{% extends 'pdflayout' %}
 
 {% block content %}
 <h2 class="title is-2">The {{ culture.name }} Culture</h2>
-
-<a class="button is-primary" href="{{ route('culture.pdf', {guid: page.id}) }}">Get PDF</a>
 
 <p>This culture is called the <em>{{ culture.name }}</em>. Its people are the {{ culture.adjective }}, and they are a {{ culture.primary_race.adjective }} society.</p>
 <p>They speak {{ culture.language.name }}. {{ culture.language.description }}</p>
 
 <h3 class="title is-3">Common Names</h3>
-<div class="columns">
-    <div class="column">
-        <h4 class="title is-4">Male Names</h4>
-        <ul>
-            {% for name in culture.common_male_names %}
-            <li>{{ name }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="column">
-        <h4 class="title is-4">Female Names</h4>
-        <ul>
-            {% for name in culture.common_female_names %}
-            <li>{{ name }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="column">
-        <h4 class="title is-4">Family Names</h4>
-        <ul>
-            {% for name in culture.common_family_names %}
-            <li>{{ name }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+
+<h4 class="title is-4">Male Names</h4>
+<ul>
+    {% for name in culture.common_male_names %}
+    <li>{{ name }}</li>
+    {% endfor %}
+</ul>
+
+<h4 class="title is-4">Female Names</h4>
+<ul>
+    {% for name in culture.common_female_names %}
+    <li>{{ name }}</li>
+    {% endfor %}
+</ul>
+
+<h4 class="title is-4">Family Names</h4>
+<ul>
+    {% for name in culture.common_family_names %}
+    <li>{{ name }}</li>
+    {% endfor %}
+</ul>
 
 <h3 class="title is-3">Buildings</h3>
 <p>{{ culture.building_style.description }}</p>

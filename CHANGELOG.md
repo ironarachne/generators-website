@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.2.2 (2019-06-28)
+
+For archival purposes, I added PDF generation for cultures so you can locally save your results.
+
+### Change List
+
+- Add PDF generation for cultures
+
 ## 0.2.1 (2019-06-26)
 
 This is a typography release.
