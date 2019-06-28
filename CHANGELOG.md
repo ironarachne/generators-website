@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.3 (2019-06-29)
+
+### Change List
+
+- Fix typo in CSS that prevented body font from loading
+
 ## 0.2.2 (2019-06-28)
 
 For archival purposes, I added PDF generation for cultures so you can locally save your results.
