@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.4 (2019-06-30)
+
+### Change List
+
+- Update to use the new 0.2.3 version of the World API
+- Fix some small display bugs
+
 ## 0.2.3 (2019-06-29)
 
 ### Change List

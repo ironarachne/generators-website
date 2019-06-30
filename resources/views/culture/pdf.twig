@@ -6,6 +6,8 @@
 <p>This culture is called the <em>{{ culture.name }}</em>. Its people are the {{ culture.adjective }}, and they are a {{ culture.primary_race.adjective }} society.</p>
 <p>They speak {{ culture.language.name }}. {{ culture.language.description }}</p>
 
+<p>{{ culture.home_climate.description|replace({"This is": "They hail from"}) }}</p>
+
 <h3 class="title is-3">Common Names</h3>
 
 <h4 class="title is-4">Male Names</h4>
@@ -33,8 +35,7 @@
 <p>{{ culture.building_style.description }}</p>
 
 <h3 class="title is-3">Music</h3>
-<p>{{ culture.music_style.description }}. Common instruments
-include:</p>
+<p>{{ culture.music_style.description }} Common instruments include:</p>
 <ul>
     {% for instrument in culture.music_style.instruments %}
     <li>{{ instrument.description }}</li>
@@ -47,29 +48,24 @@ style is appropriate for that kind of place. They often wear the following:
 </p>
 <h4 class="title is-4">Male Clothing</h4>
 <ul>
-    {% for item in culture.clothing_style.common_male_items %}
+    {% for item in culture.clothing_style.male_outfit %}
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
 <h4 class="title is-4">Female Clothing</h4>
 <ul>
-    {% for item in culture.clothing_style.common_female_items %}
+    {% for item in culture.clothing_style.female_outfit %}
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
 <p>Common colors include {% for color in culture.clothing_style.common_colors %}
     {% if loop.revindex == 1 %} and{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}.
     Decoration tends towards {{ culture.clothing_style.decorative_style }}.</p>
-<p>Clothing is most often made of the following materials:</p>
-<ul>
-    {% for item in culture.clothing_style.common_materials %}
-    <li>{{ item }}</li>
-    {% endfor %}
-</ul>
+
 <div v-if="culture.clothing_style.CommonJewelry != null">
 <p>For jewelry, some of the following are common:</p>
 <ul>
-    {% for item in culture.clothing_style.CommonJewelry %}
+    {% for item in culture.clothing_style.common_jewelry %}
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
