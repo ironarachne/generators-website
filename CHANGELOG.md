@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.5 (2019-07-01)
+
+### Change List
+
+- Support the new naming language feature of 0.2.2 of the API
+
 ## 0.2.4 (2019-06-30)
 
 ### Change List

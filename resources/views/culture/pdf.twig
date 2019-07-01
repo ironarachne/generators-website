@@ -4,7 +4,7 @@
 <h2 class="title is-2">The {{ culture.name }} Culture</h2>
 
 <p>This culture is called the <em>{{ culture.name }}</em>. Its people are the {{ culture.adjective }}, and they are a {{ culture.primary_race.adjective }} society.</p>
-<p>They speak {{ culture.language.name }}. {{ culture.language.description }}</p>
+<p>They speak {{ culture.language.name }}. {{ culture.language.description }} The sample phrase "{{ culture.language.phrase }}" in {{ culture.language.name }} is said <em>"{{ culture.language.translation }}"</em></p>
 
 <p>{{ culture.home_climate.description|replace({"This is": "They hail from"}) }}</p>
 
