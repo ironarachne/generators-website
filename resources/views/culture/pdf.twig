@@ -72,38 +72,40 @@ style is appropriate for that kind of place. They often wear the following:
 </div>
 
 <h3 class="title is-3">Food and Drink</h3>
-<p>Common dishes for the {{ culture.adjective }} include:</p>
+<p>Common main dishes for the {{ culture.adjective }} include:</p>
 <ul>
-{% for item in culture.food_style.common_dishes %}
+{% for item in culture.food_style.common_main_dishes %}
 <li>{{ item }}</li>
 {% endfor %}
 </ul>
+<p>Common desserts include:</p>
+<ul>
+{% for item in culture.food_style.common_desserts %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% if culture.food_style.breads %}
+<p>Common breads include:</p>
+<ul>
+    {% for item in culture.food_style.breads %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if culture.alcoholic_drinks %}
+<p>The most common alcoholic beverages are:</p>
+<ul>
+    {% for item in culture.alcoholic_drinks %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <p>As far as eating customs go, they have the following:</p>
 <ul>
 {% for item in culture.food_style.eating_traits %}
 <li>{{ item }}</li>
 {% endfor %}
 </ul>
-{% if culture.food_style.breads %}
-<div>
-    <p>Common breads include:</p>
-    <ul>
-        {% for item in culture.food_style.breads %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
-{% if culture.food_style.alcoholic_drinks %}
-<div>
-    <p>The most common alcoholic beverages are:</p>
-    <ul>
-        {% for item in culture.food_style.alcoholic_drinks %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
 
 <h3 class="title is-3">Religion</h3>
 <p>The {{ culture.adjective }} have a {{ culture.religion.type }} outlook. They gather in

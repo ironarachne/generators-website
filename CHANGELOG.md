@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.7 (2019-07-21)
+
+### Change List
+
+- Fix food and drink display
+
 ## 0.2.6 (2019-07-21)
 
 ### Change List
