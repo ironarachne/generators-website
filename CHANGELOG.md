@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.6 (2019-07-21)
+
+### Change List
+
+- Updated composer dependencies
+- Updated npm dependencies
+
 ## 0.2.5 (2019-07-01)
 
 ### Change List
