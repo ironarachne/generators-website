@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.8 (2019-09-03)
+
+### Change List
+
+- Make Redis port and password ENV configurable
+
 ## 0.2.7 (2019-07-21)
 
 ### Change List
