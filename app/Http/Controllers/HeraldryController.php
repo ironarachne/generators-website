@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
 
 class HeraldryController extends Controller
 {
@@ -23,7 +24,7 @@ class HeraldryController extends Controller
     {
         $fieldShape = $request->query('shape');
 
-        $heraldry = Cache::rememberForever( "heraldry-$guid", function () use ($guid, $fieldShape) {
+        $heraldry = Cache::rememberForever( "heraldry-$guid-$fieldShape", function () use ($guid, $fieldShape) {
             $heraldryGenerator = new \App\HeraldryGenerator();
             return $heraldryGenerator->generate($guid, $fieldShape);
         } );
