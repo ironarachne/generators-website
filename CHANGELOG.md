@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.1 (2019-09-13)
+
+### Change List
+
+- Fix a bug in the heraldry router
+
 ## 0.3.0 (2019-09-13)
 
 ### Change List

@@ -19,7 +19,7 @@ class HeraldryController extends Controller
         return view( 'heraldry.index', [ 'page' => $page ] );
     }
 
-    public function show( $guid )
+    public function show( Request $request, $guid )
     {
         $fieldShape = $request->query('shape');
 
