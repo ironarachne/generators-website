@@ -15,25 +15,17 @@ class HeraldryController extends Controller
             'description' => 'This tool procedurally generates fictional coats-of-arms and their blazons.',
             'type' => 'single',
         ];
-        
+
         return view( 'heraldry.index', [ 'page' => $page ] );
-    }
-
-    public function device( $guid )
-    {
-        $heraldry = Cache::rememberForever( "heraldry-$guid", function () use ($guid) {
-            $heraldryGenerator = new \App\HeraldryGenerator();
-            return $heraldryGenerator->generate($guid);
-        } );
-
-        return response($heraldry['heraldry']->Device)->header('Content-Type', 'image/svg+xml');
     }
 
     public function show( $guid )
     {
-        $heraldry = Cache::rememberForever( "heraldry-$guid", function () use ($guid) {
+        $fieldShape = $request->query('shape');
+
+        $heraldry = Cache::rememberForever( "heraldry-$guid", function () use ($guid, $fieldShape) {
             $heraldryGenerator = new \App\HeraldryGenerator();
-            return $heraldryGenerator->generate($guid);
+            return $heraldryGenerator->generate($guid, $fieldShape);
         } );
 
         $page = [

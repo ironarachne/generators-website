@@ -20,7 +20,7 @@ services:
       MYSQL_ROOT_PASSWORD: onlyfordev
 
   worldapi:
-    image: ironarachne/worldapi:latest
+    image: ironarachne/worldapi:0.6.0
 
   redis:
     image: redis:latest

@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.3.0 (2019-09-13)
+
+### Change List
+
+- Make use of the new heraldry API
+- Update dependencies
+- Update to PHP 7.3
+- Update to Node.js 12.10
+
 ## 0.2.8 (2019-09-03)
 
 ### Change List

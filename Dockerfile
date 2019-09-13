@@ -12,7 +12,7 @@ RUN composer install \
     --no-scripts \
     --prefer-dist
 
-FROM node:10.15 as frontend
+FROM node:12.10 as frontend
 
 RUN mkdir -p /app/public
 
@@ -23,7 +23,7 @@ WORKDIR /app
 
 RUN yarn install && yarn production
 
-FROM php:7.2-apache-stretch
+FROM php:7.3-apache-stretch
 
 RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \

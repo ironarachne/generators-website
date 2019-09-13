@@ -20,7 +20,6 @@ Route::get( '/culture/{guid}/pdf', 'CultureController@pdf' )->name( 'culture.pdf
 
 Route::get( '/heraldry/', 'HeraldryController@index' )->name( 'heraldry.index' );
 Route::post( '/heraldry/', 'HeraldryController@generate' )->name( 'heraldry.generate' );
-Route::get( '/heraldry/{guid}/device.svg', 'HeraldryController@device' )->name( 'heraldry.device' );
 Route::get( '/heraldry/{guid}', 'HeraldryController@show' )->name( 'heraldry.show' );
 
 Route::get( '/region/', 'RegionController@index' )->name( 'region.index' );

@@ -2,5 +2,5 @@
 
 {% block content %}
 <p class="blazon is-italic is-size-3">{{ heraldry.heraldry.Blazon }}</p>
-<img src="{{ route('heraldry.device', {guid:heraldry.id})}}">
+<img src="{{ heraldry.heraldry.ImageURL }}">
 {% endblock %}
