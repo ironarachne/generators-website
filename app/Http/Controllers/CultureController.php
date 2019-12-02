@@ -15,6 +15,7 @@ class CultureController extends Controller
             'subtitle' => 'Generate human cultures for a fantasy world',
             'description' => 'This tool procedurally generates fantasy human cultures',
             'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
         ];
 
         return view( 'culture.index', [ 'page' => $page ] );
@@ -33,6 +34,7 @@ class CultureController extends Controller
             'subtitle' => 'A fictional people from a ' . $culture->home_climate->adjective . ' climate',
             'description' => 'The ' . $culture->adjective . ', a fictional ' . $culture->primary_race->adjective . ' culture from a ' . $culture->home_climate->adjective . ' climate.',
             'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
         ];
 
         $html = view( 'culture.pdf', [ 'culture' => $culture, 'page' => $page ] );
@@ -58,6 +60,7 @@ class CultureController extends Controller
             'subtitle' => 'A fictional people from a ' . $culture->home_climate->adjective . ' climate',
             'description' => 'The ' . $culture->adjective . ', a fictional ' . $culture->primary_race->adjective . ' culture from a ' . $culture->home_climate->adjective . ' climate.',
             'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
         ];
 
         return view( 'culture.show', [ 'culture' => $culture, 'page' => $page ] );

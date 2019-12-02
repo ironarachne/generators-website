@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'fathom' => [
+        'domain' => env('FATHOM_DOMAIN'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

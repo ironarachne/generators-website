@@ -75,7 +75,7 @@
         m=f.getElementsByTagName('script')[0];
         o.async=1; o.src=t; o.id='fathom-script';
         m.parentNode.insertBefore(o,m)
-    })(document, window, '//fathom.benovermyer.com/tracker.js', 'fathom');
+    })(document, window, '//{{ page.fathom_domain }}/tracker.js', 'fathom');
     fathom('set', 'siteId', 'KQMKI');
     fathom('trackPageview');
     </script>

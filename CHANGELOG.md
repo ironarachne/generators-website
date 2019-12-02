@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.1 (2019-12-02)
+
+- Make Fathom domain configurable
+
 ## 0.4.0 (2019-09-13)
 
 Upgrade to Laravel 6

@@ -14,8 +14,9 @@ class RegionController extends Controller
             'subtitle' => 'Generate individual regions in a fantasy world',
             'description' => 'This tool procedurally generates regions for a fantasy world.',
             'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
         ];
-        
+
         return view( 'region.index', [ 'page' => $page ] );
     }
 
@@ -42,6 +43,7 @@ class RegionController extends Controller
             'subtitle' => 'A region ruled by ' . $region->ruler->name,
             'description' => 'The fantasy region of ' . $region->name . '.',
             'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
         ];
 
         return view( 'region.show', [ 'region' => $region, 'page' => $page ] );
