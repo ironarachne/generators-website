@@ -15,6 +15,7 @@ class HomeController extends Controller
             'description' => 'Procedural Generation Tools for Tabletop Role-playing Games',
             'type' => 'home',
             'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
         return view( 'index' )->with( [ 'page' => $page ] );

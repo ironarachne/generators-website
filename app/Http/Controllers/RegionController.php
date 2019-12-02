@@ -15,6 +15,7 @@ class RegionController extends Controller
             'description' => 'This tool procedurally generates regions for a fantasy world.',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
         return view( 'region.index', [ 'page' => $page ] );
@@ -44,6 +45,7 @@ class RegionController extends Controller
             'description' => 'The fantasy region of ' . $region->name . '.',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
         return view( 'region.show', [ 'region' => $region, 'page' => $page ] );

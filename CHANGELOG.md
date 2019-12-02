@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.2 (2019-12-02)
+
+- Add Fathom site ID
+
 ## 0.4.1 (2019-12-02)
 
 - Make Fathom domain configurable

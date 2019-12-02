@@ -16,6 +16,7 @@ return [
 
     'fathom' => [
         'domain' => env('FATHOM_DOMAIN'),
+        'site_id' => env('FATHOM_SITE_ID'),
     ],
 
     'mailgun' => [

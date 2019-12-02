@@ -16,6 +16,7 @@ class HeraldryController extends Controller
             'description' => 'This tool procedurally generates fictional coats-of-arms and their blazons.',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
         return view( 'heraldry.index', [ 'page' => $page ] );
@@ -35,6 +36,7 @@ class HeraldryController extends Controller
             'description' => 'A coat of arms for the blazon "' . $heraldry['heraldry']->Blazon . '"',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
         return view( 'heraldry.show', [ 'heraldry' => $heraldry, 'page' => $page ] );
