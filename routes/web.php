@@ -13,6 +13,10 @@
 
 Route::get( '/', 'HomeController@index' )->name( 'index' );
 
+Route::get( '/home', 'HomeController@dashboard' )->name( 'home' )->middleware( 'auth' );
+
+Auth::routes();
+
 Route::get( '/culture/', 'CultureController@index' )->name( 'culture.index' );
 Route::post( '/culture/', 'CultureController@generate' )->name( 'culture.generate' );
 Route::get( '/culture/{guid}', 'CultureController@show' )->name( 'culture.show' );

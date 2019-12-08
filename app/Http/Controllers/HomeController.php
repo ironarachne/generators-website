@@ -20,4 +20,18 @@ class HomeController extends Controller
 
         return view( 'index' )->with( [ 'page' => $page ] );
     }
+
+    public function dashboard()
+    {
+        $page = [
+            'title' => 'Iron Arachne',
+            'subtitle' => 'Your Dashboard',
+            'description' => 'User Dashboard',
+            'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
+        ];
+
+        return view( 'dashboard' )->with( [ 'page' => $page ] );
+    }
 }

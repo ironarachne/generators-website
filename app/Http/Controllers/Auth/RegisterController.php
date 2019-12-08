@@ -69,4 +69,18 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function showRegistrationForm()
+    {
+        $page = [
+            'title' => 'Register',
+            'subtitle' => 'Register a new user account',
+            'description' => 'Register a new user account',
+            'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
+        ];
+
+        return view( 'auth.register' )->with( [ 'page' => $page ] );
+    }
 }

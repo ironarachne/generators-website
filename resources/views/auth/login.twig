@@ -1,0 +1,24 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<p>Log in to your user account.</p>
+
+{{ form_open() }}
+<div class="field">
+    {{ form_label('email', 'Email Address', {'class': 'label'}) }}
+    <div class="control">
+        {{ form_email('email', '', {'class': 'input'}) }}
+    </div>
+</div>
+<div class="field">
+    {{ form_label('password', 'Password', {'class': 'label'}) }}
+    <div class="control">
+        {{ form_password('password', {'class': 'input'}) }}
+    </div>
+</div>
+
+{{ form_submit('Login', {'class': 'button is-primary'}) }}
+
+{{ form_close() }}
+
+{% endblock %}

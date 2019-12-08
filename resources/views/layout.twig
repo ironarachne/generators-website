@@ -39,10 +39,24 @@
   <div class="container" id="app">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="{{ route('index') }}">Home</a>
+        <a class="navbar-item" href="{{ route('index') }}">Main</a>
         <a class="navbar-item" href="{{ route('culture.index') }}">Cultures</a>
         <a class="navbar-item" href="{{ route('region.index') }}">Regions</a>
         <a class="navbar-item" href="{{ route('heraldry.index') }}">Heraldry</a>
+        {% if not auth_check() %}
+        <a class="navbar-item" href="{{ route('login') }}">Login</a>
+        <a class="navbar-item" href="{{ route('register') }}">Register</a>
+        {% else %}
+        <a class="navbar-item" href="{{ route('home' ) }}">My Dashboard</a>
+        <a class="navbar-item" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ form_token() }}
+        </form>
+        {% endif %}
       </div>
     </nav>
     <section class="section">
@@ -61,6 +75,9 @@
           <a href="https://benovermyer.com">Ben Overmyer</a>. You can find source code for most of these tools on
           GitHub at
           <a href="https://github.com/ironarachne/">github.com/ironarachne</a>.
+        </p>
+        <p>
+          You can contact the author at <a href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>.
         </p>
       </div>
     </div>
