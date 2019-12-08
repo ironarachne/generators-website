@@ -12,6 +12,7 @@
 */
 
 Route::get( '/', 'HomeController@index' )->name( 'index' );
+Route::get( '/quick', 'HomeController@quick' )->name( 'quick' );
 
 Route::get( '/home', 'HomeController@dashboard' )->name( 'home' )->middleware( 'auth' );
 

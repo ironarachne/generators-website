@@ -9,6 +9,7 @@
     "require": {
         "php": "7.*",
         "dompdf/dompdf": "^0.8.3",
+        "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^6.0",
@@ -19,6 +20,7 @@
         "sentry/sentry-laravel": "1.2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "laravel/ui": "^1.1",

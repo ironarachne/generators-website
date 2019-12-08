@@ -4,28 +4,18 @@
     <p>This website hosts tools intended to make life easier for players of tabletop RPGs. It's a living website,
     and will continue to receive new tools on a semiregular basis.</p>
     <p>My name is <a href="https://benovermyer.com">Ben Overmyer</a>. I'm the developer behind this site and the
-    tools it presents. I'm happy to take suggestions - either for my existing generators, or for new tools you wish 
+    tools it presents. I'm happy to take suggestions - either for my existing generators, or for new tools you wish
     existed. Email me at <a href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>!</p>
 
-    <h3 class="title is-3">Quick Generators</h3>
-    <p>The following are small generators that you run from this page.</p>
+    <h3 class="title is-3">Latest News</h3>
 
-    {% verbatim %}
-    <h4 class="title is-4">Language Generator</h4>
-    <p>This generates a description of a fantasy language for you.</p>
-    <p><button class="button is-primary" v-on:click="generateLanguage">Generate New Language</button></p>
-    <blockquote>{{ languageDescription }}</blockquote>
-
-    <h4 class="title is-4">Town Generator</h4>
-    <p>Need a quick town? Click here.</p>
-    <p><button class="button is-primary" v-on:click="generateTown">Generate New Town</button></p>
-    <blockquote>{{ townDescription }}</blockquote>
-
-    <h4 class="title is-4">Organization Generator</h4>
-    <p>This generates a fantasy organization.</p>
-    <p><button class="button is-primary" v-on:click="generateOrganization">Generate New Organization</button></p>
-    <blockquote>{{ organizationDescription }}</blockquote>
-    {% endverbatim %}
+    {% for post in posts %}
+    <div class="post">
+        <h4 class="title is-4">{{ post.title }}</h4>
+        <p><cite>{{ post.created|date }}</cite></p>
+        <p>{{ post.body|raw }}</p>
+    </div>
+    {% endfor %}
 </div>
 <div class="column is-one-third">
     <div class="has-text-centered content">
@@ -45,60 +35,4 @@
         <li><a href="http://www.springhole.net/writing_roleplaying_randomators/index.html">Springhole.net</a></li>
     </ul>
     </div>
-{% endblock %}
-
-{% block javascript %}
-function getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    }
-    var app = new Vue({
-      el: '#app',
-      data: {
-        languageDescription: '',
-        languageName: '',
-        organizationDescription: '',
-        townDescription: ''
-      },
-      methods: {
-        generateLanguage: function (event) {
-          url = 'https://worldapi.ironarachne.com/language'
-
-          fetch(url)
-            .then(response => response.json())
-            .then(response => {
-              this.languageDescription = response.description
-            })
-            .catch(error => console.error(error));
-        },
-        generateOrganization: function (event) {
-          id = getRandomInt(1000000)
-          url = 'https://worldapi.ironarachne.com/organization/' + id
-
-          fetch(url)
-            .then(response => response.json())
-            .then(response => {
-              this.organizationDescription = response.description
-            })
-            .catch(error => console.error(error));
-        },
-        generateTown: function (event) {
-          id = getRandomInt(1000000)
-          url = 'https://worldapi.ironarachne.com/town/' + id
-
-          fetch(url)
-            .then(response => response.json())
-            .then(response => {
-              this.townDescription = response.name + ' is a ' + response.category + ' of ' + response.population + ' people. '
-              this.townDescription = response.building_style + ' '
-              this.townDescription += 'It exports ' + response.exports[0] + ' and imports ' + response.imports[0] + '. '
-              this.townDescription += 'The mayor is ' + response.mayor.name + '. ' + response.mayor.description
-            })
-            .catch(error => console.error(error));
-        }
-      }
-    })
-
-    app.generateLanguage()
-    app.generateOrganization()
-    app.generateTown()
 {% endblock %}

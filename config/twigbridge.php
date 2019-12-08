@@ -212,6 +212,9 @@ return [
         */
         'filters' => [
             'get' => 'data_get',
+            'markdown_to_html' => [
+                'is_safe' => ['html'],
+            ],
         ],
     ],
 ];
