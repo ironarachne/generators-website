@@ -5,6 +5,10 @@
 
 {{ form_open() }}
 
+{% if errors.any %}
+<h4 class="has-text-danger">{{ errors.first }}</h4>
+{% endif %}
+
 <div class="field">
     {{ form_label('name', 'Display Name', {'class': 'label'}) }}
     <div class="control">

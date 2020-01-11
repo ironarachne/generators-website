@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Client;
@@ -21,12 +22,19 @@ class HomeController extends Controller
             $post_data = $json->data->posts;
 
             $Parsedown = new \Parsedown();
+
+            $i = 0;
+
             foreach ($post_data as $post) {
-                $posts[] = [
-                    'title' => $post->title,
-                    'created' => $post->created,
-                    'body' => $Parsedown->text($post->body),
-                ];
+                if ( $i < 3 ) {
+                    $posts[] = [
+                        'title' => $post->title,
+                        'created' => $post->created,
+                        'body' => $Parsedown->text( $post->body ),
+                    ];
+                }
+
+                $i++;
             }
 
             return $posts;
@@ -40,21 +48,24 @@ class HomeController extends Controller
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
-
-        return view( 'index' )->with( [ 'page' => $page, 'posts' => $posts, ] );
+        return view( 'index' )->with( [ 'page' => $page, 'posts' => $posts ] );
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function dashboard()
     {
         $page = [
-            'title' => 'Iron Arachne',
-            'subtitle' => 'Your Dashboard',
-            'description' => 'User Dashboard',
+            'title' => 'My Dashboard',
+            'subtitle' => '',
+            'description' => 'Personal dashboard',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
-
         return view( 'dashboard' )->with( [ 'page' => $page ] );
     }
 
