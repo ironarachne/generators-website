@@ -16,12 +16,12 @@ FROM node:12.10 as frontend
 
 RUN mkdir -p /app/public
 
-COPY package.json webpack.mix.js yarn.lock /app/
+COPY package.json webpack.mix.js package-lock.json /app/
 COPY resources/assets/ /app/resources/assets/
 
 WORKDIR /app
 
-RUN yarn install && yarn production
+RUN npm install && npm run production
 
 FROM php:7.3-apache-stretch
 
