@@ -160,6 +160,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         TwigBridge\ServiceProvider::class,
+        App\Providers\ForceHttpsServiceProvider::class,
 
     ],
 
