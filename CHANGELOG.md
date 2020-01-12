@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.5.0 (2020-01-12)
+
+- Add user accounts
+- Add ability to save results to the database for cultures, regions, and heraldry
+- Add blog articles to front page
+- Add personal dashboard
+- Change style of navigation bar to emphasize active page
+- Center content on heraldry display page
+- Add "most recent" to culture, region, and heraldry pages
+- Add field shape selection to heraldry generator
+
 ## 0.4.2 (2019-12-02)
 
 - Add Fathom site ID
