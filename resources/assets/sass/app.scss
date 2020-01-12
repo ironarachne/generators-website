@@ -69,4 +69,17 @@ h1, h2, h3, h4, h5 {
     font-family: $family-sans-serif;
 }
 
+.active {
+    font-weight: 800;
+    font-style: italic;
+}
+
+.navbar {
+    border-bottom: 5px double #eee;
+}
+
+.heraldry-small {
+    width: 64px;
+}
+
 @import "~bulma";

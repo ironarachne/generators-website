@@ -2,8 +2,34 @@
 
 {% block content %}
 <p>This generator creates a fictional coat-of-arms and accompanying blazon.<p>
-<form method="POST" action="/heraldry">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="submit" class="button is-primary is-large" value="Generate New Heraldry">
-</form>
+
+{{ form_open() }}
+
+{% if errors.any %}
+<h4 class="has-text-danger">{{ errors.first }}</h4>
+{% endif %}
+
+<div class="field">
+    {{ form_label('field_shape', 'Field Shape', {'class': 'label'}) }}
+
+    <div class="select">
+    {{ form_select('field_shape', {'any': 'Any', 'banner': 'Banner', 'engrailed': 'Engrailed', 'wedge': 'Wedge'}, 'any') }}
+    </div>
+</div>
+
+{{ form_submit('Generate', {'class': 'button is-primary is-large'}) }}
+
+{{ form_close() }}
+
+<h3>Most Recent Heraldry Generated</h3>
+{% for device in devices %}
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-64x64"><img src="{{ device.url }}" class="heraldry-small"></p>
+    </figure>
+    <div class="media-content">
+        <p><a href="{{ route('heraldry.show', {'guid': device.guid}) }}">{{ device.blazon }}</a></p>
+    </div>
+</article>
+{% endfor %}
 {% endblock %}

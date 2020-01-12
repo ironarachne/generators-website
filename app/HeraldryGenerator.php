@@ -14,7 +14,12 @@ class HeraldryGenerator {
         $response = $client->request('GET', $url);
         $heraldry = $response->getBody()->getContents();
 
-        $heraldry = ['heraldry' => json_decode($heraldry), 'id' => $id];
+        $body = json_decode($heraldry);
+
+        $heraldry = new Heraldry();
+        $heraldry->guid = $id;
+        $heraldry->blazon = $body->Blazon;
+        $heraldry->url = $body->ImageURL;
 
         return $heraldry;
     }

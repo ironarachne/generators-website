@@ -1,6 +1,8 @@
 {% extends 'layout' %}
 
 {% block content %}
-<p class="blazon is-italic is-size-3">{{ heraldry.heraldry.Blazon }}</p>
-<img src="{{ heraldry.heraldry.ImageURL }}">
+<div class="has-text-centered">
+    <p class="blazon is-italic is-size-3">{{ heraldry.blazon }}</p>
+    <img src="{{ heraldry.url }}">
+</div>
 {% endblock %}

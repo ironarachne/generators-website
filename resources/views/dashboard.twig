@@ -1,0 +1,41 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<p>This is your dashboard. Your creations appear here.</p>
+
+<div class="columns">
+    <div class="column">
+        <h2>Cultures</h2>
+
+        <ul>
+        {% for culture in cultures %}
+            <li><a href="{{ route('culture.show', {'guid': culture.guid}) }}">{{ culture.name }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <h2>Regions</h2>
+
+        <ul>
+        {% for region in regions %}
+            <li><a href="{{ route('region.show', {'guid': region.guid}) }}">{{ region.name }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <h2>Heraldry</h2>
+
+        {% for device in devices %}
+        <article class="media">
+            <figure class="media-left">
+                <p class="image is-64x64"><img src="{{ device.url }}" class="heraldry-small"></p>
+            </figure>
+            <div class="media-content">
+                <p><a href="{{ route('heraldry.show', {'guid': device.guid}) }}">{{ device.blazon }}</a></p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

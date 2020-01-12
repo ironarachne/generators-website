@@ -1,0 +1,42 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<p>Register a new user account.</p>
+
+{{ form_open() }}
+
+{% if errors.any %}
+<h4 class="has-text-danger">{{ errors.first }}</h4>
+{% endif %}
+
+<div class="field">
+    {{ form_label('name', 'Display Name', {'class': 'label'}) }}
+    <div class="control">
+        {{ form_text('name', '', {'class': 'input'}) }}
+    </div>
+</div>
+
+<div class="field">
+    {{ form_label('email', 'Email Address', {'class': 'label'}) }}
+    <div class="control">
+        {{ form_email('email', '', {'class': 'input'}) }}
+    </div>
+</div>
+<div class="field">
+    {{ form_label('password', 'Password', {'class': 'label'}) }}
+    <div class="control">
+        {{ form_password('password', {'class': 'input'}) }}
+    </div>
+</div>
+<div class="field">
+    {{ form_label('password_confirmation', 'Confirm Password', {'class': 'label'}) }}
+    <div class="control">
+        {{ form_password('password_confirmation', {'class': 'input'}) }}
+    </div>
+</div>
+
+{{ form_submit('Register', {'class': 'button is-primary'}) }}
+
+{{ form_close() }}
+
+{% endblock %}

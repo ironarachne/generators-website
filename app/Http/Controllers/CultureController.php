@@ -5,13 +5,27 @@ namespace App\Http\Controllers;
 use Dompdf\Dompdf;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
+use App\CultureGenerator;
+use App\Culture;
 
 class CultureController extends Controller
 {
     public function index()
     {
+        $cultureData = Culture::latest()->limit(5)->get();
+
+        $cultures = [];
+
+        foreach ($cultureData as $cultureObject) {
+            $data = json_decode($cultureObject->data);
+            $culture['name'] = $data->name;
+            $culture['guid'] = $cultureObject->guid;
+            $culture['description'] = 'The ' . $data->adjective . ' are a ' . $data->primary_race->adjective . ' society. They are from a ' . $data->home_climate->name . ' region.';
+            $cultures[] = $culture;
+        }
+
         $page = [
-            'title' => 'Culture Generator',
+            'title' => 'Cultures',
             'subtitle' => 'Generate human cultures for a fantasy world',
             'description' => 'This tool procedurally generates fantasy human cultures',
             'type' => 'single',
@@ -19,15 +33,33 @@ class CultureController extends Controller
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
-        return view( 'culture.index', [ 'page' => $page ] );
+        return view( 'culture.index', [ 'page' => $page, 'cultures' => $cultures ] );
+    }
+
+    public function create()
+    {
+        $guid = Uuid::uuid4();
+
+        $cultureGenerator = new CultureGenerator();
+        $culture = $cultureGenerator->generate( $guid );
+
+        if (\Auth::check()) {
+            $user = \Auth::user();
+
+            $user->cultures()->save($culture);
+        } else {
+            $culture->save();
+        }
+
+        Cache::forever('culture-'.$culture->guid, $culture);
+
+        return redirect()->route('culture.show', ['guid' => $culture->guid]);
     }
 
     public function pdf( $guid )
     {
-        $culture = Cache::rememberForever( "culture-$guid", function () use ($guid) {
-            $cultureGenerator = new \App\CultureGenerator();
-            return $cultureGenerator->generate($guid);
-        } );
+        $cultureObject = Cache::get('culture-'.$guid);
+        $culture = json_decode($cultureObject->data);
 
         $page = [
             'id' => $guid,
@@ -51,10 +83,8 @@ class CultureController extends Controller
 
     public function show( $guid )
     {
-        $culture = Cache::rememberForever( "culture-$guid", function () use ($guid) {
-            $cultureGenerator = new \App\CultureGenerator();
-            return $cultureGenerator->generate($guid);
-        } );
+        $cultureObject = Cache::get('culture-'.$guid);
+        $culture = json_decode($cultureObject->data);
 
         $page = [
             'id' => $guid,
@@ -67,12 +97,5 @@ class CultureController extends Controller
         ];
 
         return view( 'culture.show', [ 'culture' => $culture, 'page' => $page ] );
-    }
-
-    public function generate()
-    {
-        $guid = Uuid::uuid4();
-
-        return redirect()->route( 'culture.show', [ 'guid' => $guid ] );
     }
 }

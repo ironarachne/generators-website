@@ -6,4 +6,12 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="submit" class="button is-primary is-large" value="Generate New Region">
 </form>
+
+<h3>Most Recent Regions Generated</h3>
+{% for region in regions %}
+<div class="content">
+    <h4><a href="{{ route('region.show', {'guid': region.guid}) }}">{{ region.name }}</a></h4>
+    <p>{{ region.description }}</p>
+</div>
+{% endfor %}
 {% endblock %}
