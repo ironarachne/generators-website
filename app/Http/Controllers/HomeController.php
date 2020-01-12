@@ -62,7 +62,9 @@ class HomeController extends Controller
 
         $cultures = [];
 
-        foreach ($user->cultures as $cultureObject) {
+        $userCultures = $user->cultures()->latest()->get();
+
+        foreach ($userCultures as $cultureObject) {
             $cultureData = json_decode($cultureObject->data);
             $culture['name'] = $cultureData->name;
             $culture['guid'] = $cultureObject->guid;
@@ -71,14 +73,16 @@ class HomeController extends Controller
 
         $regions = [];
 
-        foreach ($user->regions as $regionObject) {
+        $userRegions = $user->regions()->latest()->get();
+
+        foreach ($userRegions as $regionObject) {
             $regionData = json_decode($regionObject->data);
             $region['name'] = $regionData->name;
             $region['guid'] = $regionObject->guid;
             $regions[] = $region;
         }
 
-        $devices = $user->heraldries()->get();
+        $devices = $user->heraldries()->latest()->get();
 
         $page = [
             'title' => 'My Dashboard',
