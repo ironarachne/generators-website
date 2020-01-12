@@ -23,7 +23,7 @@ WORKDIR /app
 
 RUN npm install && npm run production
 
-FROM php:7.4-apache-stretch
+FROM php:7.4-apache
 
 RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
