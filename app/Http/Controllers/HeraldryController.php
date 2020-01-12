@@ -54,7 +54,21 @@ class HeraldryController extends Controller
 
     public function show( Request $request, $guid )
     {
-        $heraldry = Cache::get('heraldry-'.$guid);
+        $fieldShape = $request->query('shape');
+        $heraldry = Cache::rememberForever('heraldry-'.$guid, function() use ($fieldShape, $guid) {
+            $heraldryGenerator = new HeraldryGenerator();
+            $heraldry = $heraldryGenerator->generate( $guid, $fieldShape );
+
+            if (\Auth::check()) {
+                $user = \Auth::user();
+
+                $user->heraldries()->save($heraldry);
+            } else {
+                $heraldry->save();
+            }
+
+            return $heraldry;
+        });
 
         $page = [
             'title' => $heraldry->blazon,
