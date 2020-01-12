@@ -2,7 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
+      - image: circleci/php:7.4-node-browsers
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+          VERSION_TAG=`cat VERSION`
+          GIT_TAG=`git log -1 --pretty=%h`
+          docker build -t ironarachne/generators-website:$VERSION_TAG -t ironarachne/generators-website:$GIT_TAG -t ironarachne/generators-website:latest .
+  publish:
+    docker:
+      - image: circleci/php:7.4-node-browsers
     steps:
       - checkout
       - setup_remote_docker
@@ -18,7 +28,8 @@ workflows:
   version: 2
   build-and-publish:
     jobs:
-      - build:
+      - build
+      - publish:
           filters:
             branches:
               only: release
