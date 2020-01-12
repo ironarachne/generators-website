@@ -2,4 +2,12 @@
 
 {% block content %}
 <p>This is your dashboard. Your creations appear here.</p>
+
+<h2>Cultures</h2>
+
+<ul>
+{% for culture in cultures %}
+    <li><a href="{{ route('culture.show', {'guid': culture.guid}) }}">{{ culture.name }}</li>
+{% endfor %}
+</ul>
 {% endblock %}

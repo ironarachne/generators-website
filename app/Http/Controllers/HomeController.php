@@ -58,6 +58,17 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
+        $user = \Auth::user();
+
+        $cultures = [];
+
+        foreach ($user->cultures as $cultureObject) {
+            $cultureData = json_decode($cultureObject->data);
+            $culture['name'] = $cultureData->name;
+            $culture['guid'] = $cultureObject->guid;
+            $cultures[] = $culture;
+        }
+
         $page = [
             'title' => 'My Dashboard',
             'subtitle' => '',
@@ -66,20 +77,34 @@ class HomeController extends Controller
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
-        return view( 'dashboard' )->with( [ 'page' => $page ] );
+        return view( 'dashboard' )->with( [ 'page' => $page, 'cultures' => $cultures ] );
     }
 
     public function quick()
     {
         $page = [
-            'title' => 'Iron Arachne',
-            'subtitle' => 'Quick Generators',
-            'description' => 'Quick generators',
+            'title' => 'Quick Generators',
+            'subtitle' => 'Small generators for quick creations',
+            'description' => 'Small generators for quick creations',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
         return view( 'quick' )->with( [ 'page' => $page ] );
+    }
+
+    public function privacy()
+    {
+        $page = [
+            'title' => 'Privacy Policy',
+            'subtitle' => 'This is the site privacy policy',
+            'description' => 'Iron Arachne\'s privacy policy',
+            'type' => 'single',
+            'fathom_domain' => config('services.fathom.domain'),
+            'fathom_site_id' => config('services.fathom.site_id'),
+        ];
+
+        return view( 'privacy' )->with( [ 'page' => $page ] );
     }
 }

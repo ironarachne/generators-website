@@ -10,7 +10,7 @@ class RegionController extends Controller
     public function index()
     {
         $page = [
-            'title' => 'Region Generator',
+            'title' => 'Regions',
             'subtitle' => 'Generate individual regions in a fantasy world',
             'description' => 'This tool procedurally generates regions for a fantasy world.',
             'type' => 'single',

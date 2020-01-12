@@ -13,13 +13,14 @@
 
 Route::get( '/', 'HomeController@index' )->name( 'index' );
 Route::get( '/quick', 'HomeController@quick' )->name( 'quick' );
+Route::get( '/privacy', 'HomeController@privacy' )->name( 'privacy' );
 
 Route::get( '/dashboard', 'HomeController@dashboard' )->name( 'dashboard' )->middleware( 'verified' );
 
 Auth::routes( [ 'verify' => true ] );
 
 Route::get( '/culture/', 'CultureController@index' )->name( 'culture.index' );
-Route::post( '/culture/', 'CultureController@generate' )->name( 'culture.generate' );
+Route::post( '/culture/', 'CultureController@create' )->name( 'culture.create' );
 Route::get( '/culture/{guid}', 'CultureController@show' )->name( 'culture.show' );
 Route::get( '/culture/{guid}/pdf', 'CultureController@pdf' )->name( 'culture.pdf' );
 

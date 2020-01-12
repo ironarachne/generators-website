@@ -11,7 +11,7 @@ class HeraldryController extends Controller
     public function index()
     {
         $page = [
-            'title' => 'Heraldry Generator',
+            'title' => 'Heraldry',
             'subtitle' => 'Generate fictional coats-of-arms and their blazons',
             'description' => 'This tool procedurally generates fictional coats-of-arms and their blazons.',
             'type' => 'single',

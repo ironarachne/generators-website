@@ -39,11 +39,11 @@
   <div class="container" id="app">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-start">
-        <a class="navbar-item" href="{{ route('index') }}">Main</a>
-        <a class="navbar-item" href="{{ route('quick') }}">Quick Generators</a>
-        <a class="navbar-item" href="{{ route('culture.index') }}">Cultures</a>
-        <a class="navbar-item" href="{{ route('region.index') }}">Regions</a>
-        <a class="navbar-item" href="{{ route('heraldry.index') }}">Heraldry</a>
+        <a class="navbar-item{% if page.title == "Iron Arachne" %} active{% endif %}" href="{{ route('index') }}">Main</a>
+        <a class="navbar-item{% if page.title == "Quick Generators" %} active{% endif %}" href="{{ route('quick') }}">Quick Generators</a>
+        <a class="navbar-item{% if page.title == "Cultures" %} active{% endif %}" href="{{ route('culture.index') }}">Cultures</a>
+        <a class="navbar-item{% if page.title == "Regions" %} active{% endif %}" href="{{ route('region.index') }}">Regions</a>
+        <a class="navbar-item{% if page.title == "Heraldry" %} active{% endif %}" href="{{ route('heraldry.index') }}">Heraldry</a>
     </div>
     <div class="navbar-end">
         {% if not auth_check() %}
@@ -54,7 +54,7 @@
             </div>
         </div>
         {% else %}
-        <a class="navbar-item" href="{{ route('dashboard' ) }}">My Dashboard</a>
+        <a class="navbar-item{% if page.title == "My Dashboard" %} active{% endif %}" href="{{ route('dashboard' ) }}">My Dashboard</a>
         <div class="navbar-item">
             <a class="button is-small is-info" href="{{ route('logout') }}"
             onclick="event.preventDefault();
@@ -88,6 +88,9 @@
         </p>
         <p>
           You can contact the author at <a href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>.
+        </p>
+        <p>
+          The Iron Arachne privacy policy is visible <a href="{{ route('privacy') }}">here</a>.
         </p>
       </div>
     </div>
