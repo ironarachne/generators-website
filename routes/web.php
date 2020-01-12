@@ -29,6 +29,5 @@ Route::post( '/heraldry/', 'HeraldryController@generate' )->name( 'heraldry.gene
 Route::get( '/heraldry/{guid}', 'HeraldryController@show' )->name( 'heraldry.show' );
 
 Route::get( '/region/', 'RegionController@index' )->name( 'region.index' );
-Route::post( '/region/', 'RegionController@generate' )->name( 'region.generate' );
-Route::get( '/region/{guid}/ruler-device.svg', 'RegionController@device' )->name( 'region.device' );
+Route::post( '/region/', 'RegionController@create' )->name( 'region.create' );
 Route::get( '/region/{guid}', 'RegionController@show' )->name( 'region.show' );

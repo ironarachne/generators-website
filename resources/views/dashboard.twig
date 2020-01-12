@@ -3,11 +3,25 @@
 {% block content %}
 <p>This is your dashboard. Your creations appear here.</p>
 
-<h2>Cultures</h2>
+<div class="columns">
+    <div class="column">
+        <h2>Cultures</h2>
 
-<ul>
-{% for culture in cultures %}
-    <li><a href="{{ route('culture.show', {'guid': culture.guid}) }}">{{ culture.name }}</li>
-{% endfor %}
-</ul>
+        <ul>
+        {% for culture in cultures %}
+            <li><a href="{{ route('culture.show', {'guid': culture.guid}) }}">{{ culture.name }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <h2>Regions</h2>
+
+        <ul>
+        {% for region in regions %}
+            <li><a href="{{ route('region.show', {'guid': region.guid}) }}">{{ region.name }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
 {% endblock %}

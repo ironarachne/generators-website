@@ -14,6 +14,8 @@ class CultureController extends Controller
     {
         $cultureData = Culture::latest()->limit(5)->get();
 
+        $cultures = [];
+
         foreach ($cultureData as $cultureObject) {
             $data = json_decode($cultureObject->data);
             $culture['name'] = $data->name;

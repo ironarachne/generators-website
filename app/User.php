@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function cultures() {
         return $this->hasMany( 'App\Culture' );
     }
+
+    public function regions() {
+        return $this->hasMany( 'App\Region' );
+    }
 }

@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
+use App\RegionGenerator;
+use App\Region;
 
 class RegionController extends Controller
 {
     public function index()
     {
+        $regionData = Region::latest()->limit(5)->get();
+
+        $regions = [];
+
+        foreach ($regionData as $regionObject) {
+            $data = json_decode($regionObject->data);
+            $region['name'] = $data->name;
+            $region['guid'] = $regionObject->guid;
+            $region['description'] = $data->name . ', ruled by ' . $data->ruler->name;
+            $regions[] = $region;
+        }
+
         $page = [
             'title' => 'Regions',
             'subtitle' => 'Generate individual regions in a fantasy world',
@@ -18,25 +32,33 @@ class RegionController extends Controller
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
 
-        return view( 'region.index', [ 'page' => $page ] );
+        return view( 'region.index', [ 'page' => $page, 'regions' => $regions ] );
     }
 
-    public function device( $guid )
+    public function create()
     {
-        $region = Cache::rememberForever( "region-$guid", function () use ($guid) {
-            $regionGenerator = new \App\RegionGenerator();
-            return $regionGenerator->generate($guid);
-        } );
+        $guid = Uuid::uuid4();
 
-        return response($region->ruler->device)->header('Content-Type', 'image/svg+xml');
+        $regionGenerator = new RegionGenerator();
+        $region = $regionGenerator->generate( $guid );
+
+        if (\Auth::check()) {
+            $user = \Auth::user();
+
+            $user->regions()->save($region);
+        } else {
+            $region->save();
+        }
+
+        Cache::forever('region-'.$region->guid, $region);
+
+        return redirect()->route('region.show', ['guid' => $region->guid]);
     }
 
     public function show( $guid )
     {
-        $region = Cache::rememberForever( "region-$guid", function () use ($guid) {
-            $regionGenerator = new \App\RegionGenerator();
-            return $regionGenerator->generate($guid);
-        } );
+        $regionObject = Cache::get('region-'.$guid);
+        $region = json_decode($regionObject->data);
 
         $page = [
             'id' => $guid,
@@ -49,12 +71,5 @@ class RegionController extends Controller
         ];
 
         return view( 'region.show', [ 'region' => $region, 'page' => $page ] );
-    }
-
-    public function generate()
-    {
-        $guid = Uuid::uuid4();
-
-        return redirect()->route( 'region.show', [ 'guid' => $guid ] );
     }
 }
