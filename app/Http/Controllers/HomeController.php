@@ -78,6 +78,8 @@ class HomeController extends Controller
             $regions[] = $region;
         }
 
+        $devices = $user->heraldries()->get();
+
         $page = [
             'title' => 'My Dashboard',
             'subtitle' => '',
@@ -86,7 +88,7 @@ class HomeController extends Controller
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),
         ];
-        return view( 'dashboard' )->with( [ 'page' => $page, 'cultures' => $cultures, 'regions' => $regions ] );
+        return view( 'dashboard' )->with( [ 'page' => $page, 'cultures' => $cultures, 'regions' => $regions, 'devices' => $devices ] );
     }
 
     public function quick()

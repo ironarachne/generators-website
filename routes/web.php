@@ -25,7 +25,7 @@ Route::get( '/culture/{guid}', 'CultureController@show' )->name( 'culture.show' 
 Route::get( '/culture/{guid}/pdf', 'CultureController@pdf' )->name( 'culture.pdf' );
 
 Route::get( '/heraldry/', 'HeraldryController@index' )->name( 'heraldry.index' );
-Route::post( '/heraldry/', 'HeraldryController@generate' )->name( 'heraldry.generate' );
+Route::post( '/heraldry/', 'HeraldryController@create' )->name( 'heraldry.create' );
 Route::get( '/heraldry/{guid}', 'HeraldryController@show' )->name( 'heraldry.show' );
 
 Route::get( '/region/', 'RegionController@index' )->name( 'region.index' );

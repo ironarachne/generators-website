@@ -18,9 +18,23 @@
 
         <ul>
         {% for region in regions %}
-            <li><a href="{{ route('region.show', {'guid': region.guid}) }}">{{ region.name }}</li>
+            <li><a href="{{ route('region.show', {'guid': region.guid}) }}">{{ region.name }}</a></li>
         {% endfor %}
         </ul>
+    </div>
+    <div class="column">
+        <h2>Heraldry</h2>
+
+        {% for device in devices %}
+        <article class="media">
+            <figure class="media-left">
+                <p class="image is-64x64"><img src="{{ device.url }}" class="heraldry-small"></p>
+            </figure>
+            <div class="media-content">
+                <p><a href="{{ route('heraldry.show', {'guid': device.guid}) }}">{{ device.blazon }}</a></p>
+            </div>
+        </article>
+        {% endfor %}
     </div>
 </div>
 
