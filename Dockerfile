@@ -12,7 +12,7 @@ RUN composer install \
     --no-scripts \
     --prefer-dist
 
-FROM node:12.10 as frontend
+FROM node:12.14 as frontend
 
 RUN mkdir -p /app/public
 
@@ -23,11 +23,13 @@ WORKDIR /app
 
 RUN npm install && npm run production
 
-FROM php:7.3-apache-stretch
+FROM php:7.4-apache-stretch
 
 RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
+
+RUN docker-php-ext-install mbstring pdo pdo_mysql
 
 COPY . /var/www/html
 COPY --from=vendor /app/vendor/ /var/www/html/vendor/
