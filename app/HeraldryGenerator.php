@@ -18,8 +18,8 @@ class HeraldryGenerator {
 
         $heraldry = new Heraldry();
         $heraldry->guid = $id;
-        $heraldry->blazon = $body->Blazon;
-        $heraldry->url = $body->ImageURL;
+        $heraldry->blazon = $body->blazon;
+        $heraldry->url = $body->image_url;
 
         return $heraldry;
     }

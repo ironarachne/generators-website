@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.1 (2020-01-14)
+
+- Update HeraldryGenerator to pull from world API 0.9.0 or later
+
 ## 0.5.0 (2020-01-12)
 
 - Add user accounts
