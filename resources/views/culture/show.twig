@@ -56,13 +56,13 @@ style is appropriate for that kind of place. They often wear the following:
 <h4 class="title is-4">Male Clothing</h4>
 <ul>
     {% for item in culture.clothing_style.male_outfit %}
-    <li>{{ item }}</li>
+    <li>{{ item.prefix_modifier }} {{ item.name }} {{ item.suffix_modifier }}</li>
     {% endfor %}
 </ul>
 <h4 class="title is-4">Female Clothing</h4>
 <ul>
     {% for item in culture.clothing_style.female_outfit %}
-    <li>{{ item }}</li>
+    <li>{{ item.prefix_modifier }} {{ item.name }} {{ item.suffix_modifier }}</li>
     {% endfor %}
 </ul>
 <p>Common colors include {% for color in culture.clothing_style.common_colors %}
@@ -103,7 +103,7 @@ style is appropriate for that kind of place. They often wear the following:
 <p>The most common alcoholic beverages are:</p>
 <ul>
     {% for item in culture.alcoholic_drinks %}
-    <li>{{ item }}</li>
+    <li>{{ item.description }}</li>
     {% endfor %}
 </ul>
 {% endif %}
