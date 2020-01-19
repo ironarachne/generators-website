@@ -1,0 +1,48 @@
+<p>{{ region.name }} is ruled by {{ region.ruler.name }}. Its capital is {{ region.capital }}.</p>
+<p>{{ region.climate }}</p>
+<div class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure>
+                <img src="{{ region.ruler.device }}" height="450">
+                <p><em>{{ region.ruler.blazon }}</em></p>
+            </figure>
+        </div>
+        <div class="media-content">
+            <p class="title">{{ region.ruler.name }}</p>
+            <hr>
+            <p>{{ region.ruler.description }}</p>
+        </div>
+    </article>
+</div>
+
+<h4 class="title is-4">Notable Towns in {{ region.name }}</h4>
+{% for town in region.towns %}
+<div class="content">
+    <h5 class="title is-5">{{ town.name }}{% if town.name == region.capital %}<span>, the capital and
+        {{ region.ruler.name }}'s home</span>{% endif %}</h5>
+    <p><strong>Population:</strong> {{ town.population|number_format }} ({{ town.category }})</p>
+    <p><strong>Mayor:</strong> {{ town.mayor.description }}</p>
+    <p><strong>Exports</strong></p>
+    <ul>
+    {% for good in town.exports %}
+    <li>{{ good }}</li>
+    {% endfor %}
+    </ul>
+
+    <p><strong>Imports</strong></p>
+    <ul>
+    {% for good in town.imports %}
+    <li>{{ good }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+<h4 class="title is-4">Notable Organizations in {{ region.name }}</h4>
+{% for organization in region.organizations %}
+<div class="content">
+    <h5 class="title is-5">{{ organization.name }}</h5>
+    <p>{{ organization.description }} {{ organization.leader.description }}</p>
+</div>
+{% endfor %}

@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.6.0 (2020-01-19)
+
+- Save rendered HTML of generated regions and cultures
+- Change displays to use saved rendered HTML
+- Fix language description display
+- Fix description of religion in culture display
+- Remove PDF save for cultures (for now)
+- Remove deprecated Docker development workflow
+
 ## 0.5.2 (2020-01-15)
 
 - Fix display of cultures
