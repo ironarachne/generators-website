@@ -12,17 +12,7 @@ class CultureController extends Controller
 {
     public function index()
     {
-        $cultureData = Culture::latest()->limit(5)->get();
-
-        $cultures = [];
-
-        foreach ($cultureData as $cultureObject) {
-            $data = json_decode($cultureObject->data);
-            $culture['name'] = $data->name;
-            $culture['guid'] = $cultureObject->guid;
-            $culture['description'] = 'The ' . $data->adjective . ' are a ' . $data->primary_race->adjective . ' society. They are from a ' . $data->home_climate->name . ' region.';
-            $cultures[] = $culture;
-        }
+        $cultures = Culture::latest()->limit(5)->get();
 
         $page = [
             'title' => 'Cultures',
@@ -58,20 +48,17 @@ class CultureController extends Controller
 
     public function pdf( $guid )
     {
-        $cultureObject = Cache::get('culture-'.$guid);
-        $culture = json_decode($cultureObject->data);
+        $culture = Cache::rememberForever('culture-'.$guid, function() use ($guid) {
+            $culture = Culture::where('guid', '=', $guid)->first();
+            return $culture;
+        });
 
         $page = [
-            'id' => $guid,
-            'title' => 'The ' . $culture->adjective . ' Culture',
-            'subtitle' => 'A fictional people from a ' . $culture->home_climate->adjective . ' climate',
-            'description' => 'The ' . $culture->adjective . ', a fictional ' . $culture->primary_race->adjective . ' culture from a ' . $culture->home_climate->adjective . ' climate.',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
+            'title' => 'The ' . $culture->name . ' Culture',
+            'description' => $culture->description,
         ];
 
-        $html = view( 'culture.pdf', [ 'culture' => $culture, 'page' => $page ] );
+        $html = view( 'culture.pdf', [ 'culture' => $culture, 'page' => $page ] )->render();
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
@@ -83,14 +70,16 @@ class CultureController extends Controller
 
     public function show( $guid )
     {
-        $cultureObject = Cache::get('culture-'.$guid);
-        $culture = json_decode($cultureObject->data);
+        $culture = Cache::rememberForever('culture-'.$guid, function() use ($guid) {
+            $culture = Culture::where('guid', '=', $guid)->first();
+            return $culture;
+        });
 
         $page = [
             'id' => $guid,
-            'title' => 'The ' . $culture->adjective . ' Culture',
-            'subtitle' => 'A fictional people from a ' . $culture->home_climate->adjective . ' climate',
-            'description' => 'The ' . $culture->adjective . ', a fictional ' . $culture->primary_race->adjective . ' culture from a ' . $culture->home_climate->adjective . ' climate.',
+            'title' => 'The ' . $culture->name . ' Culture',
+            'subtitle' => $culture->description,
+            'description' => $culture->description,
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),

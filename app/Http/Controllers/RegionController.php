@@ -11,17 +11,7 @@ class RegionController extends Controller
 {
     public function index()
     {
-        $regionData = Region::latest()->limit(5)->get();
-
-        $regions = [];
-
-        foreach ($regionData as $regionObject) {
-            $data = json_decode($regionObject->data);
-            $region['name'] = $data->name;
-            $region['guid'] = $regionObject->guid;
-            $region['description'] = $data->name . ', ruled by ' . $data->ruler->name;
-            $regions[] = $region;
-        }
+        $regions = Region::latest()->limit(5)->get();
 
         $page = [
             'title' => 'Regions',
@@ -57,14 +47,16 @@ class RegionController extends Controller
 
     public function show( $guid )
     {
-        $regionObject = Cache::get('region-'.$guid);
-        $region = json_decode($regionObject->data);
+        $region = Cache::rememberForever('region-'.$guid, function() use ($guid) {
+            $region = Region::where('guid', '=', $guid)->first();
+            return $region;
+        });
 
         $page = [
             'id' => $guid,
             'title' => $region->name,
-            'subtitle' => 'A region ruled by ' . $region->ruler->name,
-            'description' => 'The fantasy region of ' . $region->name . '.',
+            'subtitle' => $region->description,
+            'description' => $region->description,
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),

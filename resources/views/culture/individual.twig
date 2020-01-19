@@ -1,0 +1,124 @@
+<p>This culture is called the <em>{{ culture.name }}</em>. Its people are the {{ culture.adjective }}, and they are a {{ culture.primary_race.adjective }} society.</p>
+<p>They speak {{ culture.language.name }}. {{ culture.language.description }} The sample phrase "{{ culture.language.sample_phrase }}" in {{ culture.language.name }} is said <em>"{{ culture.language.sample_phrase_translation }}"</em></p>
+
+<p>{{ culture.home_climate.description|replace({"This is": "They hail from"}) }}</p>
+
+<h3 class="title is-3">Common Names</h3>
+<div class="columns">
+    <div class="column">
+        <h4 class="title is-4">Male Names</h4>
+        <ul>
+            {% for name in culture.common_male_names %}
+            <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <h4 class="title is-4">Female Names</h4>
+        <ul>
+            {% for name in culture.common_female_names %}
+            <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column">
+        <h4 class="title is-4">Family Names</h4>
+        <ul>
+            {% for name in culture.common_family_names %}
+            <li>{{ name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<h3 class="title is-3">Buildings</h3>
+<p>{{ culture.building_style.description }}</p>
+
+<h3 class="title is-3">Music</h3>
+<p>{{ culture.music_style.description }} Common instruments include:</p>
+<ul>
+    {% for instrument in culture.music_style.instruments %}
+    <li>{{ instrument.description }}</li>
+    {% endfor %}
+</ul>
+
+<h3 class="title is-3">Clothing</h3>
+<p>As the {{ culture.adjective }} hail originally from a {{ culture.home_climate.adjective }} region, their clothing
+style is appropriate for that kind of place. They often wear the following:
+</p>
+<h4 class="title is-4">Male Clothing</h4>
+<ul>
+    {% for item in culture.clothing_style.male_outfit %}
+    <li>{{ item.prefix_modifier }} {{ item.name }} {{ item.suffix_modifier }}</li>
+    {% endfor %}
+</ul>
+<h4 class="title is-4">Female Clothing</h4>
+<ul>
+    {% for item in culture.clothing_style.female_outfit %}
+    <li>{{ item.prefix_modifier }} {{ item.name }} {{ item.suffix_modifier }}</li>
+    {% endfor %}
+</ul>
+<p>Common colors include {% for color in culture.clothing_style.common_colors %}
+    {% if loop.revindex == 1 %} and{% endif %} {{ color }}{% if loop.revindex > 1 %}, {% endif %}{% endfor %}.
+    Decoration tends towards {{ culture.clothing_style.decorative_style }}.</p>
+
+<div v-if="culture.clothing_style.CommonJewelry != null">
+<p>For jewelry, some of the following are common:</p>
+<ul>
+    {% for item in culture.clothing_style.common_jewelry %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+</div>
+
+<h3 class="title is-3">Food and Drink</h3>
+<p>Common main dishes for the {{ culture.adjective }} include:</p>
+<ul>
+{% for item in culture.food_style.common_main_dishes %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+<p>Common desserts include:</p>
+<ul>
+{% for item in culture.food_style.common_desserts %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% if culture.food_style.breads %}
+<p>Common breads include:</p>
+<ul>
+    {% for item in culture.food_style.breads %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if culture.alcoholic_drinks %}
+<p>The most common alcoholic beverages are:</p>
+<ul>
+    {% for item in culture.alcoholic_drinks %}
+    <li>{{ item.description }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<p>As far as eating customs go, they have the following:</p>
+<ul>
+{% for item in culture.food_style.eating_traits %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+<h3 class="title is-3">Religion</h3>
+<p>The {{ culture.adjective }} have a {{ culture.religion.class.name }} outlook. They gather in
+{{ culture.religion.gathering_place }}s.</p>
+{% if culture.religion.pantheon.deities|length > 0 %}
+    <div class="content">
+        <h4 class="title is-4">Deities</h4>
+        <p>The deities of the {{ culture.adjective }} are as follows:</p>
+        {% for deity in culture.religion.pantheon.deities %}
+        <div class="content">
+            <h5 class="title is-5">{{ deity.name }}</h5>
+            <p>{{ deity.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
