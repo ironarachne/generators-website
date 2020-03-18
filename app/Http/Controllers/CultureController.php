@@ -16,8 +16,8 @@ class CultureController extends Controller
 
         $page = [
             'title' => 'Cultures',
-            'subtitle' => 'Generate human cultures for a fantasy world',
-            'description' => 'This tool procedurally generates fantasy human cultures',
+            'subtitle' => 'Generate cultures for a fantasy world',
+            'description' => 'This tool procedurally generates fantasy cultures',
             'type' => 'single',
             'fathom_domain' => config('services.fathom.domain'),
             'fathom_site_id' => config('services.fathom.site_id'),

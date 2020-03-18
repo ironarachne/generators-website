@@ -1,7 +1,7 @@
 <p>This culture is called the <em>{{ culture.name }}</em>. Its people are the {{ culture.adjective }}, and they are a {{ culture.primary_race.adjective }} society.</p>
 <p>They speak {{ culture.language.name }}. {{ culture.language.description }} The sample phrase "{{ culture.language.sample_phrase }}" in {{ culture.language.name }} is said <em>"{{ culture.language.sample_phrase_translation }}"</em></p>
 
-<p>{{ culture.home_climate.description|replace({"This is": "They hail from"}) }}</p>
+<p>They originally came from a {{ culture.home_biome }} region.</p>
 
 <h3 class="title is-3">Common Names</h3>
 <div class="columns">
@@ -35,15 +35,10 @@
 <p>{{ culture.building_style.description }}</p>
 
 <h3 class="title is-3">Music</h3>
-<p>{{ culture.music_style.description }} Common instruments include:</p>
-<ul>
-    {% for instrument in culture.music_style.instruments %}
-    <li>{{ instrument.description }}</li>
-    {% endfor %}
-</ul>
+<p>{{ culture.music_style.description }}</p>
 
 <h3 class="title is-3">Clothing</h3>
-<p>As the {{ culture.adjective }} hail originally from a {{ culture.home_climate.adjective }} region, their clothing
+<p>As the {{ culture.adjective }} hail originally from a {{ culture.home_biome }} region, their clothing
 style is appropriate for that kind of place. They often wear the following:
 </p>
 <h4 class="title is-4">Male Clothing</h4>
