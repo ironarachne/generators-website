@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.1 (2020-03-18)
+
+- Change templates to support v0.11.0 of World API
+
 ## 0.6.0 (2020-01-19)
 
 - Save rendered HTML of generated regions and cultures
