@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.2 (2020-04-09)
+
+- Add Plausible tracking snippet
+
 ## 0.6.1 (2020-03-18)
 
 - Change templates to support v0.11.0 of World API
