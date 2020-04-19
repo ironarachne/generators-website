@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.6.3 (2020-04-19)
+
+- Add cyberpunk chop shop generator to the quick generators page
+- Update a ton of dependencies
+
 ## 0.6.2 (2020-04-09)
 
 - Add Plausible tracking snippet
