@@ -48,7 +48,19 @@ class RegionController extends Controller
     public function show( $guid )
     {
         $region = Cache::rememberForever('region-'.$guid, function() use ($guid) {
-            $region = Region::where('guid', '=', $guid)->first();
+            $region = Region::where('guid', $guid)->first();
+            if ($region == false) {
+                $regionGenerator = new RegionGenerator();
+                $region = $regionGenerator->generate( $guid );
+
+                if (\Auth::check()) {
+                    $user = \Auth::user();
+
+                    $user->regions()->save($region);
+                } else {
+                    $region->save();
+                }    
+            }
             return $region;
         });
 

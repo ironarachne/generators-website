@@ -71,7 +71,19 @@ class CultureController extends Controller
     public function show( $guid )
     {
         $culture = Cache::rememberForever('culture-'.$guid, function() use ($guid) {
-            $culture = Culture::where('guid', '=', $guid)->first();
+            $culture = Culture::where('guid', $guid)->first();
+            if ($culture == false) {
+                $cultureGenerator = new CultureGenerator();
+                $culture = $cultureGenerator->generate( $guid );
+
+                if (\Auth::check()) {
+                    $user = \Auth::user();
+
+                    $user->cultures()->save($culture);
+                } else {
+                    $culture->save();
+                }
+            }
             return $culture;
         });
 
