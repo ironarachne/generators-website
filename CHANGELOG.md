@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.4 (2020-04-20)
+
+- Fix a bug where heraldry that existed but wasn't in the cache would cause an error
+
 ## 0.6.3 (2020-04-19)
 
 - Add cyberpunk chop shop generator to the quick generators page
