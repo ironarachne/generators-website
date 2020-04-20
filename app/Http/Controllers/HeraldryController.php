@@ -58,7 +58,7 @@ class HeraldryController extends Controller
         $heraldry = Cache::rememberForever('heraldry-'.$guid, function() use ($fieldShape, $guid) {
             $h = Heraldry::where('guid', $guid)->first();
 
-            if $h == false {
+            if ($h == false) {
                 $heraldryGenerator = new HeraldryGenerator();
                 $heraldry = $heraldryGenerator->generate( $guid, $fieldShape );
 

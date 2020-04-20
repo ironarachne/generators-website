@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.5 (2020-04-20)
+
+- Fix a typo in the heraldry controller introduced in 0.6.4
+
 ## 0.6.4 (2020-04-20)
 
 - Fix a bug where heraldry that existed but wasn't in the cache would cause an error
