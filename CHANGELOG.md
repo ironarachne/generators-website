@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.6 (2020-04-20)
+
+- Add the same cache bug fix to culture and region
+
 ## 0.6.5 (2020-04-20)
 
 - Fix a typo in the heraldry controller introduced in 0.6.4
