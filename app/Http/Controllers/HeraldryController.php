@@ -56,15 +56,21 @@ class HeraldryController extends Controller
     {
         $fieldShape = $request->query('shape');
         $heraldry = Cache::rememberForever('heraldry-'.$guid, function() use ($fieldShape, $guid) {
-            $heraldryGenerator = new HeraldryGenerator();
-            $heraldry = $heraldryGenerator->generate( $guid, $fieldShape );
+            $h = Heraldry::where('guid', $guid)->first();
 
-            if (\Auth::check()) {
-                $user = \Auth::user();
+            if $h == false {
+                $heraldryGenerator = new HeraldryGenerator();
+                $heraldry = $heraldryGenerator->generate( $guid, $fieldShape );
 
-                $user->heraldries()->save($heraldry);
+                if (\Auth::check()) {
+                    $user = \Auth::user();
+
+                    $user->heraldries()->save($heraldry);
+                } else {
+                    $heraldry->save();
+                }
             } else {
-                $heraldry->save();
+                $heraldry = $h;
             }
 
             return $heraldry;
