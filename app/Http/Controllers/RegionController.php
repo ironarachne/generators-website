@@ -11,15 +11,15 @@ class RegionController extends Controller
 {
     public function index()
     {
-        $regions = Region::latest()->limit(5)->get();
+        $regions = Region::latest()->limit( 5 )->get();
 
         $page = [
             'title' => 'Regions',
             'subtitle' => 'Generate individual regions in a fantasy world',
             'description' => 'This tool procedurally generates regions for a fantasy world.',
             'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
+            'fathom_domain' => config( 'services.fathom.domain' ),
+            'fathom_site_id' => config( 'services.fathom.site_id' ),
         ];
 
         return view( 'region.index', [ 'page' => $page, 'regions' => $regions ] );
@@ -32,37 +32,37 @@ class RegionController extends Controller
         $regionGenerator = new RegionGenerator();
         $region = $regionGenerator->generate( $guid );
 
-        if (\Auth::check()) {
+        if ( \Auth::check() ) {
             $user = \Auth::user();
 
-            $user->regions()->save($region);
+            $user->regions()->save( $region );
         } else {
             $region->save();
         }
 
-        Cache::forever('region-'.$region->guid, $region);
+        Cache::forever( 'region-' . $region->guid, $region );
 
-        return redirect()->route('region.show', ['guid' => $region->guid]);
+        return redirect()->route( 'region.show', [ 'guid' => $region->guid ] );
     }
 
     public function show( $guid )
     {
-        $region = Cache::rememberForever('region-'.$guid, function() use ($guid) {
-            $region = Region::where('guid', $guid)->first();
-            if ($region == false) {
+        $region = Cache::rememberForever( 'region-' . $guid, function () use ( $guid ) {
+            $region = Region::where( 'guid', $guid )->first();
+            if ( $region == false ) {
                 $regionGenerator = new RegionGenerator();
                 $region = $regionGenerator->generate( $guid );
 
-                if (\Auth::check()) {
+                if ( \Auth::check() ) {
                     $user = \Auth::user();
 
-                    $user->regions()->save($region);
+                    $user->regions()->save( $region );
                 } else {
                     $region->save();
-                }    
+                }
             }
             return $region;
-        });
+        } );
 
         $page = [
             'id' => $guid,
@@ -70,8 +70,8 @@ class RegionController extends Controller
             'subtitle' => $region->description,
             'description' => $region->description,
             'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
+            'fathom_domain' => config( 'services.fathom.domain' ),
+            'fathom_site_id' => config( 'services.fathom.site_id' ),
         ];
 
         return view( 'region.show', [ 'region' => $region, 'page' => $page ] );

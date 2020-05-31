@@ -38,7 +38,7 @@ return [
             // When set to true, the generated templates have a __toString() method
             // that you can use to display the generated nodes.
             // default: false
-            'debug' => env('APP_DEBUG', false),
+            'debug' => env( 'APP_DEBUG', false ),
 
             // The charset used by the templates.
             // default: utf-8
@@ -213,7 +213,7 @@ return [
         'filters' => [
             'get' => 'data_get',
             'markdown_to_html' => [
-                'is_safe' => ['html'],
+                'is_safe' => [ 'html' ],
             ],
         ],
     ],

@@ -13,14 +13,14 @@ class CreateHeraldriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('heraldries', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create( 'heraldries', function ( Blueprint $table ) {
+            $table->bigIncrements( 'id' );
             $table->timestamps();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('guid', 128)->unique();
-            $table->string('url', 128)->unique();
-            $table->string('blazon', 255);
-        });
+            $table->unsignedBigInteger( 'user_id' )->nullable();
+            $table->string( 'guid', 128 )->unique();
+            $table->string( 'url', 128 )->unique();
+            $table->string( 'blazon', 255 );
+        } );
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateHeraldriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('heraldries');
+        Schema::dropIfExists( 'heraldries' );
     }
 }
