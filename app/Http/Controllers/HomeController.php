@@ -95,6 +95,20 @@ class HomeController extends Controller
         return view( 'dashboard' )->with( [ 'page' => $page, 'cultures' => $cultures, 'regions' => $regions, 'devices' => $devices ] );
     }
 
+    public function about()
+    {
+        $page = [
+            'title' => 'About',
+            'subtitle' => '',
+            'description' => 'About Iron Arachne',
+            'type' => 'single',
+            'fathom_domain' => config( 'services.fathom.domain' ),
+            'fathom_site_id' => config( 'services.fathom.site_id' ),
+        ];
+
+        return view('about')->with( [ 'page' => $page ] );
+    }
+
     public function quick()
     {
         $page = [
