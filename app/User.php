@@ -37,15 +37,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function cultures() {
+    public function cultures()
+    {
         return $this->hasMany( 'App\Culture' );
     }
 
-    public function heraldries() {
+    public function heraldries()
+    {
         return $this->hasMany( 'App\Heraldry' );
     }
 
-    public function regions() {
+    public function regions()
+    {
         return $this->hasMany( 'App\Region' );
     }
 }

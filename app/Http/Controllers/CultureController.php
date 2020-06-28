@@ -12,15 +12,15 @@ class CultureController extends Controller
 {
     public function index()
     {
-        $cultures = Culture::latest()->limit(5)->get();
+        $cultures = Culture::latest()->limit( 5 )->get();
 
         $page = [
             'title' => 'Cultures',
             'subtitle' => 'Generate cultures for a fantasy world',
             'description' => 'This tool procedurally generates fantasy cultures',
             'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
+            'fathom_domain' => config( 'services.fathom.domain' ),
+            'fathom_site_id' => config( 'services.fathom.site_id' ),
         ];
 
         return view( 'culture.index', [ 'page' => $page, 'cultures' => $cultures ] );
@@ -33,25 +33,25 @@ class CultureController extends Controller
         $cultureGenerator = new CultureGenerator();
         $culture = $cultureGenerator->generate( $guid );
 
-        if (\Auth::check()) {
+        if ( \Auth::check() ) {
             $user = \Auth::user();
 
-            $user->cultures()->save($culture);
+            $user->cultures()->save( $culture );
         } else {
             $culture->save();
         }
 
-        Cache::forever('culture-'.$culture->guid, $culture);
+        Cache::forever( 'culture-' . $culture->guid, $culture );
 
-        return redirect()->route('culture.show', ['guid' => $culture->guid]);
+        return redirect()->route( 'culture.show', [ 'guid' => $culture->guid ] );
     }
 
     public function pdf( $guid )
     {
-        $culture = Cache::rememberForever('culture-'.$guid, function() use ($guid) {
-            $culture = Culture::where('guid', '=', $guid)->first();
+        $culture = Cache::rememberForever( 'culture-' . $guid, function () use ( $guid ) {
+            $culture = Culture::where( 'guid', '=', $guid )->first();
             return $culture;
-        });
+        } );
 
         $page = [
             'title' => 'The ' . $culture->name . ' Culture',
@@ -61,31 +61,31 @@ class CultureController extends Controller
         $html = view( 'culture.pdf', [ 'culture' => $culture, 'page' => $page ] )->render();
 
         $dompdf = new Dompdf();
-        $dompdf->loadHtml($html);
+        $dompdf->loadHtml( $html );
 
-        $dompdf->setPaper('letter', 'portrait');
+        $dompdf->setPaper( 'letter', 'portrait' );
         $dompdf->render();
         $dompdf->stream();
     }
 
     public function show( $guid )
     {
-        $culture = Cache::rememberForever('culture-'.$guid, function() use ($guid) {
-            $culture = Culture::where('guid', $guid)->first();
-            if ($culture == false) {
+        $culture = Cache::rememberForever( 'culture-' . $guid, function () use ( $guid ) {
+            $culture = Culture::where( 'guid', $guid )->first();
+            if ( $culture == false ) {
                 $cultureGenerator = new CultureGenerator();
                 $culture = $cultureGenerator->generate( $guid );
 
-                if (\Auth::check()) {
+                if ( \Auth::check() ) {
                     $user = \Auth::user();
 
-                    $user->cultures()->save($culture);
+                    $user->cultures()->save( $culture );
                 } else {
                     $culture->save();
                 }
             }
             return $culture;
-        });
+        } );
 
         $page = [
             'id' => $guid,
@@ -93,8 +93,8 @@ class CultureController extends Controller
             'subtitle' => $culture->description,
             'description' => $culture->description,
             'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
+            'fathom_domain' => config( 'services.fathom.domain' ),
+            'fathom_site_id' => config( 'services.fathom.site_id' ),
         ];
 
         return view( 'culture.show', [ 'culture' => $culture, 'page' => $page ] );

@@ -22,10 +22,10 @@ class ForceHttpsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(UrlGenerator $url)
+    public function boot( UrlGenerator $url )
     {
-        if (env('FORCE_HTTPS') === true) {
-            $url->forceScheme('https');
+        if ( env( 'FORCE_HTTPS' ) === true ) {
+            $url->forceScheme( 'https' );
         }
     }
 }
