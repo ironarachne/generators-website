@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware( 'auth:api' )->get( '/user', function ( Request $request ) {
     return $request->user();
 } );
+
+Route::get('/region', 'ApiController@randomRegion')->name('api.region.random');
+Route::get('/region/{seed}', 'ApiController@randomRegionSeed')->name('api.region.seed');

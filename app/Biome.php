@@ -10,6 +10,7 @@ class Biome
     public $fauna_prevalence;
     public $altitude_min;
     public $altitude_max;
+    public $match_score;
     public $temperature_min;
     public $temperature_max;
     public $precipitation_min;
