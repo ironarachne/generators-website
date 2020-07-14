@@ -17,5 +17,8 @@ Route::middleware( 'auth:api' )->get( '/user', function ( Request $request ) {
     return $request->user();
 } );
 
-Route::get('/region', 'ApiController@randomRegion')->name('api.region.random');
-Route::get('/region/{seed}', 'ApiController@randomRegionSeed')->name('api.region.seed');
+Route::get('/geography', 'ApiController@randomGeographicRegion')->name('api.geographicregion.random');
+Route::get('/geography/{seed}', 'ApiController@randomGeographicRegionSeed')->name('api.geographicregion.seed');
+
+Route::get('/language', 'ApiController@randomLanguage')->name('api.language.random');
+Route::get('/language/{seed}', 'ApiController@randomLanguageFromSeed')->name('api.language.seed');

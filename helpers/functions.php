@@ -42,8 +42,32 @@ if (!function_exists('seeder')) {
     }
 }
 
+if (!function_exists('combine_phrases')) {
+    function combine_phrases($phrases)
+    {
+        $result = '';
+
+        if (sizeof($phrases) == 1) {
+            return $phrases[0];
+        } elseif (sizeof($phrases) == 2) {
+            return "${phrases[0]} and ${phrases[1]}";
+        } else {
+            foreach ($phrases as $index => $phrase) {
+                if ($index == sizeof($phrases) - 1) {
+                    $result .= 'and ' . $phrase;
+                } else {
+                    $result .= "$phrase, ";
+                }
+            }
+        }
+
+        return $result;
+    }
+}
+
 if (!function_exists('pronoun')) {
-    function pronoun($word) {
+    function pronoun($word)
+    {
         $pronoun = 'a';
 
         $firstLetter = $word[0];
@@ -103,5 +127,34 @@ if (!function_exists('random_direction')) {
     function random_direction()
     {
         return mt_rand(0, 7);
+    }
+}
+
+if (!function_exists('random_item')) {
+    function random_item($items)
+    {
+        return $items[mt_rand(0, sizeof($items) - 1)];
+    }
+}
+
+if (!function_exists('random_weighted_item')) {
+    function random_weighted_item($items)
+    {
+        $ceiling = 0;
+
+        foreach ($items as $item => $weight) {
+            $ceiling += $weight;
+        }
+
+        $randomValue = mt_rand(0, $ceiling);
+
+        foreach ($items as $item => $weight) {
+            $randomValue -= $weight;
+            if ($randomValue <= 0) {
+                return $item;
+            }
+        }
+
+        return '';
     }
 }
