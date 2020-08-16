@@ -32,8 +32,9 @@ if (!function_exists('rnd')) {
 if (!function_exists('seeder')) {
     function seeder($seed)
     {
+        $hash = substr(md5($seed), 0, 6);
         $seedNumber = '';
-        $byteArray = unpack('C*', $seed);
+        $byteArray = unpack('C*', $hash);
         foreach ($byteArray as $b) {
             $seedNumber .= $b;
         }
