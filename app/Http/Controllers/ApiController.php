@@ -24,7 +24,7 @@ class ApiController extends Controller
 
     public function randomClothingStyleSeed($seed)
     {
-        $style = Cache::rememberForever("clothing_style_$seed", function() use ($seed) {
+        $style = Cache::rememberForever("clothing_style_$seed", function () use ($seed) {
             seeder($seed);
 
             $gen = new ClothingStyleGenerator();
@@ -49,7 +49,7 @@ class ApiController extends Controller
 
     public function randomGeographicRegionSeed($seed)
     {
-        $region = Cache::rememberForever("geographic_region_$seed", function() use ($seed) {
+        $region = Cache::rememberForever("geographic_region_$seed", function () use ($seed) {
             seeder($seed);
 
             $gen = new GeographicRegionGenerator();
@@ -66,7 +66,7 @@ class ApiController extends Controller
     {
         $guid = Uuid::uuid4()->toString();
 
-        $language = Cache::rememberForever("language_$guid", function() use ($guid) {
+        $language = Cache::rememberForever("language_$guid", function () use ($guid) {
             seeder($guid);
 
             $gen = new LanguageGenerator();
@@ -83,7 +83,7 @@ class ApiController extends Controller
     {
         $guid = $seed;
 
-        $language = Cache::rememberForever("language_$guid", function() use ($guid) {
+        $language = Cache::rememberForever("language_$guid", function () use ($guid) {
             $language = Language::where('guid', '=', $guid)->with(['names', 'words', 'writingSystems'])->first();
 
             if (empty($language)) {
@@ -106,7 +106,7 @@ class ApiController extends Controller
     {
         $guid = Uuid::uuid4()->toString();
 
-        $music = Cache::rememberForever("music_$guid", function() use ($guid) {
+        $music = Cache::rememberForever("music_$guid", function () use ($guid) {
             seeder($guid);
 
             $gen = new MusicGenerator();
@@ -122,7 +122,7 @@ class ApiController extends Controller
     {
         $guid = $seed;
 
-        $music = Cache::rememberForever("music_$guid", function() use ($guid) {
+        $music = Cache::rememberForever("music_$guid", function () use ($guid) {
             seeder($guid);
 
             $gen = new MusicGenerator();
