@@ -80,4 +80,66 @@ class Pattern
             return $patterns;
         });
     }
+
+    public function makeResource($resources)
+    {
+        $filledSlots = [];
+
+        foreach ($this->slots as $slot) {
+            $options = Resource::byTag($resources, $slot->required_tag);
+            $ingredient = random_item($options);
+            $slot->resource = $ingredient;
+
+            $filledSlots[] = $slot;
+        }
+
+        $this->slots = $filledSlots;
+
+        $resource = new Resource();
+        $resource->name = $this->renderName();
+        $resource->description = $this->renderDescription();
+        $resource->main_material = $this->slots[0]->resource->main_material;
+
+        if ($this->main_material_override != '') {
+            $resource->main_material = $this->main_material_override;
+        }
+
+        $resource->origin = $this->slots[0]->resource->origin;
+
+        if ($this->origin_override != '') {
+            $resource->origin = $this->origin_override;
+        }
+
+        $resource->tags = $this->tags;
+        $resource->tags [] = $resource->name;
+        $resource->commonality = $this->commonality;
+
+        $value = 0;
+
+        foreach ($this->slots as $s) {
+            $value += $s->resource->value;
+        }
+
+        $value += $this->value;
+        $resource->value = $value;
+
+        return $resource;
+    }
+
+    public function renderDescription()
+    {
+        $description = '';
+
+        foreach ($this->slots as $slot) {
+            $description .= str_replace('{{.Resource.MainMaterial}}', $slot->resource->main_material, $slot->description_template);
+        }
+
+        return $description;
+    }
+
+    public function renderName()
+    {
+        $mainMaterial = $this->main_material_override != '' ? $this->main_material_override : $this->slots[0]->resource->main_material;
+        return str_replace('{{.MainMaterial}}', $mainMaterial, $this->name_template);
+    }
 }
