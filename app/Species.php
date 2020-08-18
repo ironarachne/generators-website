@@ -130,21 +130,7 @@ class Species
                 }
 
                 foreach ($d->resources as $r) {
-                    $resource = new Resource();
-
-                    $resource->name = $r->name;
-                    $resource->description = $r->description;
-                    $resource->commonality = $r->commonality;
-                    $resource->main_material = $r->main_material;
-                    $resource->origin = $r->origin;
-                    $resource->value = $r->value;
-
-                    foreach ($r->tags as $t) {
-                        $tag = new Tag();
-                        $tag->name = $t->name;
-                        $resource->tags [] = $tag;
-                    }
-
+                    $resource = Resource::fromJSON($r);
                     $s->resources [] = $resource;
                 }
 

@@ -4,6 +4,9 @@
 namespace App;
 
 
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
+
 class Resource
 {
     public $name;
@@ -30,6 +33,46 @@ class Resource
         }
 
         return $result;
+    }
+
+    public static function fromJSON($json)
+    {
+        $resource = new Resource();
+        $resource->name = $json->name;
+        $resource->description = $json->description;
+        $resource->commonality = $json->commonality;
+        $resource->main_material = $json->main_material;
+        $resource->origin = $json->origin;
+        $resource->value = $json->value;
+
+        foreach ($json->tags as $t) {
+            $tag = new Tag();
+            $tag->name = $t->name;
+            $resource->tags [] = $tag;
+        }
+
+        return $resource;
+    }
+
+    public static function loadAll()
+    {
+        return Cache::remember('resources_all', 600, function () {
+            $resources = [];
+
+            $url = env('DATA_CORE_URL');
+
+            $client = new Client();
+            $response = $client->request('GET', $url . '/resources');
+
+            $data = json_decode($response->getBody()->getContents());
+
+            foreach ($data->resources as $d) {
+                $resource = Resource::fromJSON($d);
+                $resources[] = $resource;
+            }
+
+            return $resources;
+        });
     }
 
     public function in($haystack)
