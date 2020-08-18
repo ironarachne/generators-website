@@ -2,16 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\AlcoholicDrinkGenerator;
 use App\ClothingStyleGenerator;
 use App\GeographicRegionGenerator;
 use App\LanguageGenerator;
 use App\Language;
 use App\MusicGenerator;
+use App\Resource;
 use Illuminate\Support\Facades\Cache;
 use Ramsey\Uuid\Uuid;
 
 class ApiController extends Controller
 {
+    public function randomAlcoholicDrink()
+    {
+        $gen = new AlcoholicDrinkGenerator();
+        $name = $gen->randomName();
+        $resources = Resource::loadAll();
+        $drink = $gen->generate($resources, $name);
+
+        $json = '{"alcoholic_drink":' . json_encode($drink) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomAlcoholicDrinkSeed($seed)
+    {
+        $drink = Cache::rememberForever("alcoholic_drink_$seed", function () use ($seed) {
+            seeder($seed);
+
+            $gen = new AlcoholicDrinkGenerator();
+            $name = $gen->randomName();
+            $resources = Resource::loadAll();
+            return $gen->generate($resources, $name);
+        });
+
+        $json = '{"alcoholic_drink":' . json_encode($drink) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
     public function randomClothingStyle()
     {
         $gen = new ClothingStyleGenerator();

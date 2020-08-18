@@ -17,6 +17,9 @@ Route::middleware( 'auth:api' )->get( '/user', function ( Request $request ) {
     return $request->user();
 } );
 
+Route::get('/alcoholic_drink', 'ApiController@randomAlcoholicDrink')->name('api.alcoholicdrink.random');
+Route::get('/alcoholic_drink/{seed}', 'ApiController@randomAlcoholicDrinkSeed')->name('api.alcoholicdrink.seed');
+
 Route::get('/clothing_style', 'ApiController@randomClothingStyle')->name('api.clothingstyle.random');
 Route::get('/clothing_style/{seed}', 'ApiController@randomClothingStyleSeed')->name('api.clothingstyle.seed');
 
