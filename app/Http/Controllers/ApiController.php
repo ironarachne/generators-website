@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AlcoholicDrinkGenerator;
 use App\ClothingStyleGenerator;
+use App\CuisineGenerator;
 use App\GeographicRegionGenerator;
 use App\LanguageGenerator;
 use App\Language;
@@ -63,6 +64,34 @@ class ApiController extends Controller
         });
 
         $json = '{"clothing_style":' . json_encode($style) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomCuisine()
+    {
+        $gen = new CuisineGenerator();
+
+        $resources = Resource::loadAll();
+        $cuisine = $gen->generate($resources);
+
+        $json = '{"cuisine":' . json_encode($cuisine) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomCuisineSeed($seed)
+    {
+        $cuisine = Cache::rememberForever("cuisine_$seed", function () use ($seed) {
+            seeder($seed);
+
+            $gen = new CuisineGenerator();
+
+            $resources = Resource::loadAll();
+            return $gen->generate($resources);
+        });
+
+        $json = '{"cuisine":' . json_encode($cuisine) . '}';
 
         return response($json)->header('Content-Type', 'application/json');
     }
