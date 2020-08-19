@@ -2,14 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class WritingSystem extends Model
+class WritingSystem
 {
-    protected $hidden = ['pivot', 'id', 'created_at', 'updated_at'];
-
-    public function languages()
-    {
-        return $this->belongsToMany('App\Language');
-    }
+    public $name;
+    public $classification;
+    public $stroke_style;
+    public $character_order;
+    public $description;
 }

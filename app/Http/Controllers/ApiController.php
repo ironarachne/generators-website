@@ -131,8 +131,7 @@ class ApiController extends Controller
             seeder($guid);
 
             $gen = new LanguageGenerator();
-            $language = $gen->generate($guid);
-            return Language::where('guid', '=', $guid)->with(['names', 'words', 'writingSystems'])->first();
+            return $gen->generate();
         });
 
         $json = '{"language": ' . json_encode($language) . '}';
@@ -145,17 +144,10 @@ class ApiController extends Controller
         $guid = $seed;
 
         $language = Cache::rememberForever("language_$guid", function () use ($guid) {
-            $language = Language::where('guid', '=', $guid)->with(['names', 'words', 'writingSystems'])->first();
+            seeder($guid);
 
-            if (empty($language)) {
-                seeder($guid);
-
-                $gen = new LanguageGenerator();
-                $language = $gen->generate($guid);
-                return $language->with(['names', 'words', 'writingSystems'])->get();
-            } else {
-                return $language;
-            }
+            $gen = new LanguageGenerator();
+            return $gen->generate();
         });
 
         $json = '{"language": ' . json_encode($language) . '}';

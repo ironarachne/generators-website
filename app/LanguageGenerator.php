@@ -6,7 +6,7 @@ namespace App;
 
 class LanguageGenerator
 {
-    public function generate($guid)
+    public function generate()
     {
         // TODO: Add generation of conjugation rules
         $style = $this->getRandomStyle();
@@ -15,7 +15,6 @@ class LanguageGenerator
         $newWordSuffixes = $this->generateNewWordSuffixes($style);
 
         $language = new Language();
-        $language->guid = $guid;
         $language->new_word_prefixes = implode(',', $newWordPrefixes);
         $language->new_word_suffixes = implode(',', $newWordSuffixes);
         $descriptors = $style->descriptors;
@@ -32,54 +31,23 @@ class LanguageGenerator
         $language->name = $genericNames[0];
         $language->adjective = $language->name . $this->getRandomSyllable($style->initiators, $style->connectors, $style->finishers, 'finisher');
 
-        $language->save();
-
         $wriGen = new WritingSystemGenerator();
         $writingSystem = $wriGen->generate();
         $writingSystem->name = $language->name . ' ' . $wriGen->getRandomNameQualifier($writingSystem->classification);
         $writingSystem->description = $wriGen->describe($writingSystem);
-        $language->writingSystems()->save($writingSystem);
+        $language->writing_systems [] = $writingSystem;
 
         $words = $this->generateWords($style);
-        $language->words()->saveMany($words);
+        $language->words = $words;
 
-        $maleNames = $this->generateNames(30, 'male', $style);
-
-        foreach ($maleNames as $name) {
-            $n = new Name();
-            $n->name = $name;
-            $n->gender = 'male';
-            $n->name_type = 'first name';
-            $names [] = $n;
-        }
-
-        $femaleNames = $this->generateNames(30, 'female', $style);
-
-        foreach ($femaleNames as $name) {
-            $n = new Name();
-            $n->name = $name;
-            $n->gender = 'female';
-            $n->name_type = 'first name';
-            $names [] = $n;
-        }
-
-        $familyNames = $this->generateNames(30, 'family', $style);
-
-        foreach ($familyNames as $name) {
-            $n = new Name();
-            $n->name = $name;
-            $n->gender = '';
-            $n->name_type = 'family name';
-            $names [] = $n;
-        }
-
-        $language->names()->saveMany($names);
+        $language->male_first_names = $this->generateNames(30, 'male', $style);
+        $language->female_first_names = $this->generateNames(30, 'female', $style);
+        $language->male_last_names = $this->generateNames(30, 'family', $style);
+        $language->female_last_names = $language->male_last_names;
 
         $language->sample_phrase_translation = $this->getRandomSamplePhraseTranslation();
         $language->sample_phrase = $language->translate($language->sample_phrase_translation);
         $language->description = $this->describe($language);
-
-        $language->save();
 
         return $language;
     }
@@ -87,7 +55,7 @@ class LanguageGenerator
     public function describe($language)
     {
         $descriptors = explode(',', $language->descriptors);
-        $writingSystem = $language->writingSystems()->first();
+        $writingSystem = $language->writing_systems[0];
 
         $description = $language->name . ' is ' . pronoun($descriptors[0]) . ' ' . combine_phrases($descriptors);
         $description .= ' language. It has ' . pronoun($writingSystem->classification) . ' ' . $writingSystem->classification;

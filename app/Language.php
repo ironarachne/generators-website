@@ -2,19 +2,24 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Language extends Model
+class Language
 {
-    public function conjugationRules()
-    {
-        return $this->hasMany('App\ConjugationRule');
-    }
-
-    public function names()
-    {
-        return $this->hasMany('App\Name');
-    }
+    public $name;
+    public $adjective;
+    public $conjugation_rules;
+    public $female_first_names;
+    public $female_last_names;
+    public $male_first_names;
+    public $male_last_names;
+    public $new_word_prefixes;
+    public $new_word_suffixes;
+    public $is_tonal;
+    public $descriptors;
+    public $sample_phrase_translation;
+    public $sample_phrase;
+    public $description;
+    public $words;
+    public $writing_systems;
 
     public function translate($phrase)
     {
@@ -32,7 +37,12 @@ class Language extends Model
                 $filtered = 'be';
             }
 
-            $dictionary = $this->words()->where('english_translation', '=', $filtered)->first();
+            foreach($this->words as $w) {
+                if ($w->english_translation == $filtered) {
+                    $dictionary = $w;
+                    break;
+                }
+            }
 
             if (!empty($dictionary->word)) {
                 if ($isFirstWordOfSentence) {
@@ -66,15 +76,5 @@ class Language extends Model
         $translation = substr($translation, 0, -1);
 
         return $translation;
-    }
-
-    public function words()
-    {
-        return $this->hasMany('App\Word');
-    }
-
-    public function writingSystems()
-    {
-        return $this->belongsToMany('App\WritingSystem');
     }
 }

@@ -2,14 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Word extends Model
+class Word
 {
-    protected $hidden = ['id', 'created_at', 'updated_at', 'language_id'];
-
-    public function language()
-    {
-        return $this->belongsTo('App\Language');
-    }
+    public $english_translation;
+    public $word;
+    public $speech_part;
 }
