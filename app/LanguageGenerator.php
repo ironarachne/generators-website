@@ -19,8 +19,8 @@ class LanguageGenerator
         $language->new_word_suffixes = implode(',', $newWordSuffixes);
         $descriptors = $style->descriptors;
 
-        $isTonal = mt_rand(0, 10);
-        if ($isTonal > 8) {
+        $isTonal = mt_rand(0, 100);
+        if ($isTonal > 93) {
             $language->is_tonal = true;
             $descriptors [] = 'tonal';
         }
@@ -69,18 +69,19 @@ class LanguageGenerator
     {
         $endings = [];
         $names = [];
-        $maxSyllables = 5;
+        $maxSyllables = 3;
+        $minSyllables = 1;
 
         if ($type == 'male') {
             $endings = $style->masculine_endings;
-            $maxSyllables = 3;
+            $maxSyllables = 2;
         } else if ($type == 'female') {
             $endings = $style->feminine_endings;
-            $maxSyllables = 3;
+            $maxSyllables = 2;
         }
 
         for ($i = 0; $i < $number; $i++) {
-            $name = $this->getRandomWord($style, $maxSyllables);
+            $name = $this->getRandomWord($style, $minSyllables, $maxSyllables);
             if (sizeof($endings) > 0) {
                 $ending = random_item($endings);
                 $name .= $ending;
@@ -130,7 +131,7 @@ class LanguageGenerator
 
         foreach ($words as $w) {
             $syllableCount = $this->getSyllableCountForWord($w);
-            $w->word = $this->getRandomWord($style, $syllableCount);
+            $w->word = $this->getRandomWord($style, $syllableCount, $syllableCount);
         }
 
         return $words;
@@ -280,7 +281,7 @@ class LanguageGenerator
         return random_weighted_item($vowels);
     }
 
-    public function getRandomWord($style, $maxSyllables)
+    public function getRandomWord($style, $minSyllables, $maxSyllables)
     {
         $numSyllables = 1;
         $role = 'connector';
@@ -288,7 +289,7 @@ class LanguageGenerator
         $word = '';
 
         if ($maxSyllables > 1) {
-            $numSyllables = mt_rand(0, $maxSyllables) + 1;
+            $numSyllables = mt_rand($minSyllables, $maxSyllables);
         }
 
         for ($i = 0; $i < $numSyllables; $i++) {
@@ -299,8 +300,8 @@ class LanguageGenerator
             $syllable = $this->getRandomSyllable($style->initiators, $style->connectors, $style->finishers, $role);
 
             if ($style->uses_apostrophes) {
-                $shouldIUseAnApostrophe = mt_rand(0, 10);
-                if ($shouldIUseAnApostrophe > 8) {
+                $shouldIUseAnApostrophe = mt_rand(0, 100);
+                if ($shouldIUseAnApostrophe > 87) {
                     $syllable .= '\'';
                 }
             }
@@ -589,6 +590,7 @@ class LanguageGenerator
             'bark',
             'bay',
             'beer',
+            'beet',
             'bird',
             'blood',
             'boar',
@@ -623,6 +625,7 @@ class LanguageGenerator
             'flesh',
             'foot',
             'forest',
+            'fox',
             'friend',
             'goose',
             'grease',
