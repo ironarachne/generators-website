@@ -44,18 +44,19 @@ if (!function_exists('seeder')) {
 }
 
 if (!function_exists('combine_phrases')) {
-    function combine_phrases($phrases)
+    function combine_phrases($phrases, $use_and = true)
     {
         $result = '';
+        $joiner = $use_and ? 'and' : 'or';
 
         if (sizeof($phrases) == 1) {
             return $phrases[0];
         } elseif (sizeof($phrases) == 2) {
-            return "${phrases[0]} and ${phrases[1]}";
+            return "${phrases[0]} $joiner ${phrases[1]}";
         } else {
             foreach ($phrases as $index => $phrase) {
                 if ($index == sizeof($phrases) - 1) {
-                    $result .= 'and ' . $phrase;
+                    $result .= "$joiner $phrase";
                 } else {
                     $result .= "$phrase, ";
                 }
@@ -134,6 +135,14 @@ if (!function_exists('random_direction')) {
 if (!function_exists('random_item')) {
     function random_item($items)
     {
+        if (sizeof($items) == 0) {
+            return null;
+        }
+
+        if (sizeof($items) == 1) {
+            return $items[0];
+        }
+
         return $items[mt_rand(0, sizeof($items) - 1)];
     }
 }
