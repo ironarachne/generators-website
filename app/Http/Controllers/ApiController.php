@@ -9,6 +9,8 @@ use App\GeographicRegionGenerator;
 use App\LanguageGenerator;
 use App\Language;
 use App\MusicGenerator;
+use App\NameGenerator;
+use App\ReligionGenerator;
 use App\Resource;
 use Illuminate\Support\Facades\Cache;
 use Ramsey\Uuid\Uuid;
@@ -189,6 +191,34 @@ class ApiController extends Controller
         });
 
         $json = '{"music": ' . json_encode($music) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomReligion()
+    {
+        $gen = new ReligionGenerator();
+
+        $nameGenerator = NameGenerator::defaultFantasy();
+        $religion = $gen->generate($nameGenerator);
+
+        $json = '{"religion":' . json_encode($religion) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomReligionSeed($seed)
+    {
+        $religion = Cache::rememberForever("religion_$seed", function () use ($seed) {
+            seeder($seed);
+
+            $gen = new ReligionGenerator();
+
+            $nameGenerator = NameGenerator::defaultFantasy();
+            return $gen->generate($nameGenerator);
+        });
+
+        $json = '{"religion":' . json_encode($religion) . '}';
 
         return response($json)->header('Content-Type', 'application/json');
     }
