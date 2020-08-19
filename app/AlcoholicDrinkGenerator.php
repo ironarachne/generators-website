@@ -55,7 +55,9 @@ class AlcoholicDrinkGenerator
         $baseResource = random_item($baseOptions);
         $base = $baseResource->name;
 
-        $description = "a beverage called $name, which is " . $method['name'] . " from $base";
+        $description = trim("$strength beverage called $name, which is " . $method['name'] . " from $base");
+        $wordToCheck = $strength == '' ? 'beverage' : $strength;
+        $description = pronoun($wordToCheck) . " $description";
 
         $chanceExtras = mt_rand(0, 100);
         if ($chanceExtras > 80) {

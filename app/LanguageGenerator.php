@@ -702,6 +702,7 @@ class LanguageGenerator
             'way',
             'wine',
             'woman',
+            'word',
         ];
 
         foreach ($nouns as $a) {
