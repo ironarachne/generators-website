@@ -60,7 +60,7 @@ class LanguageGenerator
         $description = $language->name . ' is ' . pronoun($descriptors[0]) . ' ' . combine_phrases($descriptors);
         $description .= ' language. It has ' . pronoun($writingSystem->classification) . ' ' . $writingSystem->classification;
         $description .= ' writing system comprised of ' . $writingSystem->stroke_style . ' written in order ' . $writingSystem->character_order;
-        $description .= '. The phrase "' . $language->sample_phrase . '" means "' . $language->sample_phrase_translation . '".';
+        $description .= '. The phrase "' . $language->sample_phrase . '" means "' . $language->sample_phrase_translation . '"';
 
         return $description;
     }
