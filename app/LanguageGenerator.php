@@ -40,9 +40,9 @@ class LanguageGenerator
         $words = $this->generateWords($style);
         $language->words = $words;
 
-        $language->male_first_names = $this->generateNames(30, 'male', $style);
-        $language->female_first_names = $this->generateNames(30, 'female', $style);
-        $language->male_last_names = $this->generateNames(30, 'family', $style);
+        $language->male_first_names = $this->generateNames(15, 'male', $style);
+        $language->female_first_names = $this->generateNames(15, 'female', $style);
+        $language->male_last_names = $this->generateNames(15, 'family', $style);
         $language->female_last_names = $language->male_last_names;
 
         $language->sample_phrase_translation = $this->getRandomSamplePhraseTranslation();
