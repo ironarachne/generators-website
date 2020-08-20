@@ -7,7 +7,6 @@ use App\ClothingStyleGenerator;
 use App\CuisineGenerator;
 use App\GeographicRegionGenerator;
 use App\LanguageGenerator;
-use App\Language;
 use App\MusicGenerator;
 use App\NameGenerator;
 use App\ReligionGenerator;

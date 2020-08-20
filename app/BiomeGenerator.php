@@ -3,6 +3,7 @@
 
 namespace App;
 
+use Exception;
 use \GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 

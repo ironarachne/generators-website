@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;

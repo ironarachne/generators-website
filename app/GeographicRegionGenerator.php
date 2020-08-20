@@ -4,6 +4,8 @@
 namespace App;
 
 
+use Exception;
+
 class GeographicRegionGenerator
 {
     public function generate()

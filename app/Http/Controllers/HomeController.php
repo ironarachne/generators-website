@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Parsedown;
@@ -18,7 +18,7 @@ class HomeController extends Controller
             $client = new Client(['base_uri' => 'https://blog.ironarachne.com/api/']);
             $response = $client->request('GET', 'collections/ben/posts');
 
-            $body = $response->getBody();
+            $body = (string)$response->getBody();
 
             $json = json_decode($body);
 
