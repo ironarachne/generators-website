@@ -6,21 +6,21 @@ namespace App;
 
 class GeographicRegion
 {
-    public $description;
-    public $climate;
-    public $biome;
-    public $seasons;
-    public $animals;
-    public $plants;
-    public $minerals;
-    public $altitude;
-    public $humidity;
-    public $temperature;
-    public $nearest_ocean_distance;
-    public $nearest_ocean_direction;
-    public $nearest_mountains_distance;
-    public $nearest_mountains_direction;
-    public $distance_to_equator;
+    public string $description;
+    public Climate $climate;
+    public Biome $biome;
+    public array $seasons;
+    public array $animals;
+    public array $plants;
+    public array $minerals;
+    public int $altitude;
+    public int $humidity;
+    public int $temperature;
+    public int $nearest_ocean_distance;
+    public int $nearest_ocean_direction;
+    public int $nearest_mountains_distance;
+    public int $nearest_mountains_direction;
+    public int $distance_to_equator;
 
     public function resources()
     {
