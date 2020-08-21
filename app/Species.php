@@ -9,21 +9,22 @@ use Illuminate\Support\Facades\Cache;
 
 class Species
 {
-    public $name;
-    public $plural_name;
-    public $adjective;
-    public $commonality;
-    public $possible_traits;
-    public $common_traits;
-    public $age_categories;
-    public $humidity_max;
-    public $humidity_min;
-    public $temperature_max;
-    public $temperature_min;
-    public $resources;
-    public $tags;
+    public string $name;
+    public string $plural_name;
+    public string $adjective;
+    public int $commonality;
+    public array $possible_traits;
+    public array $common_traits;
+    public array $age_categories;
+    public int $humidity_max;
+    public int $humidity_min;
+    public int $temperature_max;
+    public int $temperature_min;
+    public array $resources;
+    public array $tags;
 
-    public static function byTagName($tagName, $haystack) {
+    public static function byTagName($tagName, $haystack)
+    {
         $result = [];
 
         $tag = new Tag();
@@ -49,7 +50,8 @@ class Species
         return false;
     }
 
-    public function suits($humidity, $temperature, $tags) {
+    public function suits($humidity, $temperature, $tags): bool
+    {
         if ($humidity < $this->humidity_min || $humidity > $this->humidity_max) {
             return false;
         }
@@ -90,6 +92,11 @@ class Species
                 $s->humidity_min = $d->humidity_min;
                 $s->temperature_max = $d->temperature_max;
                 $s->temperature_min = $d->temperature_min;
+                $s->tags = [];
+                $s->possible_traits = [];
+                $s->common_traits = [];
+                $s->age_categories = [];
+                $s->resources = [];
 
                 foreach ($d->tags as $t) {
                     $tag = new Tag();
@@ -100,8 +107,8 @@ class Species
                 foreach ($d->trait_templates as $t) {
                     $trait = new TraitTemplate();
                     $trait->name = $t->name;
-                    $trait->possible_descriptors = $t->possible_descriptors;
-                    $trait->possible_values = $t->possible_values;
+                    $trait->possible_descriptors = explode(',', $t->possible_descriptors);
+                    $trait->possible_values = explode(',', $t->possible_values);
                     $trait->trait_type = $t->trait_type;
 
                     if ($trait->trait_type == 'possible') {
@@ -139,5 +146,44 @@ class Species
 
             return $species;
         });
+    }
+
+    public function randomAgeCategory(): AgeCategory
+    {
+        $weighted = [];
+
+        foreach ($this->age_categories as $ac) {
+            $weighted[$ac->name] = $ac->commonality;
+        }
+
+        $result = random_weighted_item($weighted);
+
+        foreach ($this->age_categories as $ac) {
+            if ($ac->name == $result) {
+                return $ac;
+            }
+        }
+    }
+
+    public function randomPhysicalTraits(): array
+    {
+        $result = [];
+        $templates = $this->common_traits;
+        $templates [] = random_item($this->possible_traits);
+
+        foreach ($templates as $t) {
+            $value = random_item($t->possible_values);
+            $descriptor = random_item($t->possible_descriptors);
+            $result [] = str_replace('{{.Value}}', $value, $descriptor);
+        }
+
+        return $result;
+    }
+
+    public static function randomRace(): Species
+    {
+        $options = Species::load('race');
+
+        return random_item($options);
     }
 }
