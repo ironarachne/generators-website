@@ -20,6 +20,15 @@ if (!function_exists('distribute_array')) {
     }
 }
 
+if (!function_exists('inches_to_feet')) {
+    function inches_to_feet(int $inches): string {
+        $feet = floor($inches / 12);
+        $remainder = $inches % 12;
+
+        return "$feet'$remainder\"";
+    }
+}
+
 if (!function_exists('rnd')) {
     function rnd($max)
     {
