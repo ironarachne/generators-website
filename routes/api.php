@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::get('/music/{seed}', 'ApiController@randomMusicFromSeed')->name('api.musi
 
 Route::get('/religion', 'ApiController@randomReligion')->name('api.religion.random');
 Route::get('/religion/{seed}', 'ApiController@randomReligionFromSeed')->name('api.religion.seed');
+
+Route::get('/town', 'ApiController@randomTown')->name('api.town.random');
+Route::get('/town/{seed}', 'ApiController@randomTownFromSeed')->name('api.town.seed');

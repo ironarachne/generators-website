@@ -13,6 +13,7 @@ use App\NameGenerator;
 use App\ReligionGenerator;
 use App\Resource;
 use App\Species;
+use App\TownGenerator;
 use Illuminate\Support\Facades\Cache;
 use Ramsey\Uuid\Uuid;
 
@@ -240,6 +241,38 @@ class ApiController extends Controller
         });
 
         $json = '{"religion":' . json_encode($religion) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomTown()
+    {
+        $gen = new TownGenerator();
+
+        $nameGenerator = NameGenerator::defaultFantasy();
+        $geoGenerator = new GeographicRegionGenerator();
+        $geographicRegion = $geoGenerator->generate();
+        $town = $gen->generate($geographicRegion, $nameGenerator);
+
+        $json = '{"town":' . json_encode($town) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomTownSeed($seed)
+    {
+        $town = Cache::rememberForever("town_$seed", function () use ($seed) {
+            seeder($seed);
+
+            $gen = new TownGenerator();
+
+            $nameGenerator = NameGenerator::defaultFantasy();
+            $geoGenerator = new GeographicRegionGenerator();
+            $geographicRegion = $geoGenerator->generate();
+            return $gen->generate($geographicRegion, $nameGenerator);
+        });
+
+        $json = '{"town":' . json_encode($town) . '}';
 
         return response($json)->header('Content-Type', 'application/json');
     }
