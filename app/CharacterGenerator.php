@@ -28,6 +28,17 @@ class CharacterGenerator
 
         $character->profession = Profession::random();
 
+        if ($character->profession->name == 'noble') {
+            $heraldryGenerator = new HeraldryGenerator();
+            $character->heraldry = $heraldryGenerator->random();
+            $title = NobleTitle::random();
+            if ($title->is_landed) {
+                $title->lands_name = $name_generator->randomPlaceName();
+            }
+            $character->primary_title = $title->getTitle($character->gender);
+            $character->titles = [$title];
+        }
+
         $character->hobby = $this->randomHobby($character->age_category);
         $character->motivation = $this->randomMotivation();
 
