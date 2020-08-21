@@ -35,7 +35,7 @@ class LanguageGenerator
         $writingSystem = $wriGen->generate();
         $writingSystem->name = $language->name . ' ' . $wriGen->getRandomNameQualifier($writingSystem->classification);
         $writingSystem->description = $wriGen->describe($writingSystem);
-        $language->writing_systems [] = $writingSystem;
+        $language->writing_systems = [$writingSystem];
 
         $words = $this->generateWords($style);
         $language->words = $words;
@@ -44,6 +44,7 @@ class LanguageGenerator
         $language->female_first_names = $this->generateNames(15, 'female', $style);
         $language->male_last_names = $this->generateNames(15, 'family', $style);
         $language->female_last_names = $language->male_last_names;
+        $language->place_names = $this->generateNames(15, 'place', $style);
 
         $language->sample_phrase_translation = $this->getRandomSamplePhraseTranslation();
         $language->sample_phrase = $language->translate($language->sample_phrase_translation);
@@ -78,6 +79,8 @@ class LanguageGenerator
         } else if ($type == 'female') {
             $endings = $style->feminine_endings;
             $maxSyllables = 2;
+        } else if ($type == 'place') {
+            $maxSyllables = 4;
         }
 
         for ($i = 0; $i < $number; $i++) {

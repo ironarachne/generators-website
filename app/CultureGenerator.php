@@ -15,10 +15,11 @@ class CultureGenerator
         $langGen = new LanguageGenerator();
         $language = $langGen->generate();
         $nameGenerator = new NameGenerator();
-        $nameGenerator->femaleFirstNames = $language->female_first_names;
-        $nameGenerator->femaleLastNames = $language->female_last_names;
-        $nameGenerator->maleFirstNames = $language->male_first_names;
-        $nameGenerator->maleLastNames = $language->male_last_names;
+        $nameGenerator->female_first_names = $language->female_first_names;
+        $nameGenerator->female_last_names = $language->female_last_names;
+        $nameGenerator->male_first_names = $language->male_first_names;
+        $nameGenerator->male_last_names = $language->male_last_names;
+        $nameGenerator->place_names = $language->place_names;
 
         $name = $language->name;
         $adjective = $language->adjective;

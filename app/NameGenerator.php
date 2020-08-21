@@ -6,19 +6,20 @@ namespace App;
 
 class NameGenerator
 {
-    public $femaleFirstNames;
-    public $femaleLastNames;
-    public $maleFirstNames;
-    public $maleLastNames;
+    public array $female_first_names;
+    public array $female_last_names;
+    public array $male_first_names;
+    public array $male_last_names;
+    public array $place_names;
 
     public function generate($gender, $withLastName = true)
     {
-        $first = $this->femaleFirstNames;
-        $last = $this->femaleLastNames;
+        $first = $this->female_first_names;
+        $last = $this->female_last_names;
 
         if ($gender == 'male') {
-            $first = $this->maleFirstNames;
-            $last = $this->maleLastNames;
+            $first = $this->male_first_names;
+            $last = $this->male_last_names;
         }
 
         $name = random_item($first);
@@ -30,11 +31,15 @@ class NameGenerator
         return $name;
     }
 
+    public function randomPlaceName(): string {
+        return random_item($this->place_names);
+    }
+
     public static function defaultFantasy()
     {
         $generator = new NameGenerator();
 
-        $generator->femaleFirstNames = [
+        $generator->female_first_names = [
             'Aeris',
             'Afia',
             'Agama',
@@ -137,7 +142,7 @@ class NameGenerator
             'Zet',
         ];
 
-        $generator->femaleLastNames = [
+        $generator->female_last_names = [
             'Ambers',
             'Albion',
             'Ashsorrow',
@@ -471,7 +476,7 @@ class NameGenerator
             'Woodflower',
         ];
 
-        $generator->maleFirstNames = [
+        $generator->male_first_names = [
             'Adon',
             'Agro',
             'Aramor',
@@ -575,7 +580,7 @@ class NameGenerator
             'Zenner',
         ];
 
-        $generator->maleLastNames = [
+        $generator->male_last_names = [
             'Ambers',
             'Albion',
             'Ashsorrow',
@@ -907,6 +912,209 @@ class NameGenerator
             'Warbreaker',
             'Woodlight',
             'Woodflower',
+        ];
+
+        $generator->place_names = [
+            'Adurant',
+            'Aenor\'s Hill',
+            'Aerilon',
+            'Amram',
+            'Anfauglith',
+            'Aquarin',
+            'Aramoor',
+            'Arlan\'s Way',
+            'Arnor',
+            'Arrendyll',
+            'Ashdrift',
+            'Avaglade',
+            'Azmar',
+            'Barrow Hills',
+            'Barrow Falls',
+            'Battlecliff',
+            'Bay of Balar',
+            'Begger\'s Hole',
+            'Beleriand',
+            'Black Hollow',
+            'Blue Field',
+            'Boatwright',
+            'Briar Glen',
+            'Brickelwhyte',
+            'Brilthor',
+            'Broken Shield',
+            'Bruinen',
+            'Bullmar',
+            'Camorrus',
+            'Carran',
+            'Coalfell',
+            'Corralis',
+            'Crow\'s Cry',
+            'Cullfield',
+            'Darendale',
+            'Darkwell',
+            'Deathfall',
+            'Death\'s Door',
+            'Dimbar',
+            'Doonatel',
+            'Doriath',
+            'Dorlomin',
+            'Dorthonion',
+            'Doveseal',
+            'Doveshire',
+            'Dragon\'s Coast',
+            'Dry Gulch',
+            'Duarudelf',
+            'Duskendale',
+            'East Armistice',
+            'Eastford',
+            'Easthaven',
+            'Eastwatch',
+            'Ecrin',
+            'Eden\'s Gulf',
+            'Ekaia',
+            'Elbright',
+            'Eldarmar',
+            'Embertown',
+            'End\'s Run',
+            'Erast',
+            'Ered',
+            'Erede',
+            'Eredluin',
+            'Eribourne',
+            'Ethermoor',
+            'Fallenedge',
+            'Fangorn',
+            'Far Water',
+            'Firebend',
+            'Firecrow',
+            'Fool\'s March',
+            'Freevale',
+            'Frostenvale',
+            'Frostfangs',
+            'Frostford',
+            'Garen\'s Well',
+            'Glaskerville',
+            'Goldcrest',
+            'Goldenleaf',
+            'Greenflower',
+            'Greenglade',
+            'Greenloft',
+            'Gulltown',
+            'Haran',
+            'Harlen',
+            'Harsengaard',
+            'Hillfar',
+            'Hogsfeet',
+            'Hollyhead',
+            'Horizon\'s End',
+            'Hull',
+            'Hwen',
+            'Icemeet',
+            'Iron Hills',
+            'Ironforge',
+            'Irragin',
+            'Jarren\'s Outpost',
+            'Jongvale',
+            'Kara\'s Vale',
+            'Knife\'s Edge',
+            'Lakeshore',
+            'Lakestown',
+            'Lamorra',
+            'Last Lock',
+            'Leeside',
+            'Legolin',
+            'Linesse',
+            'Lochley',
+            'Lothlann',
+            'Lullin',
+            'Maglor\'s Gap',
+            'Mahalaga',
+            'Marren\'s Eve',
+            'Merriwich',
+            'Millstone',
+            'Moonbright',
+            'Mountmend',
+            'Nandungorteb',
+            'Nargorthon',
+            'Nearon',
+            'New Cresthill',
+            'Nogrod',
+            'Northpass',
+            'Northstead',
+            'Northtown',
+            'Nuxvar',
+            'Oakensword',
+            'Oakheart',
+            'Oar\'s Rest',
+            'Old Ashton',
+            'Orrinshire',
+            'Ozryn',
+            'Pavv',
+            'Pella\'s Wish',
+            'Pineland',
+            'Pinnella Pass',
+            'Pony Run',
+            'Pran',
+            'Pyreacre',
+            'Quan Ma',
+            'Queenstown',
+            'Ramshorn',
+            'Red Hawk',
+            'Rhaunar',
+            'Rhudaur',
+            'Rhuin',
+            'Rivermouth',
+            'Riverwind',
+            'Saker Keep',
+            'Seameet',
+            'Shadestown',
+            'Shiny Ship',
+            'Ship\'s Haven',
+            'Silverkeep',
+            'Snake\'s Canyon',
+            'Snowforge',
+            'Snowmelt',
+            'South Warren',
+            'Southern Vale',
+            'Squall\'s End',
+            'Stone\'s Throw',
+            'Stonewatch',
+            'Strong Oak',
+            'Suilwen',
+            'Sundance',
+            'Swordbreak',
+            'Tarrin',
+            'Taur-in-duinath',
+            'Thales',
+            'The Gale',
+            'The Last Battle',
+            'Three Streams',
+            'Twin Rivers',
+            'Two Rivers',
+            'Trudid',
+            'Ubbin Falls',
+            'Ula\'ree',
+            'Duskvale',
+            'Veritas',
+            'Vertrock',
+            'Violl\'s Garden',
+            'Wolfsrealm',
+            'Wellspring',
+            'Westend',
+            'Westwend',
+            'Whiteridge',
+            'Whiterun',
+            'Widow\'s Peak',
+            'Willowdale',
+            'Windrip',
+            'Wintergale',
+            'Wintervale',
+            'Wolfden',
+            'Xan\'s Bequest',
+            'Xynnar',
+            'Yarrin',
+            'Yellowseed',
+            'Zeffari',
+            'Zumka',
         ];
 
         return $generator;
