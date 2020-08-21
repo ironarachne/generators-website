@@ -3,6 +3,7 @@
 namespace App;
 
 use \GuzzleHttp\Client;
+use Ramsey\Uuid\Uuid;
 
 class HeraldryGenerator
 {
@@ -24,5 +25,12 @@ class HeraldryGenerator
         $heraldry->url = $body->image_url;
 
         return $heraldry;
+    }
+
+    public function random()
+    {
+        $guid = Uuid::uuid4()->toString();
+
+        return $this->generate($guid, '');
     }
 }
