@@ -4,22 +4,23 @@ namespace App;
 
 class Language
 {
-    public $name;
-    public $adjective;
-    public $conjugation_rules;
-    public $female_first_names;
-    public $female_last_names;
-    public $male_first_names;
-    public $male_last_names;
-    public $new_word_prefixes;
-    public $new_word_suffixes;
-    public $is_tonal;
-    public $descriptors;
-    public $sample_phrase_translation;
-    public $sample_phrase;
-    public $description;
-    public $words;
-    public $writing_systems;
+    public string $name;
+    public string $adjective;
+    public array $conjugation_rules;
+    public array $female_first_names;
+    public array $female_last_names;
+    public array $male_first_names;
+    public array $male_last_names;
+    public array $place_names;
+    public array $new_word_prefixes;
+    public array $new_word_suffixes;
+    public bool $is_tonal;
+    public array $descriptors;
+    public string $sample_phrase_translation;
+    public string $sample_phrase;
+    public string $description;
+    public array $words;
+    public array $writing_systems;
 
     public function translate($phrase)
     {
