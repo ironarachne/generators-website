@@ -5,7 +5,9 @@ namespace App;
 
 class CharacterGenerator
 {
-    public function generate(NameGenerator $name_generator, Species $species): Character
+    public function generate(NameGenerator $name_generator, Species $species,
+                             array $ageCategories = ['infant', 'child', 'teenager', 'young adult', 'adult', 'elderly']
+    ): Character
     {
         $character = new Character();
 
@@ -20,7 +22,7 @@ class CharacterGenerator
         $character->first_name = $full_name[0];
         $character->last_name = $full_name[1];
 
-        $character->age_category = $species->randomAgeCategory();
+        $character->age_category = $species->randomAgeCategory($ageCategories);
         $character->age = $character->age_category->randomAge();
 
         $character->height = $character->age_category->randomHeight($character->gender);
@@ -49,10 +51,10 @@ class CharacterGenerator
         $negativeTraits = $this->randomNegativeTraits();
         $positiveTraits = $this->randomPositiveTraits();
         $positiveTraits = PersonalityTrait::removeIncompatible($negativeTraits, $positiveTraits);
-        foreach($negativeTraits as $t) {
+        foreach ($negativeTraits as $t) {
             $character->negative_traits [] = $t->name;
         }
-        foreach($positiveTraits as $t) {
+        foreach ($positiveTraits as $t) {
             $character->positive_traits [] = $t->name;
         }
 

@@ -10,6 +10,7 @@ use App\GeographicRegionGenerator;
 use App\LanguageGenerator;
 use App\MusicGenerator;
 use App\NameGenerator;
+use App\OrganizationGenerator;
 use App\ReligionGenerator;
 use App\Resource;
 use App\Species;
@@ -213,6 +214,34 @@ class ApiController extends Controller
         });
 
         $json = '{"music": ' . json_encode($music) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomOrganization()
+    {
+        $gen = new OrganizationGenerator();
+
+        $nameGenerator = NameGenerator::defaultFantasy();
+        $organization = $gen->generate($nameGenerator);
+
+        $json = '{"organization":' . json_encode($organization) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomOrganizationSeed($seed)
+    {
+        $organization = Cache::rememberForever("organization_$seed", function () use ($seed) {
+            seeder($seed);
+
+            $gen = new OrganizationGenerator();
+
+            $nameGenerator = NameGenerator::defaultFantasy();
+            return $gen->generate($nameGenerator);
+        });
+
+        $json = '{"organization":' . json_encode($organization) . '}';
 
         return response($json)->header('Content-Type', 'application/json');
     }

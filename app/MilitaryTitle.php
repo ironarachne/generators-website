@@ -16,5 +16,6 @@ class MilitaryTitle extends Title
         $this->female_suffix = "$prefix of the $unit";
         $this->is_officer = $isOfficer;
         $this->precedence = $precedence;
+        $this->type = 'military';
     }
 }

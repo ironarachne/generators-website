@@ -39,6 +39,9 @@ Route::get('/language/{seed}', 'ApiController@randomLanguageFromSeed')->name('ap
 Route::get('/music', 'ApiController@randomMusic')->name('api.music.random');
 Route::get('/music/{seed}', 'ApiController@randomMusicFromSeed')->name('api.music.seed');
 
+Route::get('/organization', 'ApiController@randomOrganization')->name('api.organization.random');
+Route::get('/organization/{seed}', 'ApiController@randomOrganizationFromSeed')->name('api.organization.seed');
+
 Route::get('/religion', 'ApiController@randomReligion')->name('api.religion.random');
 Route::get('/religion/{seed}', 'ApiController@randomReligionFromSeed')->name('api.religion.seed');
 

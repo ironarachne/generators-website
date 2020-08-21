@@ -13,6 +13,16 @@ class Title
     public string $type;
     public int $precedence;
 
+    public function __construct(string $malePrefix, string $femalePrefix, string $maleSuffix, string $femaleSuffix, string $type, int $precedence)
+    {
+        $this->male_prefix = $malePrefix;
+        $this->female_prefix = $femalePrefix;
+        $this->male_suffix = $maleSuffix;
+        $this->female_suffix = $femaleSuffix;
+        $this->type = $type;
+        $this->precedence = $precedence;
+    }
+
     public function getPrefix($gender)
     {
         if ($gender == 'female') {

@@ -148,12 +148,14 @@ class Species
         });
     }
 
-    public function randomAgeCategory(): AgeCategory
+    public function randomAgeCategory(array $ageCategories = ['infant', 'child', 'teenager', 'young adult', 'adult', 'elderly']): AgeCategory
     {
         $weighted = [];
 
         foreach ($this->age_categories as $ac) {
-            $weighted[$ac->name] = $ac->commonality;
+            if (in_array($ac->name, $ageCategories)) {
+                $weighted[$ac->name] = $ac->commonality;
+            }
         }
 
         $result = random_weighted_item($weighted);
