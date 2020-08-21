@@ -6,8 +6,8 @@ namespace App;
 
 class Dice
 {
-    public $number;
-    public $sides;
+    public int $number;
+    public int $sides;
 
     public function __construct($expression) {
         $data = explode('d', $expression);
