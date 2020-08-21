@@ -6,8 +6,9 @@ namespace App;
 
 class TraitTemplate
 {
-    public $name;
-    public $possible_values;
-    public $possible_descriptors;
-    public $trait_type;
+    public string $name;
+    public array $possible_values;
+    public array $possible_descriptors;
+    public string $trait_type;
+    public array $tags;
 }
