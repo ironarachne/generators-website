@@ -26,18 +26,20 @@ class CharacterGenerator
         $character->height = $character->age_category->randomHeight($character->gender);
         $character->weight = $character->age_category->randomWeight($character->gender);
 
-        $character->profession = Profession::random();
+        if (in_array($character->age_category->name, ['teenager', 'young adult', 'adult', 'elderly'])) {
+            $character->profession = Profession::random();
 
-        if ($character->profession->name == 'noble') {
-            $heraldryGenerator = new HeraldryGenerator();
-            $character->heraldry = $heraldryGenerator->random();
-            $title = NobleTitle::random();
-            if ($title->is_landed) {
-                $title->lands_name = $name_generator->randomPlaceName();
+            if ($character->profession->name == 'noble') {
+                $heraldryGenerator = new HeraldryGenerator();
+                $character->heraldry = $heraldryGenerator->random();
+                $title = NobleTitle::random();
+                if ($title->is_landed) {
+                    $title->lands_name = $name_generator->randomPlaceName();
+                }
+                $character->primary_title = $title->getTitle($character->gender);
+                $character->titles = [$title];
             }
-            $character->primary_title = $title->getTitle($character->gender);
-            $character->titles = [$title];
-        }
+        };
 
         $character->hobby = $this->randomHobby($character->age_category);
         $character->motivation = $this->randomMotivation();
@@ -55,6 +57,7 @@ class CharacterGenerator
         }
 
         $character->physical_traits = $character->species->randomPhysicalTraits();
+        $character->description = $character->describe();
 
         return $character;
     }
