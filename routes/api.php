@@ -20,6 +20,9 @@ Route::middleware( 'auth:api' )->get( '/user', function ( Request $request ) {
 Route::get('/alcoholic_drink', 'ApiController@randomAlcoholicDrink')->name('api.alcoholic_drink.random');
 Route::get('/alcoholic_drink/{seed}', 'ApiController@randomAlcoholicDrinkSeed')->name('api.alcoholic_drink.seed');
 
+Route::get('/character', 'ApiController@randomCharacter')->name('api.character.random');
+Route::get('/character/{seed}', 'ApiController@randomCharacterSeed')->name('api.character.seed');
+
 Route::get('/cuisine', 'ApiController@randomCuisine')->name('api.cuisine.random');
 Route::get('/cuisine/{seed}', 'ApiController@randomCuisineSeed')->name('api.cuisine.seed');
 

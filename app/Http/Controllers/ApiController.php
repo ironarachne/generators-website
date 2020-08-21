@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AlcoholicDrinkGenerator;
+use App\CharacterGenerator;
 use App\ClothingStyleGenerator;
 use App\CuisineGenerator;
 use App\GeographicRegionGenerator;
@@ -11,6 +12,7 @@ use App\MusicGenerator;
 use App\NameGenerator;
 use App\ReligionGenerator;
 use App\Resource;
+use App\Species;
 use Illuminate\Support\Facades\Cache;
 use Ramsey\Uuid\Uuid;
 
@@ -40,6 +42,34 @@ class ApiController extends Controller
         });
 
         $json = '{"alcoholic_drink":' . json_encode($drink) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomCharacter()
+    {
+        $gen = new CharacterGenerator();
+        $nameGen = NameGenerator::defaultFantasy();
+        $species = Species::randomRace();
+        $character = $gen->generate($nameGen, $species);
+
+        $json = '{"character":' . json_encode($character) . '}';
+
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function randomCharacterSeed($seed)
+    {
+        $character = Cache::rememberForever("character_$seed", function () use ($seed) {
+            seeder($seed);
+
+            $gen = new CharacterGenerator();
+            $nameGen = NameGenerator::defaultFantasy();
+            $species = Species::randomRace();
+            return $gen->generate($nameGen, $species);
+        });
+
+        $json = '{"character":' . json_encode($character) . '}';
 
         return response($json)->header('Content-Type', 'application/json');
     }
