@@ -9,7 +9,8 @@ class NobleTitle extends Title
     public bool $is_landed;
     public string $lands_name;
 
-    public function __construct($malePrefix, $femalePrefix, $precedence, $isLanded = false, $landsName = '') {
+    public function __construct($malePrefix, $femalePrefix, $precedence, $isLanded = false, $landsName = '')
+    {
         $this->male_prefix = $malePrefix;
         $this->female_prefix = $femalePrefix;
         $this->precedence = $precedence;
@@ -26,7 +27,8 @@ class NobleTitle extends Title
         $this->type = 'noble';
     }
 
-    public function getFullTitle(string $gender): string {
+    public function getFullTitle(string $gender): string
+    {
         $name = $this->male_prefix;
 
         if ($gender == 'female') {
@@ -40,7 +42,8 @@ class NobleTitle extends Title
         return $name;
     }
 
-    public function getTitle(string $gender): string {
+    public function getTitle(string $gender): string
+    {
         $name = $this->male_prefix;
 
         if ($gender == 'female') {
@@ -50,7 +53,8 @@ class NobleTitle extends Title
         return $name;
     }
 
-    public static function all(): array {
+    public static function all(): array
+    {
         return [
             new NobleTitle('Lord', 'Lady', 0),
             new NobleTitle('Lord', 'Lady', 1, true),
@@ -68,11 +72,12 @@ class NobleTitle extends Title
         ];
     }
 
-    public static function allLanded(): array {
+    public static function allLanded(): array
+    {
         $landed = [];
         $all = NobleTitle::all();
 
-        foreach($all as $t) {
+        foreach ($all as $t) {
             if ($t->is_landed) {
                 $landed [] = $t;
             }
@@ -81,11 +86,13 @@ class NobleTitle extends Title
         return $landed;
     }
 
-    public static function random(): NobleTitle {
+    public static function random(): NobleTitle
+    {
         return random_item(NobleTitle::all());
     }
 
-    public static function randomLanded(): NobleTitle {
+    public static function randomLanded(): NobleTitle
+    {
         $landed = NobleTitle::allLanded();
 
         return random_item($landed);

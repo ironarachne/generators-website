@@ -26,19 +26,19 @@ class GeographicRegion
     {
         $resources = [];
 
-        foreach($this->animals as $a) {
+        foreach ($this->animals as $a) {
             if (!empty($a->resources)) {
                 $resources = array_merge($resources, $a->resources);
             }
         }
 
-        foreach($this->plants as $p) {
+        foreach ($this->plants as $p) {
             if (!empty($p->resources)) {
                 $resources = array_merge($resources, $p->resources);
             }
         }
 
-        foreach($this->minerals as $m) {
+        foreach ($this->minerals as $m) {
             if (!empty($m->resources)) {
                 $resources = array_merge($resources, $m->resources);
             }

@@ -88,7 +88,7 @@ class GeographicRegionGenerator
 
         $filteredAnimals = [];
 
-        foreach($animals as $a) {
+        foreach ($animals as $a) {
             if ($a->suits($humidity, $temperature, $tags)) {
                 $filteredAnimals [] = $a;
             }
@@ -98,7 +98,7 @@ class GeographicRegionGenerator
 
         $filteredFish = [];
 
-        foreach($fish as $a) {
+        foreach ($fish as $a) {
             if ($a->suits($humidity, $temperature, $tags)) {
                 $filteredFish [] = $a;
             }
@@ -108,7 +108,7 @@ class GeographicRegionGenerator
 
         $filteredInsects = [];
 
-        foreach($insects as $a) {
+        foreach ($insects as $a) {
             if ($a->suits($humidity, $temperature, $tags)) {
                 $filteredInsects [] = $a;
             }
@@ -118,16 +118,16 @@ class GeographicRegionGenerator
         $numFish = (($prevalence / 100) * 20) + 3;
         $numInsects = (($prevalence / 100) * 20) + 1;
 
-        for ($i=0;$i<$numAnimals;$i++) {
-            $a = $filteredAnimals[mt_rand(0, sizeof($filteredAnimals)-1)];
+        for ($i = 0; $i < $numAnimals; $i++) {
+            $a = $filteredAnimals[mt_rand(0, sizeof($filteredAnimals) - 1)];
             if (!$a->in($result)) {
                 $result [] = $a;
             }
         }
 
         if (sizeof($filteredFish) > 0) {
-            for ($i=0;$i<$numFish;$i++) {
-                $a = $filteredFish[mt_rand(0, sizeof($filteredFish)-1)];
+            for ($i = 0; $i < $numFish; $i++) {
+                $a = $filteredFish[mt_rand(0, sizeof($filteredFish) - 1)];
                 if (!$a->in($result)) {
                     $result [] = $a;
                 }
@@ -135,8 +135,8 @@ class GeographicRegionGenerator
         }
 
         if (sizeof($filteredInsects) > 0) {
-            for ($i=0;$i<$numInsects;$i++) {
-                $a = $filteredInsects[mt_rand(0, sizeof($filteredInsects)-1)];
+            for ($i = 0; $i < $numInsects; $i++) {
+                $a = $filteredInsects[mt_rand(0, sizeof($filteredInsects) - 1)];
                 if (!$a->in($result)) {
                     $result [] = $a;
                 }
@@ -152,7 +152,7 @@ class GeographicRegionGenerator
 
         $metals = Mineral::load('metal');
 
-        for ($i=0;$i<5;$i++) {
+        for ($i = 0; $i < 5; $i++) {
             $weighted = Mineral::weightedRandom($metals);
             if (!$weighted->in($result)) {
                 $result [] = $weighted;
@@ -161,8 +161,8 @@ class GeographicRegionGenerator
 
         $gems = Mineral::load('gem');
 
-        for ($i=0;$i<3;$i++) {
-            $gem = $gems[mt_rand(0, sizeof($gems)-1)];
+        for ($i = 0; $i < 3; $i++) {
+            $gem = $gems[mt_rand(0, sizeof($gems) - 1)];
             if (!$gem->in($result)) {
                 $result [] = $gem;
             }
@@ -170,8 +170,8 @@ class GeographicRegionGenerator
 
         $stones = Mineral::load('stone');
 
-        for ($i=0;$i<2;$i++) {
-            $stone = $stones[mt_rand(0, sizeof($stones)-1)];
+        for ($i = 0; $i < 2; $i++) {
+            $stone = $stones[mt_rand(0, sizeof($stones) - 1)];
             if (!$stone->in($result)) {
                 $result [] = $stone;
             }
@@ -180,25 +180,25 @@ class GeographicRegionGenerator
         if ($oceanDistance < 10 || ($humidity < 15 && $temperature > 40)) {
             $sands = Mineral::load('sand');
 
-            $result [] = $sands[mt_rand(0, sizeof($sands)-1)];
+            $result [] = $sands[mt_rand(0, sizeof($sands) - 1)];
         }
 
         if ($humidity > 50) {
             $clays = Mineral::load('clay');
 
-            $result [] = $clays[mt_rand(0, sizeof($clays)-1)];
+            $result [] = $clays[mt_rand(0, sizeof($clays) - 1)];
         }
 
         if ($temperature > 30 && $humidity > 30) {
             $loams = Mineral::load('loam');
 
-            $result [] = $loams[mt_rand(0, sizeof($loams)-1)];
+            $result [] = $loams[mt_rand(0, sizeof($loams) - 1)];
         }
 
         if ($temperature > 40 && $humidity < 40) {
             $silts = Mineral::load('silt');
 
-            $result [] = $silts[mt_rand(0, sizeof($silts)-1)];
+            $result [] = $silts[mt_rand(0, sizeof($silts) - 1)];
         }
 
         return $result;
@@ -212,7 +212,7 @@ class GeographicRegionGenerator
 
         $filteredPlants = [];
 
-        foreach($plants as $a) {
+        foreach ($plants as $a) {
             if ($a->suits($humidity, $temperature, $tags)) {
                 $filteredPlants [] = $a;
             }
@@ -222,7 +222,7 @@ class GeographicRegionGenerator
 
         $filteredTrees = [];
 
-        foreach($trees as $a) {
+        foreach ($trees as $a) {
             if ($a->suits($humidity, $temperature, $tags)) {
                 $filteredTrees [] = $a;
             }
@@ -231,8 +231,8 @@ class GeographicRegionGenerator
         $numPlants = (($prevalence / 100) * 30) + 4;
         $numTrees = (($prevalence / 100) * 20) + 1;
 
-        for ($i=0;$i<$numPlants;$i++) {
-            $p = $filteredPlants[mt_rand(0, sizeof($filteredPlants)-1)];
+        for ($i = 0; $i < $numPlants; $i++) {
+            $p = $filteredPlants[mt_rand(0, sizeof($filteredPlants) - 1)];
             if (!$p->in($result)) {
                 $result [] = $p;
             }
@@ -240,7 +240,7 @@ class GeographicRegionGenerator
 
         $hasGrains = false;
 
-        foreach($result as $p) {
+        foreach ($result as $p) {
             $grain = new Tag();
             $grain->name = 'grain';
 
@@ -252,15 +252,15 @@ class GeographicRegionGenerator
         if (!$hasGrains) {
             $grains = Species::byTagName('grain', $plants);
             if (sizeof($grains) > 0) {
-                $result [] = $grains[mt_rand(0, sizeof($grains)-1)];
+                $result [] = $grains[mt_rand(0, sizeof($grains) - 1)];
             } else {
                 throw new Exception('failed to find an appropriate grain plant for this area');
             }
         }
 
         if (sizeof($filteredTrees) > 0) {
-            for ($i=0;$i<$numTrees;$i++) {
-                $p = $filteredTrees[mt_rand(0, sizeof($filteredTrees)-1)];
+            for ($i = 0; $i < $numTrees; $i++) {
+                $p = $filteredTrees[mt_rand(0, sizeof($filteredTrees) - 1)];
                 if (!$p->in($result)) {
                     $result [] = $p;
                 }

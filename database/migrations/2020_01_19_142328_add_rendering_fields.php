@@ -13,17 +13,17 @@ class AddRenderingFields extends Migration
      */
     public function up()
     {
-        Schema::table( 'cultures', function ( Blueprint $table ) {
-            $table->string( 'name' )->default( '' );
-            $table->string( 'description' )->default( '' );
-            $table->text( 'html' );
-        } );
+        Schema::table('cultures', function (Blueprint $table) {
+            $table->string('name')->default('');
+            $table->string('description')->default('');
+            $table->text('html');
+        });
 
-        Schema::table( 'regions', function ( Blueprint $table ) {
-            $table->string( 'name' )->default( '' );
-            $table->string( 'description' )->default( '' );
-            $table->text( 'html' );
-        } );
+        Schema::table('regions', function (Blueprint $table) {
+            $table->string('name')->default('');
+            $table->string('description')->default('');
+            $table->text('html');
+        });
     }
 
     /**
@@ -33,16 +33,16 @@ class AddRenderingFields extends Migration
      */
     public function down()
     {
-        Schema::table( 'cultures', function ( Blueprint $table ) {
-            $table->dropColumn( 'name' );
-            $table->dropColumn( 'description' );
-            $table->dropColumn( 'html' );
-        } );
+        Schema::table('cultures', function (Blueprint $table) {
+            $table->dropColumn('name');
+            $table->dropColumn('description');
+            $table->dropColumn('html');
+        });
 
-        Schema::table( 'regions', function ( Blueprint $table ) {
-            $table->dropColumn( 'name' );
-            $table->dropColumn( 'description' );
-            $table->dropColumn( 'html' );
-        } );
+        Schema::table('regions', function (Blueprint $table) {
+            $table->dropColumn('name');
+            $table->dropColumn('description');
+            $table->dropColumn('html');
+        });
     }
 }

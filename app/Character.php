@@ -60,7 +60,8 @@ class Character
         return $description;
     }
 
-    public function genderNoun(): string {
+    public function genderNoun(): string
+    {
         if ($this->age_category->name == 'infant') {
             return 'infant';
         }

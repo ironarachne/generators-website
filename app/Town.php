@@ -14,7 +14,8 @@ class Town
     public array $common_exports;
     public string $character;
 
-    public function describe(): string {
+    public function describe(): string
+    {
         $description = "{$this->name} is " . pronoun($this->character) . " {$this->character} {$this->category->name}";
         $description .= " of {$this->population} people. Its notable exports are ";
         $description .= combine_phrases($this->common_exports) . ". {$this->surrounding_environment}";

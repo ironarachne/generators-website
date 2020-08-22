@@ -13,10 +13,11 @@ class Climate
     public $precipitation_frequency;
     public $precipitation_type;
 
-    public function describeClouds() {
+    public function describeClouds()
+    {
         if ($this->cloud_cover < 10) {
             return 'no clouds';
-        } else if ($this->cloud_cover < 30 ) {
+        } else if ($this->cloud_cover < 30) {
             return 'few clouds';
         } else if ($this->cloud_cover < 50) {
             return 'some clouds';

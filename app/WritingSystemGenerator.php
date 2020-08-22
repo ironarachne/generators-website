@@ -6,7 +6,8 @@ namespace App;
 
 class WritingSystemGenerator
 {
-    public function generate() {
+    public function generate()
+    {
         $system = new WritingSystem();
 
         $system->classification = $this->getRandomClassification();
@@ -58,7 +59,8 @@ class WritingSystemGenerator
         return $qualifier;
     }
 
-    public function getRandomCharacterOrder() {
+    public function getRandomCharacterOrder()
+    {
         $orders = [
             'left to right',
             'right to left',
@@ -69,7 +71,8 @@ class WritingSystemGenerator
         return random_item($orders);
     }
 
-    public function getRandomClassification() {
+    public function getRandomClassification()
+    {
         $classifications = [
             'abjad',
             'abugida',
@@ -82,7 +85,8 @@ class WritingSystemGenerator
         return random_item($classifications);
     }
 
-    public function getRandomStrokeStyle() {
+    public function getRandomStrokeStyle()
+    {
         $styles = [
             'angular lines',
             'arcs',

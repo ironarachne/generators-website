@@ -21,7 +21,8 @@ class OrganizationRank
         $this->possible_age_categories = $possibleAgeCategories;
     }
 
-    public function canHaveMore(int $current) {
+    public function canHaveMore(int $current)
+    {
         if ($this->maximum_holders == 0 || $this->maximum_holders > $current) {
             return true;
         }

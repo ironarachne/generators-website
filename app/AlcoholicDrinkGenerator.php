@@ -8,7 +8,8 @@ use Exception;
 
 class AlcoholicDrinkGenerator
 {
-    public function generate($resources, $name) {
+    public function generate($resources, $name)
+    {
         $methods = [];
 
         $spices = Resource::byTag($resources, 'spice');
@@ -18,26 +19,26 @@ class AlcoholicDrinkGenerator
         $milk = Resource::byTag($resources, 'milk');
 
         if (sizeof($grains) > 0) {
-            $methods []= [
+            $methods [] = [
                 'name' => 'fermented',
                 'base_tag' => 'grain',
             ];
 
-            $methods []= [
+            $methods [] = [
                 'name' => 'distilled',
                 'base_tag' => 'grain',
             ];
         }
 
         if (sizeof($fruit) > 0) {
-            $methods []= [
+            $methods [] = [
                 'name' => 'fermented',
                 'base_tag' => 'fruit',
             ];
         }
 
         if (sizeof($milk) > 0) {
-            $methods []= [
+            $methods [] = [
                 'name' => 'fermented',
                 'base_tag' => 'milk',
             ];
@@ -62,8 +63,8 @@ class AlcoholicDrinkGenerator
         $chanceExtras = mt_rand(0, 100);
         if ($chanceExtras > 80) {
             $extras = [];
-            $extras []= random_item($spices);
-            $extras []= random_item($herbs);
+            $extras [] = random_item($spices);
+            $extras [] = random_item($herbs);
             $extra = random_item($extras);
             $description .= ' with ' . $extra->name;
         }
@@ -78,7 +79,8 @@ class AlcoholicDrinkGenerator
         return $drink;
     }
 
-    public function randomName() {
+    public function randomName()
+    {
         $prefixes = [
             'fire',
             'gods',
@@ -96,7 +98,8 @@ class AlcoholicDrinkGenerator
         return random_item($prefixes) . random_item($suffixes);
     }
 
-    public function randomStrength() {
+    public function randomStrength()
+    {
         $strengths = [
             'very weak',
             'weak',

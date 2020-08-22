@@ -27,7 +27,8 @@ class TownCategory
         $this->possible_character = $possibleCharacter;
     }
 
-    public function randomCharacter(): string {
+    public function randomCharacter(): string
+    {
         return random_item($this->possible_character);
     }
 

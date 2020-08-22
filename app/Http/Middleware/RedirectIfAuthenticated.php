@@ -17,12 +17,12 @@ class RedirectIfAuthenticated
      * @param string|null $guard
      * @return mixed
      */
-    public function handle( $request, Closure $next, $guard = null )
+    public function handle($request, Closure $next, $guard = null)
     {
-        if ( Auth::guard( $guard )->check() ) {
-            return redirect( RouteServiceProvider::HOME );
+        if (Auth::guard($guard)->check()) {
+            return redirect(RouteServiceProvider::HOME);
         }
 
-        return $next( $request );
+        return $next($request);
     }
 }

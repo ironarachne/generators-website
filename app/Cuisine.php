@@ -13,7 +13,8 @@ class Cuisine
     public $spices;
     public $is_vegetarian;
 
-    public function describe() {
+    public function describe()
+    {
         $description = 'This cuisine has ' . combine_phrases($this->flavors) . ' flavor profiles';
 
         $description .= ', favoring ' . combine_phrases($this->spices) . ' for spices. ';

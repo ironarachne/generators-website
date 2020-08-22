@@ -6,7 +6,7 @@ use \GuzzleHttp\Client;
 
 class CultureGenerator
 {
-    public function generate( $id )
+    public function generate($id)
     {
         $geoGen = new GeographicRegionGenerator();
         $geography = $geoGen->generate();
@@ -56,7 +56,7 @@ class CultureGenerator
 
         $culture->name = $cultureData->name;
         $culture->description = 'The ' . $cultureData->adjective . ', a fictional culture from a ' . $cultureData->geography->biome->name . ' climate.';
-        $culture->html = view( 'culture.individual', [ 'culture' => $cultureData ] )->render();
+        $culture->html = view('culture.individual', ['culture' => $cultureData])->render();
 
         return $culture;
     }

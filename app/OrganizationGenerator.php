@@ -66,7 +66,7 @@ class OrganizationGenerator
         $charGen = new CharacterGenerator();
         $species = Species::randomRace();
 
-        for ($i=0;$i<$numberOfLeaders;$i++) {
+        for ($i = 0; $i < $numberOfLeaders; $i++) {
             $leader = $charGen->generate($nameGenerator, $species, $leaderAgeCategories);
             $leader->profession = $organization->randomProfession();
             $leader->primary_title = $leaderTitle->getPrefix($leader->gender);
@@ -86,7 +86,7 @@ class OrganizationGenerator
 
         $charGen = new CharacterGenerator();
 
-        for($i=0;$i<$numberOfMembers;$i++) {
+        for ($i = 0; $i < $numberOfMembers; $i++) {
             $species = Species::randomRace();
             $rank = $organization->getRandomMemberRank();
             $member = $charGen->generate($nameGenerator, $species, $rank->possible_age_categories);

@@ -31,7 +31,8 @@ class NameGenerator
         return $name;
     }
 
-    public function randomPlaceName(): string {
+    public function randomPlaceName(): string
+    {
         return random_item($this->place_names);
     }
 

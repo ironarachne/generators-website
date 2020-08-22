@@ -35,7 +35,8 @@ class PantheonGenerator
         return $pantheon;
     }
 
-    private function generateRelationships($deities) {
+    private function generateRelationships($deities)
+    {
         $result = [];
 
         $possibleRelationships = [
@@ -47,7 +48,7 @@ class PantheonGenerator
             'respects',
         ];
 
-        foreach($deities as $deity) {
+        foreach ($deities as $deity) {
             $otherDeities = $deity->removeFrom($deities);
             if (sizeof($otherDeities) > 0) {
                 $target = random_item($otherDeities);

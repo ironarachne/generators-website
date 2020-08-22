@@ -7,17 +7,17 @@ use Ramsey\Uuid\Uuid;
 
 class HeraldryGenerator
 {
-    public function generate( $id, $fieldShape )
+    public function generate($id, $fieldShape)
     {
         $client = new Client();
-        $url = 'http://' . env( 'WORLDAPI' ) . '/heraldry/' . $id;
-        if ( !empty( $fieldShape ) ) {
+        $url = 'http://' . env('WORLDAPI') . '/heraldry/' . $id;
+        if (!empty($fieldShape)) {
             $url .= "?shape=$fieldShape";
         }
-        $response = $client->request( 'GET', $url );
+        $response = $client->request('GET', $url);
         $heraldry = $response->getBody()->getContents();
 
-        $body = json_decode( $heraldry );
+        $body = json_decode($heraldry);
 
         $heraldry = new Heraldry();
         $heraldry->guid = $id;

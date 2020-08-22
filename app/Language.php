@@ -38,7 +38,7 @@ class Language
                 $filtered = 'be';
             }
 
-            foreach($this->words as $w) {
+            foreach ($this->words as $w) {
                 if ($w->english_translation == $filtered) {
                     $dictionary = $w;
                     break;

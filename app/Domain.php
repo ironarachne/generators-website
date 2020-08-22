@@ -15,7 +15,8 @@ class Domain
     public $holy_items;
     public $holy_symbols;
 
-    public function removeFrom($haystack) {
+    public function removeFrom($haystack)
+    {
         $result = [];
 
         foreach ($haystack as $d) {

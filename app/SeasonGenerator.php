@@ -20,7 +20,7 @@ class SeasonGenerator
             $season->precipitation_type = $this->getPrecipitationTypeForTemperature($region->temperature + $season->temperature_change);
             $season->daylight_hours = $this->getDaylightHours($region->distance_to_equator, $this->getMidMonth($season->month_begin, $season->month_end));
             $season->description = $this->describe($season, $climate, $region);
-            $result []= $season;
+            $result [] = $season;
         }
 
         return $result;
@@ -92,8 +92,7 @@ class SeasonGenerator
 
     public function describe($season, $climate, $region)
     {
-        if ($season->name == 'dry' || $season->name == 'wet')
-        {
+        if ($season->name == 'dry' || $season->name == 'wet') {
             $name = "The {$season->name} season";
         } else {
             $name = ucfirst($season->name);

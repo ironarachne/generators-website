@@ -6,7 +6,8 @@ namespace App;
 
 class CuisineGenerator
 {
-    public function generate($resources) {
+    public function generate($resources)
+    {
         $includeMeat = true;
 
         $chanceVegetarian = mt_rand(0, 100);
@@ -25,7 +26,8 @@ class CuisineGenerator
         return $cuisine;
     }
 
-    private function randomCookingMethods() {
+    private function randomCookingMethods()
+    {
         $options = [
             'over rice',
             'over noodles',
@@ -40,7 +42,7 @@ class CuisineGenerator
 
         $methods = [];
 
-        for ($i=0;$i<3;$i++) {
+        for ($i = 0; $i < 3; $i++) {
             $method = random_item($options);
             if (!in_array($method, $methods)) {
                 $methods [] = $method;
@@ -50,7 +52,8 @@ class CuisineGenerator
         return $methods;
     }
 
-    private function randomFlavorProfiles() {
+    private function randomFlavorProfiles()
+    {
         $flavors = [
             'sour',
             'sweet',
@@ -88,7 +91,8 @@ class CuisineGenerator
         return $profiles;
     }
 
-    private function randomMainIngredients($resources, $includeMeat) {
+    private function randomMainIngredients($resources, $includeMeat)
+    {
         $bases = [];
 
         if ($includeMeat) {
@@ -105,7 +109,7 @@ class CuisineGenerator
 
         $ingredients = [];
 
-        for ($i=0; $i<$numberOfMainIngredients; $i++) {
+        for ($i = 0; $i < $numberOfMainIngredients; $i++) {
             $ingredient = random_item($bases);
             if (!in_array($ingredient->name, $ingredients)) {
                 $ingredients [] = $ingredient->name;
@@ -115,7 +119,8 @@ class CuisineGenerator
         return $ingredients;
     }
 
-    private function randomSpices($resources) {
+    private function randomSpices($resources)
+    {
         $options = [];
 
         $spices = Resource::byTag($resources, 'spice');
@@ -127,7 +132,7 @@ class CuisineGenerator
 
         $result = [];
 
-        for ($i=0;$i<$numberOfSpices;$i++) {
+        for ($i = 0; $i < $numberOfSpices; $i++) {
             $s = random_item($options);
             if (!in_array($s->name, $result)) {
                 $result [] = $s->name;

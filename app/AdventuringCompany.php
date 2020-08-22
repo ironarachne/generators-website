@@ -69,6 +69,6 @@ class AdventuringCompany extends OrganizationType
             'Wyverns',
         ];
 
-        return random_item($prefixes) . ' '. random_item($suffixes);
+        return random_item($prefixes) . ' ' . random_item($suffixes);
     }
 }

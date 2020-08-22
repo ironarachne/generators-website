@@ -17,19 +17,19 @@ class TownGenerator
     {
         $towns = [];
 
-        for($i=0;$i<$numberOfSmall;$i++) {
+        for ($i = 0; $i < $numberOfSmall; $i++) {
             $category = TownCategory::randomSmall();
 
             $towns [] = $this->random($category, $geographicRegion, $nameGenerator);
         }
 
-        for($i=0;$i<$numberOfMedium;$i++) {
+        for ($i = 0; $i < $numberOfMedium; $i++) {
             $category = TownCategory::randomMedium();
 
             $towns [] = $this->random($category, $geographicRegion, $nameGenerator);
         }
 
-        for($i=0;$i<$numberOfLarge;$i++) {
+        for ($i = 0; $i < $numberOfLarge; $i++) {
             $category = TownCategory::randomLarge();
 
             $towns [] = $this->random($category, $geographicRegion, $nameGenerator);

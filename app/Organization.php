@@ -19,7 +19,7 @@ class Organization
     {
         $leaderNames = [];
 
-        foreach($this->leaders as $leader) {
+        foreach ($this->leaders as $leader) {
             $leaderNames [] = $leader->primary_title . " {$leader->first_name} {$leader->last_name}";
         }
 

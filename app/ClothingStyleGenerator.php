@@ -6,7 +6,8 @@ namespace App;
 
 class ClothingStyleGenerator
 {
-    public function generate() {
+    public function generate()
+    {
         $style = new ClothingStyle();
 
         $style->male_outfit = $this->randomOutfit();
@@ -17,7 +18,8 @@ class ClothingStyleGenerator
         return $style;
     }
 
-    private function randomAdornment() {
+    private function randomAdornment()
+    {
         $adornments = [
             'feathers in their hair',
             'metal rings',
@@ -31,7 +33,8 @@ class ClothingStyleGenerator
         return random_item($adornments);
     }
 
-    private function randomOutfit() {
+    private function randomOutfit()
+    {
         $hatRoll = mt_rand(0, 100);
 
         $hat = $hatRoll > 90 ? $this->randomHeadwear() : '';
@@ -41,7 +44,7 @@ class ClothingStyleGenerator
         if ($robeRoll > 80) {
             $main = $this->randomRobe();
         } else {
-            $main = $this->randomTop() . ' and '. $this->randomBottom();
+            $main = $this->randomTop() . ' and ' . $this->randomBottom();
         }
 
         $footwear = $this->randomFootwear();
@@ -55,7 +58,8 @@ class ClothingStyleGenerator
         return $outfit;
     }
 
-    private function randomFootwear() {
+    private function randomFootwear()
+    {
         $types = [
             'knee-length boots',
             'calf-length boots',
@@ -69,7 +73,8 @@ class ClothingStyleGenerator
         return random_item($types);
     }
 
-    private function randomHeadwear() {
+    private function randomHeadwear()
+    {
         $types = [
             'turban',
             'bonnet',
@@ -87,7 +92,8 @@ class ClothingStyleGenerator
         return random_item($types);
     }
 
-    private function randomRobe() {
+    private function randomRobe()
+    {
         $sleeveRoll = mt_rand(0, 100);
         if ($sleeveRoll > 95) {
             $sleeves = 'no sleeves';
@@ -111,7 +117,8 @@ class ClothingStyleGenerator
         return "$length robe with $neckline neckline and $sleeves";
     }
 
-    private function randomBottom() {
+    private function randomBottom()
+    {
         $types = [
             'pants',
             'skirt',
@@ -143,7 +150,8 @@ class ClothingStyleGenerator
         return "$length $cut $type";
     }
 
-    private function randomTop() {
+    private function randomTop()
+    {
         $lengths = [
             'waist-length',
             'thigh-length',
@@ -176,7 +184,8 @@ class ClothingStyleGenerator
         return pronoun($length) . " $length $fit-fit top with $neckline neckline$sleeves";
     }
 
-    private function randomNeckline() {
+    private function randomNeckline()
+    {
         $necklines = [
             'crossover',
             'collared',
@@ -191,7 +200,8 @@ class ClothingStyleGenerator
         return random_item($necklines);
     }
 
-    private function randomSleeves() {
+    private function randomSleeves()
+    {
         $lengths = [
             'wrist-length',
             'short',
