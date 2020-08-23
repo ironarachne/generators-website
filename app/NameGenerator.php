@@ -12,7 +12,7 @@ class NameGenerator
     public array $male_last_names;
     public array $place_names;
 
-    public function generate($gender, $withLastName = true)
+    public function generate($gender, $withLastName = true): string
     {
         $first = $this->female_first_names;
         $last = $this->female_last_names;
@@ -36,7 +36,7 @@ class NameGenerator
         return random_item($this->place_names);
     }
 
-    public static function defaultFantasy()
+    public static function defaultFantasy(): NameGenerator
     {
         $generator = new NameGenerator();
 

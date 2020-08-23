@@ -26,6 +26,18 @@ class PersonalityTrait
         return false;
     }
 
+    public static function fromJSON(string $json): PersonalityTrait
+    {
+        $data = json_decode($json);
+
+        return new PersonalityTrait($data->name, $data->incompatible);
+    }
+
+    public static function fromObject(\stdClass $data): PersonalityTrait
+    {
+        return new PersonalityTrait($data->name, $data->incompatible);
+    }
+
     public static function removeIncompatible(array $traitsToKeep, array $traitsToCheck): array
     {
         $incompatible = [];

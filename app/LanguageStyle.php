@@ -6,12 +6,22 @@ namespace App;
 
 class LanguageStyle
 {
-    public $descriptors;
-    public $word_length;
-    public $uses_apostrophes;
-    public $initiators;
-    public $connectors;
-    public $finishers;
-    public $feminine_endings;
-    public $masculine_endings;
+    public array $descriptors;
+    public int $word_length;
+    public bool $uses_apostrophes;
+    public array $initiators;
+    public array $connectors;
+    public array $finishers;
+    public array $feminine_endings;
+    public array $masculine_endings;
+
+    public function __construct()
+    {
+        $this->descriptors = [];
+        $this->initiators = [];
+        $this->connectors = [];
+        $this->finishers = [];
+        $this->feminine_endings = [];
+        $this->masculine_endings = [];
+    }
 }

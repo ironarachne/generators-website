@@ -12,15 +12,26 @@ class Language
     public array $male_first_names;
     public array $male_last_names;
     public array $place_names;
-    public array $new_word_prefixes;
-    public array $new_word_suffixes;
+    public string $new_word_prefixes;
+    public string $new_word_suffixes;
     public bool $is_tonal;
-    public array $descriptors;
+    public string $descriptors;
     public string $sample_phrase_translation;
     public string $sample_phrase;
     public string $description;
     public array $words;
     public array $writing_systems;
+
+    public function __construct() {
+        $this->conjugation_rules = [];
+        $this->female_first_names = [];
+        $this->male_first_names = [];
+        $this->female_last_names = [];
+        $this->male_last_names = [];
+        $this->place_names = [];
+        $this->words = [];
+        $this->writing_systems = [];
+    }
 
     public function translate($phrase)
     {
@@ -77,5 +88,39 @@ class Language
         $translation = substr($translation, 0, -1);
 
         return $translation;
+    }
+
+    public static function fromJSON(string $json): Language {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Language {
+        $language = new Language();
+
+        foreach($data as $key => $value) {
+            if ($key == 'writing_systems') {
+                foreach($value as $v) {
+                    $ws = new WritingSystem();
+                    foreach ($v as $vk => $vv) {
+                        $ws->{$vk} = $vv;
+                    }
+                    $language->writing_systems [] = $ws;
+                }
+            } elseif ($key == 'words') {
+                foreach($value as $v) {
+                    $w = new Word();
+                    foreach ($v as $vk => $vv) {
+                        $w->{$vk} = $vv;
+                    }
+                    $language->words [] = $w;
+                }
+            } else {
+                $language->{$key} = $value;
+            }
+        }
+
+        return $language;
     }
 }

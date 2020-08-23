@@ -4,9 +4,9 @@ namespace App;
 
 class WritingSystem
 {
-    public $name;
-    public $classification;
-    public $stroke_style;
-    public $character_order;
-    public $description;
+    public string $name;
+    public string $classification;
+    public string $stroke_style;
+    public string $character_order;
+    public string $description;
 }

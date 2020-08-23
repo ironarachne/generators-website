@@ -50,4 +50,28 @@ class AgeCategory
 
         return $weight;
     }
+
+    public static function fromJSON(string $json): AgeCategory
+    {
+        $data = json_decode($json);
+
+        $object = new AgeCategory();
+
+        foreach ($data as $key => $value) {
+            $object->{$key} = $value;
+        }
+
+        return $object;
+    }
+
+    public static function fromObject(\stdClass $data): AgeCategory
+    {
+        $object = new AgeCategory();
+
+        foreach ($data as $key => $value) {
+            $object->{$key} = $value;
+        }
+
+        return $object;
+    }
 }

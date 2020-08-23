@@ -6,7 +6,11 @@ namespace App;
 
 class DeityGenerator
 {
-    public $possibleDomains;
+    public array $possible_domains;
+
+    public function __construct() {
+        $this->possible_domains = [];
+    }
 
     public function generate(NameGenerator $nameGenerator)
     {
@@ -21,9 +25,9 @@ class DeityGenerator
         $numberOfDomains = mt_rand(1, 3);
 
         for ($i = 0; $i < $numberOfDomains; $i++) {
-            if (sizeof($this->possibleDomains) > 0) {
-                $domain = random_item($this->possibleDomains);
-                $this->possibleDomains = $domain->removeFrom($this->possibleDomains);
+            if (sizeof($this->possible_domains) > 0) {
+                $domain = random_item($this->possible_domains);
+                $this->possible_domains = $domain->removeFrom($this->possible_domains);
                 $deity->domains [] = $domain;
             }
         }
@@ -37,7 +41,7 @@ class DeityGenerator
         return $deity;
     }
 
-    private function randomAppearance($domains)
+    private function randomAppearance($domains): string
     {
         $possibleAppearances = [];
         $appearances = [];
@@ -58,7 +62,7 @@ class DeityGenerator
         return combine_phrases($appearances);
     }
 
-    private function randomHolyItem($domains)
+    private function randomHolyItem($domains): string
     {
         $possible = [];
 
@@ -69,7 +73,7 @@ class DeityGenerator
         return random_item($possible);
     }
 
-    private function randomHolySymbol($domains)
+    private function randomHolySymbol($domains): string
     {
         $possible = [];
 
@@ -80,7 +84,7 @@ class DeityGenerator
         return random_item($possible);
     }
 
-    private function randomPersonalityTraits($domains)
+    private function randomPersonalityTraits($domains): array
     {
         $possiblePersonalityTraits = [];
         $traits = [];

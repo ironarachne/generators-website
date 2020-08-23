@@ -4,6 +4,8 @@
 namespace App;
 
 
+use Exception;
+
 class CuisineGenerator
 {
     public function generate($resources)
@@ -105,6 +107,10 @@ class CuisineGenerator
 
         $bases = array_merge($bases, $vegetables);
 
+        if (sizeof($bases) == 0) {
+            throw new Exception('no food bases to use');
+        }
+
         $numberOfMainIngredients = mt_rand(2, 5);
 
         $ingredients = [];
@@ -127,6 +133,10 @@ class CuisineGenerator
         $herbs = Resource::byTag($resources, 'herb');
 
         $options = array_merge($options, $spices, $herbs);
+
+        if (sizeof($options) == 0) {
+            return [];
+        }
 
         $numberOfSpices = mt_rand(1, 4);
 

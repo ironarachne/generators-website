@@ -23,6 +23,14 @@ class Species
     public array $resources;
     public array $tags;
 
+    public function __construct() {
+        $this->possible_traits = [];
+        $this->common_traits = [];
+        $this->age_categories = [];
+        $this->resources = [];
+        $this->tags = [];
+    }
+
     public static function byTagName($tagName, $haystack)
     {
         $result = [];
@@ -67,6 +75,42 @@ class Species
         }
 
         return false;
+    }
+
+    public static function fromJSON(string $json): Species
+    {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Species
+    {
+        $object = new Species();
+
+        foreach ($data as $key => $value) {
+            if ($key == 'tags') {
+                foreach ($value as $t) {
+                    $object->tags [] = Tag::fromJSON(json_encode($t));
+                }
+            } elseif ($key == 'common_traits' || $key == 'possible_traits') {
+                foreach ($value as $t) {
+                    $object->{$key} [] = TraitTemplate::fromJSON(json_encode($t));
+                }
+            } elseif ($key == 'age_categories') {
+                foreach ($value as $a) {
+                    $object->age_categories [] = AgeCategory::fromJSON(json_encode($a));
+                }
+            } elseif ($key == 'resources') {
+                foreach ($value as $r) {
+                    $object->resources [] = Resource::fromJSON(json_encode($r));
+                }
+            } else {
+                $object->{$key} = $value;
+            }
+        }
+
+        return $object;
     }
 
     public static function load($tag)
@@ -137,7 +181,7 @@ class Species
                 }
 
                 foreach ($d->resources as $r) {
-                    $resource = Resource::fromJSON($r);
+                    $resource = Resource::fromObject($r);
                     $s->resources [] = $resource;
                 }
 

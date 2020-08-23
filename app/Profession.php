@@ -13,29 +13,32 @@ class Profession
     public string $description;
     public array $tags;
 
-    public static function fromJSON($json)
-    {
-        $professions = [];
+    public function __construct() {
+        $this->tags = [];
+    }
 
+    public static function fromJSON(string $json): Profession
+    {
         $data = json_decode($json);
 
-        foreach ($data->professions as $d) {
-            $p = new Profession();
+        return self::fromObject($data);
+    }
 
-            $p->name = $d->name;
-            $p->description = $d->description;
-            $p->tags = [];
+    public static function fromObject(\stdClass $data): Profession
+    {
+        $p = new Profession();
 
-            foreach ($d->tags as $t) {
-                $tag = new Tag();
-                $tag->name = $t->name;
-                $p->tags [] = $tag;
-            }
+        $p->name = $data->name;
+        $p->description = $data->description;
+        $p->tags = [];
 
-            $professions [] = $p;
+        foreach ($data->tags as $t) {
+            $tag = new Tag();
+            $tag->name = $t->name;
+            $p->tags [] = $tag;
         }
 
-        return $professions;
+        return $p;
     }
 
     public static function load($tag)
@@ -46,7 +49,15 @@ class Profession
             $client = new Client();
             $response = $client->request('GET', $url . '/professions?tag=' . $tag);
 
-            return Profession::fromJSON($response->getBody()->getContents());
+            $professions = [];
+
+            $data = json_decode($response->getBody()->getContents());
+
+            foreach($data->professions as $p) {
+                $professions [] = self::fromObject($p);
+            }
+
+            return $professions;
         });
     }
 
@@ -58,7 +69,15 @@ class Profession
             $client = new Client();
             $response = $client->request('GET', $url . '/professions');
 
-            return Profession::fromJSON($response->getBody()->getContents());
+            $professions = [];
+
+            $data = json_decode($response->getBody()->getContents());
+
+            foreach($data->professions as $p) {
+                $professions [] = self::fromObject($p);
+            }
+
+            return $professions;
         });
     }
 

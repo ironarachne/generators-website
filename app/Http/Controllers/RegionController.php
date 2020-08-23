@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use App\RegionGenerator;
-use App\Region;
+use App\SavedRegion;
 
 class RegionController extends Controller
 {
     public function index()
     {
-        $regions = Region::latest()->limit(5)->get();
+        $regions = SavedRegion::latest()->limit(5)->get();
 
         $page = [
             'title' => 'Regions',
@@ -49,7 +49,7 @@ class RegionController extends Controller
     public function show($guid)
     {
         $region = Cache::rememberForever('region-' . $guid, function () use ($guid) {
-            $region = Region::where('guid', $guid)->first();
+            $region = SavedRegion::where('guid', $guid)->first();
             if ($region == false) {
                 $regionGenerator = new RegionGenerator();
                 $region = $regionGenerator->generate($guid);

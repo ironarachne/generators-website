@@ -6,16 +6,16 @@ namespace App;
 
 class Music
 {
-    public $guid;
-    public $rhythm;
-    public $beat;
-    public $dynamic;
-    public $harmony;
-    public $melody;
-    public $pitch;
-    public $key;
-    public $timbre;
-    public $description;
+    public string $guid;
+    public string $rhythm;
+    public string $beat;
+    public string $dynamic;
+    public string $harmony;
+    public string $melody;
+    public string $pitch;
+    public string $key;
+    public string $timbre;
+    public string $description;
 
     public function describe()
     {
@@ -46,5 +46,23 @@ class Music
         $description .= pronoun($this->timbre) . ' ' . $this->timbre . ' timbre.';
 
         return $description;
+    }
+
+    public static function fromJSON(string $json): Music
+    {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Music
+    {
+        $object = new Music();
+
+        foreach ($data as $key => $value) {
+            $object->{$key} = $value;
+        }
+
+        return $object;
     }
 }

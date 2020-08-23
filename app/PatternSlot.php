@@ -6,9 +6,14 @@ namespace App;
 
 class PatternSlot
 {
-    public $name;
-    public $required_tag;
-    public $description_template;
-    public $possible_quirks;
-    public $resource;
+    public string $name;
+    public string $required_tag;
+    public string $description_template;
+    public array $possible_quirks;
+    public Resource $resource;
+
+    public function __construct()
+    {
+        $this->possible_quirks = [];
+    }
 }

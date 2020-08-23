@@ -40,11 +40,11 @@ class LanguageGenerator
         $words = $this->generateWords($style);
         $language->words = $words;
 
-        $language->male_first_names = $this->generateNames(15, 'male', $style);
-        $language->female_first_names = $this->generateNames(15, 'female', $style);
-        $language->male_last_names = $this->generateNames(15, 'family', $style);
+        $language->male_first_names = $this->generateNames(50, 'male', $style);
+        $language->female_first_names = $this->generateNames(50, 'female', $style);
+        $language->male_last_names = $this->generateNames(50, 'family', $style);
         $language->female_last_names = $language->male_last_names;
-        $language->place_names = $this->generateNames(15, 'place', $style);
+        $language->place_names = $this->generateNames(50, 'place', $style);
 
         $language->sample_phrase_translation = $this->getRandomSamplePhraseTranslation();
         $language->sample_phrase = $language->translate($language->sample_phrase_translation);
@@ -235,7 +235,7 @@ class LanguageGenerator
         ];
     }
 
-    public function getRandomSamplePhraseTranslation()
+    public function getRandomSamplePhraseTranslation(): string
     {
         $phrases = [
             'Hello friend! It is good to see you.',

@@ -31,7 +31,7 @@ if (!function_exists('inches_to_feet')) {
 }
 
 if (!function_exists('rnd')) {
-    function rnd($max)
+    function rnd($max): int
     {
         srand();
 
@@ -54,7 +54,7 @@ if (!function_exists('seeder')) {
 }
 
 if (!function_exists('combine_phrases')) {
-    function combine_phrases($phrases, $use_and = true)
+    function combine_phrases($phrases, $use_and = true): string
     {
         $result = '';
         $joiner = $use_and ? 'and' : 'or';
@@ -78,7 +78,7 @@ if (!function_exists('combine_phrases')) {
 }
 
 if (!function_exists('pronoun')) {
-    function pronoun($word)
+    function pronoun($word): string
     {
         $pronoun = 'a';
 
@@ -93,7 +93,7 @@ if (!function_exists('pronoun')) {
 }
 
 if (!function_exists('direction_word')) {
-    function direction_word($direction)
+    function direction_word($direction): string
     {
         $directions = [
             'north',
@@ -111,8 +111,10 @@ if (!function_exists('direction_word')) {
 }
 
 if (!function_exists('opposite_direction')) {
-    function opposite_direction($direction)
+    function opposite_direction($direction): int
     {
+        $opposite = 0;
+
         if ($direction == 0) {
             $opposite = 4;
         } else if ($direction == 1) {
@@ -136,7 +138,7 @@ if (!function_exists('opposite_direction')) {
 }
 
 if (!function_exists('random_direction')) {
-    function random_direction()
+    function random_direction(): int
     {
         return mt_rand(0, 7);
     }

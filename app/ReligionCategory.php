@@ -6,68 +6,47 @@ namespace App;
 
 class ReligionCategory
 {
-    public $name;
-    public $commonality;
-    public $founder_title;
-    public $leader_title;
-    public $pantheon_max_size;
-    public $pantheon_min_size;
-    public $gathering_places;
-    public $has_pantheon;
+    public string $name;
+    public int $commonality;
+    public string $founder_title;
+    public string $leader_title;
+    public int $pantheon_max_size;
+    public int $pantheon_min_size;
+    public array $gathering_places;
+    public bool $has_pantheon;
+
+    public function __construct(string $name, int $commonality, string $founderTitle, string $leaderTitle,
+                                int $pantheonMax, int $pantheonMin, array $gatheringPlaces, bool $hasPantheon)
+    {
+        $this->name = $name;
+        $this->commonality = $commonality;
+        $this->founder_title = $founderTitle;
+        $this->leader_title = $leaderTitle;
+        $this->pantheon_max_size = $pantheonMax;
+        $this->pantheon_min_size = $pantheonMin;
+        $this->gathering_places = $gatheringPlaces;
+        $this->has_pantheon = $hasPantheon;
+    }
 
     public static function all()
     {
-        $monotheistic = new ReligionCategory();
-        $monotheistic->name = 'monotheistic';
-        $monotheistic->commonality = 5;
-        $monotheistic->founder_title = 'prophet';
-        $monotheistic->leader_title = 'priest';
-        $monotheistic->pantheon_max_size = 1;
-        $monotheistic->pantheon_min_size = 1;
-        $monotheistic->gathering_places = ['temple', 'shrine', 'church'];
-        $monotheistic->has_pantheon = true;
+        $standard = ['temple', 'shrine', 'church', 'cathedral'];
 
-        $duotheistic = new ReligionCategory();
-        $duotheistic->name = 'duotheistic';
-        $duotheistic->commonality = 1;
-        $duotheistic->founder_title = 'prophet';
-        $duotheistic->leader_title = 'priest';
-        $duotheistic->pantheon_max_size = 2;
-        $duotheistic->pantheon_min_size = 2;
-        $duotheistic->gathering_places = ['temple', 'shrine', 'church'];
-        $duotheistic->has_pantheon = true;
-
-        $polytheistic = new ReligionCategory();
-        $polytheistic->name = 'polytheistic';
-        $polytheistic->commonality = 17;
-        $polytheistic->founder_title = 'prophet';
-        $polytheistic->leader_title = 'priest';
-        $polytheistic->pantheon_max_size = 30;
-        $polytheistic->pantheon_min_size = 7;
-        $polytheistic->gathering_places = ['temple', 'shrine', 'church'];
-        $polytheistic->has_pantheon = true;
-
-        $shamanistic = new ReligionCategory();
-        $shamanistic->name = 'shamanistic';
-        $shamanistic->commonality = 2;
-        $shamanistic->founder_title = 'shaman';
-        $shamanistic->leader_title = 'shaman';
-        $shamanistic->pantheon_max_size = 0;
-        $shamanistic->pantheon_min_size = 0;
-        $shamanistic->gathering_places = ['medicine lodge', 'sweat lodge', 'spirit lodge'];
-        $shamanistic->has_pantheon = false;
-
-        $atheistic = new ReligionCategory();
-        $atheistic->name = 'atheistic';
-        $atheistic->commonality = 1;
-        $atheistic->founder_title = 'philosopher';
-        $atheistic->leader_title = 'sage';
-        $atheistic->pantheon_max_size = 0;
-        $atheistic->pantheon_min_size = 0;
-        $atheistic->gathering_places = ['great hall', 'forum', 'public house', 'town square'];
-        $atheistic->has_pantheon = false;
+        $monotheistic = new ReligionCategory('monotheistic', 5, 'prophet', 'priest', 1, 1, $standard, true);
+        $duotheistic = new ReligionCategory('duotheistic', 1, 'prophet', 'priest', 2, 2, $standard, true);
+        $polytheistic = new ReligionCategory('polytheistic', 17, 'prophet', 'priest', 30, 7, $standard, true);
+        $shamanistic = new ReligionCategory('shamanistic', 2, 'shaman', 'shaman', 0, 0, ['medicine lodge', 'sweat lodge', 'spirit lodge'], false);
+        $atheistic = new ReligionCategory('atheistic', 1, 'philosopher', 'sage', 0, 0, ['great hall', 'forum', 'public house', 'town square'], false);
 
         return [$monotheistic, $duotheistic, $polytheistic, $shamanistic, $atheistic];
+    }
+
+    public static function fromJSON(string $json): ReligionCategory
+    {
+        $data = json_decode($json);
+
+        return new ReligionCategory($data->name, $data->commonality, $data->founder_title, $data->leader_title,
+            $data->pantheon_max_size, $data->pantheon_min_size, $data->gathering_places, $data->has_pantheon);
     }
 
     public static function random($categories)

@@ -6,11 +6,11 @@ namespace App;
 
 class PantheonGenerator
 {
-    public function generate(int $min, int $max, NameGenerator $nameGenerator)
+    public function generate(int $min, int $max, NameGenerator $nameGenerator): Pantheon
     {
         $deityGen = new DeityGenerator();
         $possibleDomains = Domain::loadAll();
-        $deityGen->possibleDomains = $possibleDomains;
+        $deityGen->possible_domains = $possibleDomains;
 
         $pantheon = new Pantheon();
         $pantheon->deities = [];
@@ -35,7 +35,7 @@ class PantheonGenerator
         return $pantheon;
     }
 
-    private function generateRelationships($deities)
+    private function generateRelationships($deities): array
     {
         $result = [];
 

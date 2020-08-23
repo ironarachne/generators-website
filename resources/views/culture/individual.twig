@@ -8,7 +8,7 @@
     <div class="column">
         <h4 class="title is-4">Male Names</h4>
         <ul>
-            {% for name in culture.language.male_first_names %}
+            {% for name in culture.language.male_first_names|slice(0, 10) %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>
@@ -16,7 +16,7 @@
     <div class="column">
         <h4 class="title is-4">Female Names</h4>
         <ul>
-            {% for name in culture.language.female_first_names %}
+            {% for name in culture.language.female_first_names|slice(0, 10) %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>
@@ -24,7 +24,7 @@
     <div class="column">
         <h4 class="title is-4">Family Names</h4>
         <ul>
-            {% for name in culture.language.male_last_names %}
+            {% for name in culture.language.male_last_names|slice(0, 10) %}
             <li>{{ name }}</li>
             {% endfor %}
         </ul>

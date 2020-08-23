@@ -6,15 +6,21 @@ namespace App;
 
 class Deity
 {
-    public $name;
-    public $gender;
-    public $description;
-    public $domains;
-    public $appearance;
-    public $personality_traits;
-    public $holy_item;
-    public $holy_symbol;
-    public $relationships;
+    public string $name;
+    public string $gender;
+    public string $description;
+    public array $domains;
+    public string $appearance;
+    public array $personality_traits;
+    public string $holy_item;
+    public string $holy_symbol;
+    public array $relationships;
+
+    public function __construct() {
+        $this->domains = [];
+        $this->personality_traits = [];
+        $this->relationships = [];
+    }
 
     public function describe()
     {
@@ -60,5 +66,29 @@ class Deity
         }
 
         return $result;
+    }
+
+    public static function fromJSON(string $json): Deity
+    {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Deity
+    {
+        $object = new Deity();
+
+        foreach ($data as $key => $value) {
+            if ($key == 'domains') {
+                foreach ($value as $dk => $dv) {
+                    $object->domains [] = Domain::fromObject($dv);
+                }
+            } else {
+                $object->{$key} = $value;
+            }
+        }
+
+        return $object;
     }
 }

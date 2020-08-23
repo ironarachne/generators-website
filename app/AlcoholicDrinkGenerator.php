@@ -19,29 +19,16 @@ class AlcoholicDrinkGenerator
         $milk = Resource::byTag($resources, 'milk');
 
         if (sizeof($grains) > 0) {
-            $methods [] = [
-                'name' => 'fermented',
-                'base_tag' => 'grain',
-            ];
-
-            $methods [] = [
-                'name' => 'distilled',
-                'base_tag' => 'grain',
-            ];
+            $methods [] = new BrewingMethod('fermented', 'grain');
+            $methods [] = new BrewingMethod('distilled', 'grain');
         }
 
         if (sizeof($fruit) > 0) {
-            $methods [] = [
-                'name' => 'fermented',
-                'base_tag' => 'fruit',
-            ];
+            $methods [] = new BrewingMethod('fermented', 'fruit');
         }
 
         if (sizeof($milk) > 0) {
-            $methods [] = [
-                'name' => 'fermented',
-                'base_tag' => 'milk',
-            ];
+            $methods [] = new BrewingMethod('fermented', 'milk');
         }
 
         if (sizeof($methods) == 0) {
@@ -52,16 +39,16 @@ class AlcoholicDrinkGenerator
 
         $strength = $this->randomStrength();
 
-        $baseOptions = Resource::byTag($resources, $method['base_tag']);
+        $baseOptions = Resource::byTag($resources, $method->base_tag);
         $baseResource = random_item($baseOptions);
         $base = $baseResource->name;
 
-        $description = trim("$strength beverage called $name, which is " . $method['name'] . " from $base");
+        $description = trim("$strength beverage called $name, which is " . $method->name . " from $base");
         $wordToCheck = $strength == '' ? 'beverage' : $strength;
         $description = pronoun($wordToCheck) . " $description";
 
         $chanceExtras = mt_rand(0, 100);
-        if ($chanceExtras > 80) {
+        if ($chanceExtras > 80 && sizeof($spices) > 0 && sizeof($herbs) > 0) {
             $extras = [];
             $extras [] = random_item($spices);
             $extras [] = random_item($herbs);

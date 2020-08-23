@@ -9,17 +9,23 @@ use Illuminate\Support\Facades\Cache;
 
 class Pattern
 {
-    public $name;
-    public $description;
-    public $tags;
-    public $commonality;
-    public $professions;
-    public $slots;
-    public $name_template;
-    public $main_material;
-    public $main_material_override;
-    public $origin_override;
-    public $value;
+    public string $name;
+    public string $description;
+    public array $tags;
+    public int $commonality;
+    public array $professions;
+    public array $slots;
+    public string $name_template;
+    public string $main_material;
+    public string $main_material_override;
+    public string $origin_override;
+    public int $value;
+
+    public function __construct() {
+        $this->tags = [];
+        $this->professions = [];
+        $this->slots = [];
+    }
 
     public static function load($tag)
     {

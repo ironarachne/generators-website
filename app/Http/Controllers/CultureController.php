@@ -7,13 +7,13 @@ use Dompdf\Dompdf;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use App\CultureGenerator;
-use App\Culture;
+use App\SavedCulture;
 
 class CultureController extends Controller
 {
     public function index()
     {
-        $cultures = Culture::latest()->limit(5)->get();
+        $cultures = SavedCulture::latest()->limit(5)->get();
 
         $page = [
             'title' => 'Cultures',
@@ -50,7 +50,7 @@ class CultureController extends Controller
     public function pdf($guid)
     {
         $culture = Cache::rememberForever('culture-' . $guid, function () use ($guid) {
-            $culture = Culture::where('guid', '=', $guid)->first();
+            $culture = SavedCulture::where('guid', '=', $guid)->first();
             return $culture;
         });
 
@@ -72,7 +72,7 @@ class CultureController extends Controller
     public function show($guid)
     {
         $culture = Cache::rememberForever('culture-' . $guid, function () use ($guid) {
-            $culture = Culture::where('guid', $guid)->first();
+            $culture = SavedCulture::where('guid', $guid)->first();
             if ($culture == false) {
                 $cultureGenerator = new CultureGenerator();
                 $culture = $cultureGenerator->generate($guid);

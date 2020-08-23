@@ -22,6 +22,14 @@ class GeographicRegion
     public int $nearest_mountains_direction;
     public int $distance_to_equator;
 
+    public function __construct()
+    {
+        $this->seasons = [];
+        $this->animals = [];
+        $this->plants = [];
+        $this->minerals = [];
+    }
+
     public function resources()
     {
         $resources = [];
@@ -45,5 +53,41 @@ class GeographicRegion
         }
 
         return $resources;
+    }
+
+    public static function fromJSON(string $json): GeographicRegion
+    {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): GeographicRegion
+    {
+        $object = new GeographicRegion();
+
+        foreach ($data as $key => $value) {
+            if ($key == 'climate') {
+                $object->climate = Climate::fromObject($value);
+            } elseif ($key == 'biome') {
+                $object->biome = Biome::fromObject($value);
+            } elseif ($key == 'seasons') {
+                foreach ($value as $s) {
+                    $object->seasons[] = Season::fromObject($s);
+                }
+            } elseif ($key == 'animals' || $key == 'plants') {
+                foreach ($value as $s) {
+                    $object->$key [] = Species::fromObject($s);
+                }
+            } elseif ($key == 'minerals') {
+                foreach ($value as $m) {
+                    $object->minerals [] = Mineral::fromObject($m);
+                }
+            } else {
+                $object->{$key} = $value;
+            }
+        }
+
+        return $object;
     }
 }

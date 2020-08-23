@@ -6,14 +6,14 @@ namespace App;
 
 class Climate
 {
-    public $cloud_cover;
-    public $wind_strength;
-    public $wind_direction;
-    public $precipitation_amount;
-    public $precipitation_frequency;
-    public $precipitation_type;
+    public string $cloud_cover;
+    public int $wind_strength;
+    public int $wind_direction;
+    public int $precipitation_amount;
+    public int $precipitation_frequency;
+    public string $precipitation_type;
 
-    public function describeClouds()
+    public function describeClouds(): string
     {
         if ($this->cloud_cover < 10) {
             return 'no clouds';
@@ -26,5 +26,23 @@ class Climate
         }
 
         return 'frequently overcast skies';
+    }
+
+    public static function fromJSON(string $json): Climate
+    {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Climate
+    {
+        $object = new Climate();
+
+        foreach ($data as $key => $value) {
+            $object->{$key} = $value;
+        }
+
+        return $object;
     }
 }

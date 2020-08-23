@@ -39,18 +39,9 @@ class CultureGenerator
         $religionGen = new ReligionGenerator();
         $religion = $religionGen->generate($nameGenerator);
 
-        $cultureData = new \stdClass();
-        $cultureData->name = $name;
-        $cultureData->adjective = $adjective;
-        $cultureData->language = $language;
-        $cultureData->geography = $geography;
-        $cultureData->music = $music;
-        $cultureData->clothing = $clothing;
-        $cultureData->cuisine = $cuisine;
-        $cultureData->drink = $drink;
-        $cultureData->religion = $religion;
+        $cultureData = new Culture($name, $adjective, $language, $geography, $music, $clothing, $cuisine, $drink, $religion);
 
-        $culture = new Culture();
+        $culture = new SavedCulture();
         $culture->data = json_encode($cultureData);
         $culture->guid = $id;
 

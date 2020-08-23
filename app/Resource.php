@@ -3,19 +3,22 @@
 
 namespace App;
 
-
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 
 class Resource
 {
-    public $name;
-    public $description;
-    public $main_material;
-    public $origin;
-    public $commonality;
-    public $value;
-    public $tags;
+    public string $name;
+    public string $description;
+    public string $main_material;
+    public string $origin;
+    public int $commonality;
+    public int $value;
+    public array $tags;
+
+    public function __construct() {
+        $this->tags = [];
+    }
 
     public static function byTag($resources, $tagName)
     {
@@ -35,17 +38,23 @@ class Resource
         return $result;
     }
 
-    public static function fromJSON($json)
+    public static function fromJSON(string $json): Resource
+    {
+        $data = json_decode($json);
+        return Resource::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Resource
     {
         $resource = new Resource();
-        $resource->name = $json->name;
-        $resource->description = $json->description;
-        $resource->commonality = $json->commonality;
-        $resource->main_material = $json->main_material;
-        $resource->origin = $json->origin;
-        $resource->value = $json->value;
+        $resource->name = $data->name;
+        $resource->description = $data->description;
+        $resource->commonality = $data->commonality;
+        $resource->main_material = $data->main_material;
+        $resource->origin = $data->origin;
+        $resource->value = $data->value;
 
-        foreach ($json->tags as $t) {
+        foreach ($data->tags as $t) {
             $tag = new Tag();
             $tag->name = $t->name;
             $resource->tags [] = $tag;

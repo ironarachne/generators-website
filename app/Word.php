@@ -4,7 +4,7 @@ namespace App;
 
 class Word
 {
-    public $english_translation;
-    public $word;
-    public $speech_part;
+    public string $english_translation;
+    public string $word;
+    public string $speech_part;
 }

@@ -6,12 +6,12 @@ namespace App;
 
 class Cuisine
 {
-    public $description;
-    public $flavors;
-    public $main_ingredients;
-    public $cooking_methods;
-    public $spices;
-    public $is_vegetarian;
+    public string $description;
+    public array $flavors;
+    public array $main_ingredients;
+    public array $cooking_methods;
+    public array $spices;
+    public bool $is_vegetarian;
 
     public function describe()
     {
@@ -22,5 +22,21 @@ class Cuisine
         $description .= 'Dishes are usually ' . combine_phrases($this->cooking_methods, false) . '.';
 
         return $description;
+    }
+
+    public static function fromJSON(string $json): Cuisine {
+        $data = json_decode($json);
+
+        return self::fromObject($data);
+    }
+
+    public static function fromObject(\stdClass $data): Cuisine {
+        $cuisine = new Cuisine();
+
+        foreach ($data as $key => $value) {
+            $cuisine->{$key} = $value;
+        }
+
+        return $cuisine;
     }
 }
