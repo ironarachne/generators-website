@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use App\RegionGenerator;
@@ -26,12 +27,20 @@ class RegionController extends Controller
         return view('region.index', ['page' => $page, 'regions' => $regions]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $guid = Uuid::uuid4();
 
+        $languageChoice = $request->input('language-choice');
+
+        $useFamiliar = false;
+
+        if ($languageChoice == 'Common') {
+            $useFamiliar = true;
+        }
+
         $regionGenerator = new RegionGenerator();
-        $region = $regionGenerator->generate($guid);
+        $region = $regionGenerator->generate($guid, $useFamiliar);
 
         if (Auth::check()) {
             $user = Auth::user();
@@ -52,6 +61,7 @@ class RegionController extends Controller
             $region = SavedRegion::where('guid', $guid)->first();
             if ($region == false) {
                 $regionGenerator = new RegionGenerator();
+
                 $region = $regionGenerator->generate($guid);
 
                 if (Auth::check()) {

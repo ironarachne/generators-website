@@ -6,6 +6,35 @@ namespace App;
 
 class LanguageGenerator
 {
+    public function getCommon(): Language {
+        $language = new Language();
+
+        $language->name = 'Common';
+        $language->adjective = 'Common';
+
+        $nameGenerator = NameGenerator::defaultFantasy();
+        $language->female_last_names = $nameGenerator->female_last_names;
+        $language->female_first_names = $nameGenerator->female_first_names;
+        $language->male_first_names = $nameGenerator->male_first_names;
+        $language->male_last_names = $nameGenerator->male_last_names;
+        $language->place_names = $nameGenerator->place_names;
+
+        $language->descriptors = 'familiar';
+
+        $writingSystem = new WritingSystem();
+        $writingSystem->name = 'Common script';
+        $writingSystem->character_order = 'left to right';
+        $writingSystem->classification = 'alphabet';
+        $writingSystem->stroke_style = 'angles and loops';
+
+        $language->writing_systems = [$writingSystem];
+
+        $language->sample_phrase = 'Hello!';
+        $language->sample_phrase_translation = 'Hello!';
+
+        return $language;
+    }
+
     public function generate()
     {
         // TODO: Add generation of conjugation rules
@@ -53,7 +82,7 @@ class LanguageGenerator
         return $language;
     }
 
-    public function describe($language)
+    public function describe($language): string
     {
         $descriptors = explode(',', $language->descriptors);
         $writingSystem = $language->writing_systems[0];

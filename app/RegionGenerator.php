@@ -4,10 +4,10 @@ namespace App;
 
 class RegionGenerator
 {
-    public function generate($id)
+    public function generate($id, $useFamiliarLanguage = false)
     {
         $cultureGen = new CultureGenerator();
-        $culture = $cultureGen->generate($id);
+        $culture = $cultureGen->generate($id, $useFamiliarLanguage);
         $cultureData = Culture::fromJSON($culture->data);
 
         $nameGenerator = new NameGenerator();

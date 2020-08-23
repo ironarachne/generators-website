@@ -2,18 +2,20 @@
 
 namespace App;
 
-use \GuzzleHttp\Client;
-
 class CultureGenerator
 {
-    public function generate($id)
+    public function generate($id, $useFamiliarLanguage = false): SavedCulture
     {
         $geoGen = new GeographicRegionGenerator();
         $geography = $geoGen->generate();
         $resources = $geography->resources();
 
         $langGen = new LanguageGenerator();
-        $language = $langGen->generate();
+        if ($useFamiliarLanguage) {
+            $language = $langGen->getCommon();
+        } else {
+            $language = $langGen->generate();
+        }
         $nameGenerator = new NameGenerator();
         $nameGenerator->female_first_names = $language->female_first_names;
         $nameGenerator->female_last_names = $language->female_last_names;
@@ -21,8 +23,13 @@ class CultureGenerator
         $nameGenerator->male_last_names = $language->male_last_names;
         $nameGenerator->place_names = $language->place_names;
 
-        $name = $language->name;
-        $adjective = $language->adjective;
+        if ($useFamiliarLanguage) {
+            $name = $nameGenerator->randomPlaceName();
+            $adjective = $name;
+        } else {
+            $name = $language->name;
+            $adjective = $language->adjective;
+        }
 
         $musicGen = new MusicGenerator();
         $music = $musicGen->generate($id);
