@@ -15,6 +15,7 @@ class Biome
     public int $temperature_max;
     public int $precipitation_min;
     public int $precipitation_max;
+    public array $possible_landmarks;
     public string $type;
     public int $flora_prevalence;
     public array $tags;

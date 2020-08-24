@@ -75,6 +75,9 @@ class BiomeGenerator
                 $biome->precipitation_min = $b->precipitation_min;
                 $biome->temperature_max = $b->temperature_max;
                 $biome->temperature_min = $b->temperature_min;
+
+                $biome->possible_landmarks = explode(',', $b->possible_landmarks);
+
                 $biome->type = $b->type;
                 foreach ($b->tags as $tag) {
                     $n = new Tag;

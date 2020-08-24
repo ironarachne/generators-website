@@ -26,6 +26,7 @@ class GeographicRegionGenerator
 
         $biomeGenerator = new BiomeGenerator();
         $region->biome = $biomeGenerator->generate($region->climate, $region);
+        $region->possible_landmarks = $region->biome->possible_landmarks;
 
         $seasonGenerator = new SeasonGenerator();
         $region->seasons = $seasonGenerator->generate($region->climate, $region);

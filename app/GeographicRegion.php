@@ -9,6 +9,7 @@ class GeographicRegion
     public string $description;
     public Climate $climate;
     public Biome $biome;
+    public array $possible_landmarks;
     public array $seasons;
     public array $animals;
     public array $plants;

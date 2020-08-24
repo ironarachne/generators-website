@@ -48,9 +48,13 @@ class TownGenerator
         $town->common_exports = $category->randomExports();
         $town->character = $category->randomCharacter();
 
-        $town->surrounding_environment = $geographicRegion->description;
+        $town->surrounding_environment = $this->randomLandmarkDescription($geographicRegion);
         $town->description = $town->describe();
 
         return $town;
+    }
+
+    private function randomLandmarkDescription(GeographicRegion $region): string {
+        return random_item($region->possible_landmarks);
     }
 }
