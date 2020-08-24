@@ -12,45 +12,26 @@
     <p>The following are small generators that you run from this page. These are not saved to your creations.</p>
 
     @verbatim
-    <h4 class="title is-4">Cyberpunk Chop Shop Generator</h4>
+    <h2>Cyberpunk Chop Shop Generator</h2>
     <p>Part of the <a href="https://reddit.com/r/rpg_generators">r/rpg_generators</a> subreddit <a href="https://www.reddit.com/r/rpg_generators/comments/ftnsx4/cyberpunk_for_april_rpg_generators_challenge/">Cyberpunk Challenge</a> for April 2020. This generates a cyberpunk chop shop.</p>
-    <p><button class="button is-primary" v-on:click="generateChopShop">Generate New Chop Shop</button></p>
+    <p><button v-on:click="generateChopShop">Generate New Chop Shop</button></p>
     <blockquote>{{ chopShopDescription }}</blockquote>
 
-    <h4 class="title is-4">Language Generator</h4>
+    <h2>Language Generator</h2>
     <p>This generates a description of a fantasy language for you.</p>
-    <p><button class="button is-primary" v-on:click="generateLanguage">Generate New Language</button></p>
+    <p><button v-on:click="generateLanguage">Generate New Language</button></p>
     <blockquote>{{ languageDescription }}</blockquote>
 
-    <h4 class="title is-4">Town Generator</h4>
+    <h2>Town Generator</h2>
     <p>Need a quick town? Click here.</p>
-    <p><button class="button is-primary" v-on:click="generateTown">Generate New Town</button></p>
+    <p><button v-on:click="generateTown">Generate New Town</button></p>
     <blockquote>{{ townDescription }}</blockquote>
 
-    <h4 class="title is-4">Organization Generator</h4>
+    <h2>Organization Generator</h2>
     <p>This generates a fantasy organization.</p>
-    <p><button class="button is-primary" v-on:click="generateOrganization">Generate New Organization</button></p>
+    <p><button v-on:click="generateOrganization">Generate New Organization</button></p>
     <blockquote>{{ organizationDescription }}</blockquote>
     @endverbatim
-</div>
-<div class="column is-one-third">
-    <div class="has-text-centered content">
-    <h3 class="title is-3">External Generators</h3>
-    </div>
-    <div class="content">
-    <p>The following is a list of other websites that offer generators like these.</p>
-    <ul>
-        <li><a href="http://www.chaoticshiny.com/">Chaotic Shiny</a></li>
-        <li><a href="https://www.darkestofnights.com/">Darkest of Nights</a></li>
-        <li><a href="http://donjon.bin.sh/">Donjon</a></li>
-        <li><a href="https://www.trollmystic.com/pub/category/generators/">Eposic</a></li>
-        <li><a href="http://www.fantasynamegenerators.com/">Fantasy Name Generators</a></li>
-        <li><a href="https://www.mithrilandmages.com/">Mithril &amp; Mages</a></li>
-        <li><a href="http://www.rangen.co.uk/">RanGen</a></li>
-        <li><a href="https://www.seventhsanctum.com/">Seventh Sanctum</a></li>
-        <li><a href="http://www.springhole.net/writing_roleplaying_randomators/index.html">Springhole.net</a></li>
-    </ul>
-    </div>
 @endsection
 
 @section('javascript')

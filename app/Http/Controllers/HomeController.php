@@ -32,11 +32,16 @@ class HomeController extends Controller
 
             foreach ($post_data as $post) {
                 if ($i < 3) {
+                    $body = $Parsedown->text($post->body);
+                    $body = str_replace('h2', 'h3', $body);
+
                     $posts[] = [
                         'title' => $post->title,
                         'created' => $post->created,
-                        'body' => $Parsedown->text($post->body),
+                        'body' => $body,
                     ];
+                } else {
+                    break;
                 }
 
                 $i++;

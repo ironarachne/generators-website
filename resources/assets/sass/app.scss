@@ -59,29 +59,144 @@
     font-style: normal;
 }
 
+$ironarachnegreen: #76E841;
+
 html, body {
     font-family: 'libre_baskerville', Georgia, serif;
     font-size: 24px;
+    line-height: 1.5rem;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'eczar', Helvetica, sans-serif;
 }
 
-.active {
-    font-weight: 800;
-    font-style: italic;
+h1 {
+    font-size: 48px;
+    line-height: 1rem;
+    margin: 0;
 }
 
-.navbar {
-    border-bottom: 5px double #eee;
+a {
+    color: $ironarachnegreen;
 }
 
-.heraldry {
+a:hover {
+    color: #0f0;
+}
+
+a:visited {
+    color: #337711;
+}
+
+article.heraldry-list {
+    display: flex;
+    align-items: center;
+    img {
+        width: 64px;
+        margin-right: 1rem;
+    }
+    margin-bottom: 0.5rem;
+}
+
+blockquote {
+    background: #F5FCF2;
+    border-left: 2px solid $ironarachnegreen;
+    padding: 0.5rem 1rem;
+}
+
+button, input[type=submit] {
+    background: rgb(37,163,14);
+    background: linear-gradient(0deg, rgba(37,163,14,1) 0%, rgba(118,232,65,1) 100%);
+    border: none;
+    border-radius: 3px;
+    color: #000;
+    padding: 0.5rem 1rem;
+}
+
+button:active, input[type=submit]:active {
+    background: rgb(37,163,14);
+    background: linear-gradient(180deg, rgba(37,163,14,1) 0%, rgba(118,232,65,1) 100%);
+    color: $ironarachnegreen;
+    transform: translateY(4px);
+}
+
+button:hover, input[type=submit]:hover {
+    color: #fff;
+}
+
+div.columns {
+    display: flex;
+    width: 100%;
+    div.column {
+        margin: 0 0.5rem;
+    }
+}
+
+div.heraldry-large {
+    width: 100%;
+    text-align: center;
+    img {
+        margin: 0 auto;
+        width: 400px;
+    }
+}
+
+div.input-group {
+    font-size: 0.8rem;
+    margin: 0.5rem;
+}
+
+figure.heraldry {
+    text-align: center;
     width: 400px;
 }
 
-.heraldry-small {
-    width: 64px;
+nav {
+    border-bottom: 3px double #eee;
+    border-top: 3px double #eee;
+    ul {
+        list-style: none;
+        display: flex;
+        width: 100%;
+        li {
+            font-family: 'eczar', Helvetica, sans-serif;
+            display: inline-block;
+            margin: 0 0.5rem;
+            a {
+                text-decoration: none;
+            }
+        }
+    }
 }
+
+header, nav, section, footer {
+    width: 968px;
+    margin: 0 auto;
+}
+
+@media (max-width: 968px) {
+    header, nav, section, footer {
+        width: 100%;
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    img.logo {
+        height: 128px;
+        width: 128px;
+    }
+    p.subtitle {
+        margin: 0;
+    }
+}
+
+footer {
+    border-top: 1px solid #eee;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+}
+
 

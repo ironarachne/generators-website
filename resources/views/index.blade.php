@@ -19,13 +19,11 @@
         tools it presents. I'm happy to take suggestions - either for my existing generators, or for new tools you wish
         existed. Email me at <a href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>!</p>
 
-    <h3 class="title is-3">Latest News</h3>
-
     @foreach($posts as $post)
-        <div class="post">
-            <h4 class="title is-4">{{ $post['title'] }}</h4>
+        <article class="post">
+            <h2>{{ $post['title'] }}</h2>
             <p><cite>{{ date('l F jS, Y', strtotime($post['created'])) }}</cite></p>
-            <p>{!! $post['body'] !!}</p>
-        </div>
+            <div>{!! $post['body'] !!}</div>
+        </article>
     @endforeach
 @endsection

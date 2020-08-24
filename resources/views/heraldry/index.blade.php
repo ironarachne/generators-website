@@ -11,31 +11,25 @@
 
     @if ($errors->any())
         @foreach($errors->all() as $error)
-        <h4 class="has-text-danger">{{ $error }}</h4>
+        <p>{{ $error }}</p>
         @endforeach
     @endif
 
-    <div class="field">
+    <div class="input-group">
         {{ Form::label('field_shape', 'Field Shape', ['class' => 'label']) }}
 
-        <div class="select">
-            {{ Form::select('field_shape', ['any' => 'Any', 'banner' => 'Banner', 'engrailed' => 'Engrailed', 'wedge' => 'Wedge'], 'any') }}
-        </div>
+        {{ Form::select('field_shape', ['any' => 'Any', 'banner' => 'Banner', 'engrailed' => 'Engrailed', 'wedge' => 'Wedge'], 'any') }}
     </div>
 
-    {{ Form::submit('Generate', ['class' => 'button is-primary is-large']) }}
+    {{ Form::submit('Generate') }}
 
     {{ Form::close() }}
 
-    <h3>Most Recent Heraldry Generated</h3>
+    <h2>Most Recent Heraldry Generated</h2>
     @foreach ($devices as $device)
-        <article class="media">
-            <figure class="media-left">
-                <p class="image is-64x64"><img src="{{ $device->url }}" class="heraldry-small"></p>
-            </figure>
-            <div class="media-content">
-                <p><a href="{{ route('heraldry.show', ['guid' => $device->guid ]) }}">{{ $device->blazon }}</a></p>
-            </div>
+        <article class="heraldry-list">
+            <img src="{{ $device->url }}">
+            <p><a href="{{ route('heraldry.show', ['guid' => $device->guid ]) }}">{{ $device->blazon }}</a></p>
         </article>
     @endforeach
 @endsection

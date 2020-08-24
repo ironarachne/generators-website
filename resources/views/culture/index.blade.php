@@ -13,15 +13,13 @@
 
     <form method="POST" action="/culture">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="submit" class="button is-primary is-large" value="Generate New Culture">
+        <input type="submit" class="button" value="Generate New Culture">
     </form>
 
-    <h3>Most Recent Cultures Generated</h3>
+    <h2>Most Recent Cultures Generated</h2>
     @foreach ($cultures as $culture)
-        <div class="content">
-            <h4><a href="{{ route('culture.show', ['guid' => $culture->guid]) }}">The {{ $culture->name }} Culture</a>
-            </h4>
-            <p>{{ $culture->description }}</p>
-        </div>
+        <h3><a href="{{ route('culture.show', ['guid' => $culture->guid]) }}">The {{ $culture->name }} Culture</a>
+        </h3>
+        <p>{{ $culture->description }}</p>
     @endforeach
 @endsection

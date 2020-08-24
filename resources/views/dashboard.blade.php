@@ -17,7 +17,7 @@
 
             <ul>
                 @foreach ($cultures as $culture)
-                    <li><a href="{{ route('culture.show', ['guid' => $culture['guid']]) }}">{{ $culture['name'] }}</li>
+                    <li><a href="{{ route('culture.show', ['guid' => $culture['guid']]) }}">{{ $culture['name'] }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -34,14 +34,9 @@
             <h2>Heraldry</h2>
 
             @foreach ($devices as $device)
-                <article class="media">
-                    <figure class="media-left">
-                        <p class="image is-64x64"><img src="{{ $device->url }}" class="heraldry-small"></p>
-                    </figure>
-                    <div class="media-content">
-                        <p><a href="{{ route('heraldry.show', ['guid' => $device->guid]) }}">{{ $device->blazon }}</a>
-                        </p>
-                    </div>
+                <article class="heraldry-list">
+                    <img src="{{ $device->url }}">
+                    <p><a href="{{ route('heraldry.show', ['guid' => $device->guid ]) }}">{{ $device->blazon }}</a></p>
                 </article>
             @endforeach
         </div>

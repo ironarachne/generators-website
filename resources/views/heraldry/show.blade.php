@@ -13,8 +13,8 @@
 @endsection
 
 @section('content')
-<div class="has-text-centered">
-    <p class="blazon is-italic is-size-3">{{ $heraldry->blazon }}</p>
-    <img src="{{ $heraldry->url }}">
+<div class="heraldry-large">
+    <p>{{ $heraldry->blazon }}</p>
+    <img src="{{ $heraldry->url }}" alt="{{ $heraldry->blazon }} coat of arms">
 </div>
 @endsection
