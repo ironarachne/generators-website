@@ -1,9 +1,17 @@
-{% extends 'layout.twig' %}
+@extends('layout')
 
-{% block content %}
+@section('title')
+    Quick Generators
+@endsection
+
+@section('subtitle')
+    Uncomplicated, quick generators for small things
+@endsection
+
+@section('content')
     <p>The following are small generators that you run from this page. These are not saved to your creations.</p>
 
-    {% verbatim %}
+    @verbatim
     <h4 class="title is-4">Cyberpunk Chop Shop Generator</h4>
     <p>Part of the <a href="https://reddit.com/r/rpg_generators">r/rpg_generators</a> subreddit <a href="https://www.reddit.com/r/rpg_generators/comments/ftnsx4/cyberpunk_for_april_rpg_generators_challenge/">Cyberpunk Challenge</a> for April 2020. This generates a cyberpunk chop shop.</p>
     <p><button class="button is-primary" v-on:click="generateChopShop">Generate New Chop Shop</button></p>
@@ -23,7 +31,7 @@
     <p>This generates a fantasy organization.</p>
     <p><button class="button is-primary" v-on:click="generateOrganization">Generate New Organization</button></p>
     <blockquote>{{ organizationDescription }}</blockquote>
-    {% endverbatim %}
+    @endverbatim
 </div>
 <div class="column is-one-third">
     <div class="has-text-centered content">
@@ -43,9 +51,9 @@
         <li><a href="http://www.springhole.net/writing_roleplaying_randomators/index.html">Springhole.net</a></li>
     </ul>
     </div>
-{% endblock %}
+@endsection
 
-{% block javascript %}
+@section('javascript')
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max))
 }
@@ -163,4 +171,4 @@ app.generateChopShop()
 app.generateLanguage()
 app.generateOrganization()
 app.generateTown()
-{% endblock %}
+@endsection

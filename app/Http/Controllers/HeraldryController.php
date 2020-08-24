@@ -15,16 +15,7 @@ class HeraldryController extends Controller
     {
         $devices = Heraldry::latest()->limit(5)->get();
 
-        $page = [
-            'title' => 'Heraldry',
-            'subtitle' => 'Generate fictional coats-of-arms and their blazons',
-            'description' => 'This tool procedurally generates fictional coats-of-arms and their blazons.',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('heraldry.index', ['page' => $page, 'devices' => $devices]);
+        return view('heraldry.index', ['devices' => $devices]);
     }
 
     public function create(Request $request)
@@ -77,14 +68,6 @@ class HeraldryController extends Controller
             return $heraldry;
         });
 
-        $page = [
-            'title' => $heraldry->blazon,
-            'description' => 'A coat of arms for the blazon "' . $heraldry->blazon . '"',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('heraldry.show', ['heraldry' => $heraldry, 'page' => $page]);
+        return view('heraldry.show', ['heraldry' => $heraldry]);
     }
 }

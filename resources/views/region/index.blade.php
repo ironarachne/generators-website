@@ -1,6 +1,10 @@
-{% extends 'layout' %}
+@extends('layout')
 
-{% block content %}
+@section('title')
+    Region Generator
+@endsection
+
+@section('content')
     <p>This generator creates a region from a fantasy world.</p>
 
     <div class="box">
@@ -26,10 +30,10 @@
     </div>
 
     <h3>Most Recent Regions Generated</h3>
-    {% for region in regions %}
+    @foreach ($regions as $region)
         <div class="content">
-            <h4><a href="{{ route('region.show', {'guid': region.guid}) }}">{{ region.name }}</a></h4>
-            <p>{{ region.description }}</p>
+            <h4><a href="{{ route('region.show', ['guid' => $region->guid]) }}">{{ $region->name }}</a></h4>
+            <p>{{ $region->description }}</p>
         </div>
-    {% endfor %}
-{% endblock %}
+    @endforeach
+@endsection

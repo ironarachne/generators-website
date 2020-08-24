@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-{% block content %}
-
-{% endblock %}
+@yield('content')
 </body>
 </html>

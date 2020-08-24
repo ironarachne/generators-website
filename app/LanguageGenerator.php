@@ -32,6 +32,8 @@ class LanguageGenerator
         $language->sample_phrase = 'Hello!';
         $language->sample_phrase_translation = 'Hello!';
 
+        $language->description = $this->describe($language);
+
         return $language;
     }
 

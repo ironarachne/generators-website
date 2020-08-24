@@ -15,6 +15,8 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Cache::remember('blog_posts', 600, function () {
+            $posts = [];
+
             $client = new Client(['base_uri' => 'https://blog.ironarachne.com/api/']);
             $response = $client->request('GET', 'collections/ben/posts');
 
@@ -43,15 +45,7 @@ class HomeController extends Controller
             return $posts;
         });
 
-        $page = [
-            'title' => 'Iron Arachne',
-            'subtitle' => 'Procedural Generation Tools for Tabletop Role-playing Games',
-            'description' => 'Procedural Generation Tools for Tabletop Role-playing Games',
-            'type' => 'home',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-        return view('index')->with(['page' => $page, 'posts' => $posts]);
+        return view('index')->with(['posts' => $posts]);
     }
 
     /**
@@ -87,56 +81,21 @@ class HomeController extends Controller
 
         $devices = $user->heraldries()->latest()->get();
 
-        $page = [
-            'title' => 'My Dashboard',
-            'subtitle' => '',
-            'description' => 'Personal dashboard',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-        return view('dashboard')->with(['page' => $page, 'cultures' => $cultures, 'regions' => $regions, 'devices' => $devices]);
+        return view('dashboard')->with(['cultures' => $cultures, 'regions' => $regions, 'devices' => $devices]);
     }
 
     public function about()
     {
-        $page = [
-            'title' => 'About',
-            'subtitle' => '',
-            'description' => 'About Iron Arachne',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('about')->with(['page' => $page]);
+        return view('about');
     }
 
     public function quick()
     {
-        $page = [
-            'title' => 'Quick Generators',
-            'subtitle' => 'Small generators for quick creations',
-            'description' => 'Small generators for quick creations',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('quick')->with(['page' => $page]);
+        return view('quick');
     }
 
     public function privacy()
     {
-        $page = [
-            'title' => 'Privacy Policy',
-            'subtitle' => 'This is the site privacy policy',
-            'description' => 'Iron Arachne\'s privacy policy',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('privacy')->with(['page' => $page]);
+        return view('privacy');
     }
 }

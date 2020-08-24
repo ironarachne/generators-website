@@ -15,16 +15,7 @@ class RegionController extends Controller
     {
         $regions = SavedRegion::latest()->limit(5)->get();
 
-        $page = [
-            'title' => 'Regions',
-            'subtitle' => 'Generate individual regions in a fantasy world',
-            'description' => 'This tool procedurally generates regions for a fantasy world.',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('region.index', ['page' => $page, 'regions' => $regions]);
+        return view('region.index', ['regions' => $regions]);
     }
 
     public function create(Request $request)
@@ -75,16 +66,6 @@ class RegionController extends Controller
             return $region;
         });
 
-        $page = [
-            'id' => $guid,
-            'title' => $region->name,
-            'subtitle' => $region->description,
-            'description' => $region->description,
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('region.show', ['region' => $region, 'page' => $page]);
+        return view('region.show', ['region' => $region]);
     }
 }

@@ -1,7 +1,14 @@
-{% extends 'layout.twig' %}
+@extends('layout')
 
-{% block content %}
+@section('title')
+    About Iron Arachne
+@endsection
 
+@section('description')
+    About the Iron Arachne website
+@endsection
+
+@section('content')
     <h2>About Iron Arachne</h2>
     <p>Iron Arachne is a project to generate an entire fantasy world completely from scratch in a way that is coherent
         and at least somewhat realistic. Eventually, this will include maps, artwork, calendars, phrasebooks, and
@@ -13,5 +20,4 @@
         in commercial works, and any other usage without attribution.</p>
     <p>With that said, I would love to know if you decide to use anything here. Drop me a line at <a
             href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>.</p>
-
-{% endblock %}
+@endsection

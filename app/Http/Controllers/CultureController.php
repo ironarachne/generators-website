@@ -14,17 +14,7 @@ class CultureController extends Controller
     public function index()
     {
         $cultures = SavedCulture::latest()->limit(5)->get();
-
-        $page = [
-            'title' => 'Cultures',
-            'subtitle' => 'Generate cultures for a fantasy world',
-            'description' => 'This tool procedurally generates fantasy cultures',
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('culture.index', ['page' => $page, 'cultures' => $cultures]);
+        return view('culture.index', ['cultures' => $cultures]);
     }
 
     public function create()
@@ -54,12 +44,7 @@ class CultureController extends Controller
             return $culture;
         });
 
-        $page = [
-            'title' => 'The ' . $culture->name . ' Culture',
-            'description' => $culture->description,
-        ];
-
-        $html = view('culture.pdf', ['culture' => $culture, 'page' => $page])->render();
+        $html = view('culture.pdf', ['culture' => $culture])->render();
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
@@ -88,16 +73,6 @@ class CultureController extends Controller
             return $culture;
         });
 
-        $page = [
-            'id' => $guid,
-            'title' => 'The ' . $culture->name . ' Culture',
-            'subtitle' => $culture->description,
-            'description' => $culture->description,
-            'type' => 'single',
-            'fathom_domain' => config('services.fathom.domain'),
-            'fathom_site_id' => config('services.fathom.site_id'),
-        ];
-
-        return view('culture.show', ['culture' => $culture, 'page' => $page]);
+        return view('culture.show', ['culture' => $culture]);
     }
 }

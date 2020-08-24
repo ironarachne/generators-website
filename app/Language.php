@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Faker\Guesser\Name;
-
 class Language
 {
     public string $name;
