@@ -12,6 +12,17 @@ RUN composer install \
     --no-scripts \
     --prefer-dist
 
+FROM node:14.8 as frontend
+
+RUN mkdir -p /app/public
+
+COPY package.json webpack.mix.js package-lock.json /app/
+COPY resources/ /app/resources/
+
+WORKDIR /app
+
+RUN npm install && npm run production
+
 FROM php:7.4-apache
 
 RUN pecl install -o -f redis \
@@ -22,6 +33,8 @@ RUN docker-php-ext-install pdo pdo_mysql
 
 COPY . /var/www/html
 COPY --from=vendor /app/vendor/ /var/www/html/vendor/
+COPY --from=frontend /app/public/css/ /var/www/html/public/css/
+COPY --from=frontend /app/mix-manifest.json /var/www/html/mix-manifest.json
 COPY .env.docker .env
 COPY docker-vhost /etc/apache2/sites-available/000-default.conf
 
