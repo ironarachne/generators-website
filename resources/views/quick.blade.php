@@ -11,27 +11,27 @@
 @section('content')
     <p>The following are small generators that you run from this page. These are not saved to your creations.</p>
 
-    <h2><img class="art-icon" src="{{ asset('img/art-icons/alcoholic_drink.PNG') }}"> Alcoholic Drink Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/alcoholic_drink.png') }}"> Alcoholic Drink Generator</h2>
     <p>This generates a unique alcoholic drink.</p>
     <p><button v-on:click="generateDrink">Generate New Drink</button></p>
     <blockquote>@{{ drinkDescription }}</blockquote>
 
-    <h2><img class="art-icon" src="{{ asset('img/art-icons/chop_shop.PNG') }}"> Cyberpunk Chop Shop Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/chop_shop.png') }}"> Cyberpunk Chop Shop Generator</h2>
     <p>Part of the <a href="https://reddit.com/r/rpg_generators">r/rpg_generators</a> subreddit <a href="https://www.reddit.com/r/rpg_generators/comments/ftnsx4/cyberpunk_for_april_rpg_generators_challenge/">Cyberpunk Challenge</a> for April 2020. This generates a cyberpunk chop shop.</p>
     <p><button v-on:click="generateChopShop">Generate New Chop Shop</button></p>
     <blockquote>@{{ chopShopDescription }}</blockquote>
 
-    <h2><img class="art-icon" src="{{ asset('img/art-icons/language.PNG') }}"> Language Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/language.png') }}"> Language Generator</h2>
     <p>This generates a description of a fantasy language for you.</p>
     <p><button v-on:click="generateLanguage">Generate New Language</button></p>
     <blockquote>@{{ languageDescription }}</blockquote>
 
-    <h2><img class="art-icon" src="{{ asset('img/art-icons/organization.PNG') }}"> Organization Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/organization.png') }}"> Organization Generator</h2>
     <p>This generates a fantasy organization.</p>
     <p><button v-on:click="generateOrganization">Generate New Organization</button></p>
     <blockquote>@{{ organizationDescription }}</blockquote>
 
-    <h2><img class="art-icon" src="{{ asset('img/art-icons/town_medium.PNG') }}"> Town Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/town_medium.png') }}"> Town Generator</h2>
     <p>Need a quick town? Click here.</p>
     <p><button v-on:click="generateTown">Generate New Town</button></p>
     <blockquote>@{{ townDescription }}</blockquote>

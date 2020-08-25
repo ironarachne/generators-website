@@ -21,7 +21,7 @@
 
     @foreach($posts as $post)
         <article class="post">
-            <h2><img class="art-icon" src="{{ asset('img/art-icons/blog_post.PNG') }}"> {{ $post['title'] }}</h2>
+            <h2><img class="art-icon" src="{{ asset('img/art-icons/blog_post.png') }}"> {{ $post['title'] }}</h2>
             <p class="date">Published {{ date('l F jS, Y', strtotime($post['created'])) }}</p>
             <div>{!! $post['body'] !!}</div>
         </article>
