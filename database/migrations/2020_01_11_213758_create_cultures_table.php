@@ -13,13 +13,13 @@ class CreateCulturesTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'cultures', function ( Blueprint $table ) {
-            $table->bigIncrements( 'id' );
+        Schema::create('cultures', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->timestamps();
-            $table->unsignedBigInteger( 'user_id' )->nullable();
-            $table->string( 'guid', 128 )->unique();
-            $table->json( 'data' );
-        } );
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('guid', 128)->unique();
+            $table->json('data');
+        });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateCulturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists( 'cultures' );
+        Schema::dropIfExists('cultures');
     }
 }

@@ -39,16 +39,16 @@ class User extends Authenticatable
 
     public function cultures()
     {
-        return $this->hasMany( 'App\Culture' );
+        return $this->hasMany('App\SavedCulture');
     }
 
     public function heraldries()
     {
-        return $this->hasMany( 'App\Heraldry' );
+        return $this->hasMany('App\Heraldry');
     }
 
     public function regions()
     {
-        return $this->hasMany( 'App\Region' );
+        return $this->hasMany('App\SavedRegion');
     }
 }

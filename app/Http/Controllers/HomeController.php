@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Parsedown;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Client;
@@ -11,63 +14,62 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Cache::remember( 'blog_posts', 600, function () {
-            $client = new Client( [ 'base_uri' => 'https://blog.ironarachne.com/api/' ] );
-            $response = $client->request( 'GET', 'collections/ben/posts' );
+        $posts = Cache::remember('blog_posts', 600, function () {
+            $posts = [];
 
-            $body = $response->getBody();
+            $client = new Client(['base_uri' => 'https://blog.ironarachne.com/api/']);
+            $response = $client->request('GET', 'collections/ben/posts');
 
-            $json = json_decode( $body );
+            $body = (string)$response->getBody();
+
+            $json = json_decode($body);
 
             $post_data = $json->data->posts;
 
-            $Parsedown = new \Parsedown();
+            $Parsedown = new Parsedown();
 
             $i = 0;
 
-            foreach ( $post_data as $post ) {
-                if ( $i < 3 ) {
+            foreach ($post_data as $post) {
+                if ($i < 3) {
+                    $body = $Parsedown->text($post->body);
+                    $body = str_replace('h2', 'h3', $body);
+
                     $posts[] = [
                         'title' => $post->title,
                         'created' => $post->created,
-                        'body' => $Parsedown->text( $post->body ),
+                        'body' => $body,
                     ];
+                } else {
+                    break;
                 }
 
                 $i++;
             }
 
             return $posts;
-        } );
+        });
 
-        $page = [
-            'title' => 'Iron Arachne',
-            'subtitle' => 'Procedural Generation Tools for Tabletop Role-playing Games',
-            'description' => 'Procedural Generation Tools for Tabletop Role-playing Games',
-            'type' => 'home',
-            'fathom_domain' => config( 'services.fathom.domain' ),
-            'fathom_site_id' => config( 'services.fathom.site_id' ),
-        ];
-        return view( 'index' )->with( [ 'page' => $page, 'posts' => $posts ] );
+        return view('index')->with(['posts' => $posts]);
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function dashboard()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         $cultures = [];
 
         $userCultures = $user->cultures()->latest()->get();
 
-        foreach ( $userCultures as $cultureObject ) {
-            $cultureData = json_decode( $cultureObject->data );
-            $culture[ 'name' ] = $cultureData->name;
-            $culture[ 'guid' ] = $cultureObject->guid;
+        foreach ($userCultures as $cultureObject) {
+            $cultureData = json_decode($cultureObject->data);
+            $culture['name'] = $cultureData->name;
+            $culture['guid'] = $cultureObject->guid;
             $cultures[] = $culture;
         }
 
@@ -75,65 +77,30 @@ class HomeController extends Controller
 
         $userRegions = $user->regions()->latest()->get();
 
-        foreach ( $userRegions as $regionObject ) {
-            $regionData = json_decode( $regionObject->data );
-            $region[ 'name' ] = $regionData->name;
-            $region[ 'guid' ] = $regionObject->guid;
+        foreach ($userRegions as $regionObject) {
+            $regionData = json_decode($regionObject->data);
+            $region['name'] = $regionData->name;
+            $region['guid'] = $regionObject->guid;
             $regions[] = $region;
         }
 
         $devices = $user->heraldries()->latest()->get();
 
-        $page = [
-            'title' => 'My Dashboard',
-            'subtitle' => '',
-            'description' => 'Personal dashboard',
-            'type' => 'single',
-            'fathom_domain' => config( 'services.fathom.domain' ),
-            'fathom_site_id' => config( 'services.fathom.site_id' ),
-        ];
-        return view( 'dashboard' )->with( [ 'page' => $page, 'cultures' => $cultures, 'regions' => $regions, 'devices' => $devices ] );
+        return view('dashboard')->with(['cultures' => $cultures, 'regions' => $regions, 'devices' => $devices]);
     }
 
     public function about()
     {
-        $page = [
-            'title' => 'About',
-            'subtitle' => '',
-            'description' => 'About Iron Arachne',
-            'type' => 'single',
-            'fathom_domain' => config( 'services.fathom.domain' ),
-            'fathom_site_id' => config( 'services.fathom.site_id' ),
-        ];
-
-        return view('about')->with( [ 'page' => $page ] );
+        return view('about');
     }
 
     public function quick()
     {
-        $page = [
-            'title' => 'Quick Generators',
-            'subtitle' => 'Small generators for quick creations',
-            'description' => 'Small generators for quick creations',
-            'type' => 'single',
-            'fathom_domain' => config( 'services.fathom.domain' ),
-            'fathom_site_id' => config( 'services.fathom.site_id' ),
-        ];
-
-        return view( 'quick' )->with( [ 'page' => $page ] );
+        return view('quick');
     }
 
     public function privacy()
     {
-        $page = [
-            'title' => 'Privacy Policy',
-            'subtitle' => 'This is the site privacy policy',
-            'description' => 'Iron Arachne\'s privacy policy',
-            'type' => 'single',
-            'fathom_domain' => config( 'services.fathom.domain' ),
-            'fathom_site_id' => config( 'services.fathom.site_id' ),
-        ];
-
-        return view( 'privacy' )->with( [ 'page' => $page ] );
+        return view('privacy');
     }
 }

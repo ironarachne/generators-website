@@ -1,8 +1,0 @@
-{% extends 'layout' %}
-
-{% block content %}
-<h1>Verification Sent</h1>
-{{ form_open({ 'route': 'verification.resend' }) }}
-    {{ form_submit('Click to request another verification email', { 'class': 'button is-primary' }) }}
-{{ form_close() }}
-{% endblock %}

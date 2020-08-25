@@ -1,9 +1,9 @@
-@charset 'utf-8';
+@charset "utf-8";
 
 @font-face {
     font-family: 'libre_baskerville';
     src: url('../fonts/librebaskerville-bold-webfont.woff2') format('woff2'),
-         url('../fonts/librebaskerville-bold-webfont.woff') format('woff');
+    url('../fonts/librebaskerville-bold-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
@@ -11,7 +11,7 @@
 @font-face {
     font-family: 'libre_baskerville';
     src: url('../fonts/librebaskerville-italic-webfont.woff2') format('woff2'),
-         url('../fonts/librebaskerville-italic-webfont.woff') format('woff');
+    url('../fonts/librebaskerville-italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
@@ -19,7 +19,7 @@
 @font-face {
     font-family: 'libre_baskerville';
     src: url('../fonts/librebaskerville-regular-webfont.woff2') format('woff2'),
-         url('../fonts/librebaskerville-regular-webfont.woff') format('woff');
+    url('../fonts/librebaskerville-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -59,27 +59,223 @@
     font-style: normal;
 }
 
-$family-serif: 'libre_baskerville';
+$ironarachnegreen: #76E841;
+$tan: #5C5031;
+$gold: #FAD037;
 
-$family-sans-serif: 'eczar';
-$family-primary: $family-serif;
-$body-size: 24px;
-
-h1, h2, h3, h4, h5 {
-    font-family: $family-sans-serif;
+html, body {
+    background: rgb(199,196,184);
+    background: linear-gradient(90deg, rgba(199,196,184,1) 0%, rgba(247,243,228,1) 15%, rgba(247,243,228,1) 85%, rgba(199,196,184,1) 100%);
+    font-family: 'libre_baskerville', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.5rem;
 }
 
-.active {
-    font-weight: 800;
-    font-style: italic;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'eczar', Helvetica, sans-serif;
 }
 
-.navbar {
-    border-bottom: 5px double #eee;
+h1 {
+    color: $ironarachnegreen;
+    font-weight: 700;
+    text-shadow: 2px 2px 1px #000;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #220;
+    font-size: 48px;
+    line-height: 1rem;
+    margin: 0;
 }
 
-.heraldry-small {
+h2 {
+    background: rgb(87,72,34);
+    background: linear-gradient(42deg, rgba(87,72,34,1) 0%, rgba(170,145,73,1) 13%, rgba(247,243,228,1) 50%, rgba(247,243,228,1) 100%);
+    color: #000;
+    font-weight: 500;
+    line-height: 64px;
+    padding: 3px;
+}
+
+a {
+    color: $ironarachnegreen;
+}
+
+a:visited {
+    color: #337711;
+}
+
+a:hover, a:active {
+    color: #0f0;
+}
+
+article.heraldry-list {
+    display: flex;
+    align-items: center;
+    img {
+        width: 64px;
+        margin-right: 1rem;
+    }
+    margin-bottom: 0.5rem;
+}
+
+article.post {
+    p.date {
+        font-style: italic;
+        font-size: 0.75rem;
+        margin: 0;
+    }
+    div {
+        border-left: 3px solid $tan;
+        padding: 0 0 0 1rem;
+        p:first-child:first-letter {
+            float: left;
+            font-family: 'eczar', Helvetica, sans-serif;
+            font-size: 75px;
+            line-height: 60px;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 3px;
+        }
+    }
+}
+
+blockquote {
+    background: #E3D5A1;
+    border-left: 2px solid $tan;
+    padding: 0.5rem 1rem;
+}
+
+button, input[type=submit] {
+    background: rgb(92,86,73);
+    background: linear-gradient(165deg, rgba(92,86,73,1) 0%, rgba(10,10,10,1) 100%);
+    border: 3px solid $tan;
+    border-radius: 3px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+}
+
+button:active, input[type=submit]:active {
+    background: rgb(92,86,73);
+    background: linear-gradient(339deg, rgba(92,86,73,1) 0%, rgba(10,10,10,1) 100%);
+    color: $ironarachnegreen;
+    transform: translateY(2px);
+}
+
+button:hover, input[type=submit]:hover {
+    color: #fff;
+}
+
+div.columns {
+    display: flex;
+    width: 100%;
+    div.column {
+        margin: 0 0.5rem;
+    }
+}
+
+div.heraldry-large {
+    width: 100%;
+    text-align: center;
+    img {
+        margin: 0 auto;
+        width: 400px;
+    }
+}
+
+div.input-group {
+    font-size: 0.8rem;
+    margin: 0.5rem;
+}
+
+figure.heraldry {
+    text-align: center;
+    width: 400px;
+}
+
+nav {
+    background-image: url("/img/stone_bg.png");
+    border-bottom: 3px solid #000;
+    border-top: 3px solid #000;
+    ul {
+        list-style: none;
+        display: flex;
+        width: 100%;
+        margin: 0;
+        li {
+            font-family: 'eczar', Helvetica, sans-serif;
+            font-size: 1.15rem;
+            margin: 0.5rem 0.35rem;
+            a {
+                text-decoration: none;
+                color: #fff;
+            }
+            a:visited {
+                color: #fff;
+            }
+        }
+        li:after {
+            color: $ironarachnegreen;
+            content: " \25C8";
+        }
+    }
+}
+
+section {
+    width: 968px;
+    margin: 0 auto;
+}
+
+@media (max-width: 968px) {
+    section {
+        width: 100%;
+    }
+}
+
+header {
+    background: rgb(156,128,58);
+    background: radial-gradient(circle, rgba(156,128,58,1) 0%, rgba(92,80,49,1) 100%);
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    img.logo {
+        height: 128px;
+        width: 128px;
+    }
+    p.subtitle {
+        color: $gold;
+        margin: 1rem 0 0 0;
+        text-shadow: 1px 1px 1px #000;
+    }
+}
+
+img.art-icon {
+    float: left;
+    height: 64px;
     width: 64px;
+    margin-right: 1rem;
 }
 
-@import "~bulma";
+footer {
+    background-color: #9C9374;
+    font-size: 0.75rem;
+    border-top: 1px solid $tan;
+    margin-top: 2rem;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+    text-align: center;
+    p.logo-name {
+        font-family: "eczar", Helvetica, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        display: block;
+    }
+    img.logo {
+        width: 128px;
+        margin: 0 auto;
+    }
+    p {
+        margin: 0.25rem;
+    }
+}
+
+
