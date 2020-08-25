@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    My Dashboard
+    {{ Auth::user()->name }}'s Dashboard
 @endsection
 
 @section('subtitle')
@@ -11,9 +11,11 @@
 @section('content')
     <p>This is your dashboard. Your creations appear here.</p>
 
+    <h2>Your Creations</h2>
+
     <div class="columns">
         <div class="column">
-            <h2>Cultures</h2>
+            <h3>Cultures</h3>
 
             <ul>
                 @foreach ($cultures as $culture)
@@ -22,7 +24,7 @@
             </ul>
         </div>
         <div class="column">
-            <h2>Regions</h2>
+            <h3>Regions</h3>
 
             <ul>
                 @foreach ($regions as $region)
@@ -31,7 +33,7 @@
             </ul>
         </div>
         <div class="column">
-            <h2>Heraldry</h2>
+            <h3>Heraldry</h3>
 
             @foreach ($devices as $device)
                 <article class="heraldry-list">

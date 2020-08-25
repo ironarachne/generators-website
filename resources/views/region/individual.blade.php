@@ -17,19 +17,19 @@
 
 <h2>Notable Towns in {{ $region->name }}</h2>
 
-<h3>{{ $region->capital->name }}<span>, the capital and
+<h3><img class="art-icon" src="{{ asset('img/art-icons/capital.PNG') }}"> {{ $region->capital->name }}<span>, the capital and
 {{ $region->ruler->primary_title }} {{ $region->ruler->last_name }}'s home</span></h3>
 <p>{{ $region->capital->description }}</p>
 
 @foreach($region->towns as $town)
-        <h3>{{ $town->name }}</h3>
+        <h3><img class="art-icon" src="{{ asset('img/art-icons/town_' . $town->category->size . '.PNG') }}"> {{ $town->name }}</h3>
         <p>{{ $town->description }}</p>
 @endforeach
 
 @if (!empty($region->organizations))
     <h2>Notable Organizations in {{ $region->name }}</h2>
     @foreach ($region->organizations as $organization)
-        <h3>The {{ $organization->name }}</h3>
+        <h3><img class="art-icon" src="{{ asset('img/art-icons/' . str_replace(' ', '_', $organization->type->name) . '.PNG') }}"> The {{ $organization->name }}</h3>
         <p>{{ $organization->description }}</p>
     @endforeach
 @endif

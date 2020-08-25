@@ -4,13 +4,15 @@
     Privacy Policy
 @endsection
 
+@section('subtitle')
+    This is Iron Arachne's privacy policy.
+@endsection
+
 @section('description')
     This is Iron Arachne's privacy policy.
 @endsection
 
 @section('content')
-    <h1>Privacy Policy for Iron Arachne</h1>
-
     <p>At Iron Arachne, accessible from https://ironarachne.com, one of our main priorities is the privacy of our
         visitors. This Privacy Policy document contains types of information that is collected and recorded by Iron
         Arachne and how we use it.</p>

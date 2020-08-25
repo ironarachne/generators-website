@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "libre_baskerville";
   src: url("../fonts/librebaskerville-bold-webfont.woff2") format("woff2"), url("../fonts/librebaskerville-bold-webfont.woff") format("woff");
@@ -47,8 +48,10 @@
   font-style: normal;
 }
 html, body {
+  background: #c7c4b8;
+  background: linear-gradient(90deg, #c7c4b8 0%, #f7f3e4 15%, #f7f3e4 85%, #c7c4b8 100%);
   font-family: "libre_baskerville", Georgia, serif;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.5rem;
 }
 
@@ -57,21 +60,35 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+  color: #76E841;
+  font-weight: 700;
+  text-shadow: 2px 2px 1px #000;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #220;
   font-size: 48px;
   line-height: 1rem;
   margin: 0;
+}
+
+h2 {
+  background: #574822;
+  background: linear-gradient(42deg, #574822 0%, #aa9149 13%, #f7f3e4 50%, #f7f3e4 100%);
+  color: #000;
+  font-weight: 500;
+  line-height: 64px;
+  padding: 3px;
 }
 
 a {
   color: #76E841;
 }
 
-a:hover {
-  color: #0f0;
-}
-
 a:visited {
   color: #337711;
+}
+
+a:hover, a:active {
+  color: #0f0;
 }
 
 article.heraldry-list {
@@ -84,26 +101,45 @@ article.heraldry-list img {
   margin-right: 1rem;
 }
 
+article.post p.date {
+  font-style: italic;
+  font-size: 0.75rem;
+  margin: 0;
+}
+article.post div {
+  border-left: 3px solid #5C5031;
+  padding: 0 0 0 1rem;
+}
+article.post div p:first-child:first-letter {
+  float: left;
+  font-family: "eczar", Helvetica, sans-serif;
+  font-size: 75px;
+  line-height: 60px;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-left: 3px;
+}
+
 blockquote {
-  background: #F5FCF2;
-  border-left: 2px solid #76E841;
+  background: #E3D5A1;
+  border-left: 2px solid #5C5031;
   padding: 0.5rem 1rem;
 }
 
 button, input[type=submit] {
-  background: #25a30e;
-  background: linear-gradient(0deg, #25a30e 0%, #76e841 100%);
-  border: none;
+  background: #5c5649;
+  background: linear-gradient(165deg, #5c5649 0%, #0a0a0a 100%);
+  border: 3px solid #5C5031;
   border-radius: 3px;
-  color: #000;
+  color: #fff;
   padding: 0.5rem 1rem;
 }
 
 button:active, input[type=submit]:active {
-  background: #25a30e;
-  background: linear-gradient(180deg, #25a30e 0%, #76e841 100%);
+  background: #5c5649;
+  background: linear-gradient(339deg, #5c5649 0%, #0a0a0a 100%);
   color: #76E841;
-  transform: translateY(4px);
+  transform: translateY(2px);
 }
 
 button:hover, input[type=submit]:hover {
@@ -138,34 +174,48 @@ figure.heraldry {
 }
 
 nav {
-  border-bottom: 3px double #eee;
-  border-top: 3px double #eee;
+  background-image: url("/img/stone_bg.png");
+  border-bottom: 3px solid #000;
+  border-top: 3px solid #000;
 }
 nav ul {
   list-style: none;
   display: flex;
   width: 100%;
+  margin: 0;
 }
 nav ul li {
   font-family: "eczar", Helvetica, sans-serif;
-  display: inline-block;
-  margin: 0 0.5rem;
+  font-size: 1.15rem;
+  margin: 0.5rem 0.35rem;
 }
 nav ul li a {
   text-decoration: none;
+  color: #fff;
+}
+nav ul li a:visited {
+  color: #fff;
+}
+nav ul li:after {
+  color: #76E841;
+  content: " ◈";
 }
 
-header, nav, section, footer {
+section {
   width: 968px;
   margin: 0 auto;
 }
 
 @media (max-width: 968px) {
-  header, nav, section, footer {
+  section {
     width: 100%;
   }
 }
 header {
+  background: #9c803a;
+  background: radial-gradient(circle, #9c803a 0%, #5c5031 100%);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
   display: flex;
   align-items: center;
 }
@@ -174,13 +224,39 @@ header img.logo {
   width: 128px;
 }
 header p.subtitle {
-  margin: 0;
+  color: #FAD037;
+  margin: 1rem 0 0 0;
+  text-shadow: 1px 1px 1px #000;
+}
+
+img.art-icon {
+  float: left;
+  height: 64px;
+  width: 64px;
+  margin-right: 1rem;
 }
 
 footer {
-  border-top: 1px solid #eee;
-  margin-top: 1rem;
+  background-color: #9C9374;
   font-size: 0.75rem;
+  border-top: 1px solid #5C5031;
+  margin-top: 2rem;
+  padding-bottom: 5rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+footer p.logo-name {
+  font-family: "eczar", Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+}
+footer img.logo {
+  width: 128px;
+  margin: 0 auto;
+}
+footer p {
+  margin: 0.25rem;
 }
 
 /*# sourceMappingURL=app.css.map */

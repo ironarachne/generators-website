@@ -9,17 +9,19 @@ class TownCategory
     public string $name;
     public int $min_size;
     public int $max_size;
+    public string $size;
     public bool $has_districts;
     public array $districts;
     public int $commonality;
     public array $export_types;
     public array $possible_character;
 
-    public function __construct(string $name, int $min, int $max, int $commonality, array $possibleCharacter, array $exportTypes = [], bool $hasDistricts = false, array $districts = [])
+    public function __construct(string $name, int $min, int $max, string $size, int $commonality, array $possibleCharacter, array $exportTypes = [], bool $hasDistricts = false, array $districts = [])
     {
         $this->name = $name;
         $this->min_size = $min;
         $this->max_size = $max;
+        $this->size = $size;
         $this->commonality = $commonality;
         $this->export_types = $exportTypes;
         $this->has_districts = $hasDistricts;
@@ -133,12 +135,12 @@ class TownCategory
         ];
 
         return [
-            new TownCategory('hamlet', 10, 49, 10, $smallCharacter, $smallExports),
-            new TownCategory('village', 50, 499, 20, $smallCharacter, $smallExports),
-            new TownCategory('town', 500, 9999, 15, $mediumCharacter, $mediumExports),
-            new TownCategory('borough', 10000, 19999, 5, $mediumCharacter, $mediumExports),
-            new TownCategory('city', 20000, 49999, 5, $largeCharacter, $largeExports),
-            new TownCategory('metropolis', 50000, 3000000, 1, $largeCharacter, $largeExports),
+            new TownCategory('hamlet', 10, 49, 'small', 10, $smallCharacter, $smallExports),
+            new TownCategory('village', 50, 499, 'small', 20, $smallCharacter, $smallExports),
+            new TownCategory('town', 500, 9999, 'medium', 15, $mediumCharacter, $mediumExports),
+            new TownCategory('borough', 10000, 19999, 'medium', 5, $mediumCharacter, $mediumExports),
+            new TownCategory('city', 20000, 49999, 'large', 5, $largeCharacter, $largeExports),
+            new TownCategory('metropolis', 50000, 3000000, 'large', 1, $largeCharacter, $largeExports),
         ];
     }
 

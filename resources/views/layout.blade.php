@@ -65,20 +65,15 @@
     @yield('content')
 </section>
 <footer>
-    <p>
-        <strong>Iron Arachne</strong> is the ongoing project of
-        <a href="https://benovermyer.com">Ben Overmyer</a>. You can find source code for most of these tools on
-        GitHub at <a href="https://github.com/ironarachne/">github.com/ironarachne</a>.
-    </p>
-    <p>
-        You can contact the author at <a href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>.
-    </p>
-    <p>
-        The Iron Arachne privacy policy is visible <a href="{{ route('privacy') }}">here</a>.
-    </p>
+    <p class="logo-name">Iron Arachne</p>
+    <img class="logo" src="{{ asset('img/ia-logo-small.png') }}" alt="Iron Arachne logo">
+    <p><strong>Iron Arachne</strong>&trade; is an ongoing project of <a href="https://benovermyer.com">Ben Overmyer</a>.</p>
+    <p>&copy;{{ date('Y') }} Ben Overmyer. All rights reserved.</p>
+    <p>You can find source code for most of these tools on <a href="https://github.com/ironarachne/">GitHub</a>.</p>
+    <p>You can contact the author at <a href="mailto:ben@ironarachne.com">ben@ironarachne.com</a>.</p>
+    <p><a href="{{ route('privacy') }}">Privacy Policy</a></p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 <script>
     @yield('javascript')
 </script>

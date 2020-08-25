@@ -76,12 +76,16 @@ class Resource
             $data = json_decode($response->getBody()->getContents());
 
             foreach ($data->resources as $d) {
-                $resource = Resource::fromJSON($d);
+                $resource = Resource::fromObject($d);
                 $resources[] = $resource;
             }
 
             return $resources;
         });
+    }
+
+    public static function random(array $resources): Resource {
+        return random_item($resources);
     }
 
     public function in($haystack)

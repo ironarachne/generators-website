@@ -27,7 +27,7 @@
     <h2>Most Recent Regions Generated</h2>
 
     @foreach ($regions as $region)
-            <h3><a href="{{ route('region.show', ['guid' => $region->guid]) }}">{{ $region->name }}</a></h3>
-            <p>{{ $region->description }}</p>
+        <h3><a href="{{ route('region.show', ['guid' => $region->guid]) }}">{{ $region->name }}</a></h3>
+        <p>{{ $region->description }}</p>
     @endforeach
 @endsection

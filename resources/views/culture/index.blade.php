@@ -4,6 +4,10 @@
     Culture Generator
 @endsection
 
+@section('subtitle')
+    A generator of fantasy cultures
+@endsection
+
 @section('description')
     This tool procedurally generates fantasy cultures
 @endsection

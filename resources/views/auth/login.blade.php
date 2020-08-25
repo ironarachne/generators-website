@@ -11,27 +11,23 @@
 
     @if ($errors->any())
         @foreach($errors->all() as $error)
-            <h4 class="has-text-danger">{{ $error }}</h4>
+            <p>{{ $error }}</p>
         @endforeach
     @endif
 
-    <div class="field">
+    <div class="input-group">
         {{ Form::label('email', 'Email Address', ['class' => 'label']) }}
-        <div class="control">
-            {{ Form::email('email', '', ['class' => 'input']) }}
-        </div>
+        {{ Form::email('email', '', ['class' => 'input']) }}
     </div>
-    <div class="field">
+    <div class="input-group">
         {{ Form::label('password', 'Password', ['class' => 'label']) }}
-        <div class="control">
-            {{ Form::password('password', ['class' => 'input']) }}
-        </div>
+        {{ Form::password('password', ['class' => 'input']) }}
     </div>
 
     {{ Form::submit('Login', ['class' => 'button is-primary']) }}
 
     {{ Form::close() }}
 
-    <a href="/password/reset">Forgot your password?</a>
+    <p><a href="/password/reset">Forgot your password?</a></p>
 
 @endsection

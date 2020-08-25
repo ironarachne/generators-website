@@ -11,27 +11,32 @@
 @section('content')
     <p>The following are small generators that you run from this page. These are not saved to your creations.</p>
 
-    @verbatim
-    <h2>Cyberpunk Chop Shop Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/alcoholic_drink.PNG') }}"> Alcoholic Drink Generator</h2>
+    <p>This generates a unique alcoholic drink.</p>
+    <p><button v-on:click="generateDrink">Generate New Drink</button></p>
+    <blockquote>@{{ drinkDescription }}</blockquote>
+
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/chop_shop.PNG') }}"> Cyberpunk Chop Shop Generator</h2>
     <p>Part of the <a href="https://reddit.com/r/rpg_generators">r/rpg_generators</a> subreddit <a href="https://www.reddit.com/r/rpg_generators/comments/ftnsx4/cyberpunk_for_april_rpg_generators_challenge/">Cyberpunk Challenge</a> for April 2020. This generates a cyberpunk chop shop.</p>
     <p><button v-on:click="generateChopShop">Generate New Chop Shop</button></p>
-    <blockquote>{{ chopShopDescription }}</blockquote>
+    <blockquote>@{{ chopShopDescription }}</blockquote>
 
-    <h2>Language Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/language.PNG') }}"> Language Generator</h2>
     <p>This generates a description of a fantasy language for you.</p>
     <p><button v-on:click="generateLanguage">Generate New Language</button></p>
-    <blockquote>{{ languageDescription }}</blockquote>
+    <blockquote>@{{ languageDescription }}</blockquote>
 
-    <h2>Town Generator</h2>
-    <p>Need a quick town? Click here.</p>
-    <p><button v-on:click="generateTown">Generate New Town</button></p>
-    <blockquote>{{ townDescription }}</blockquote>
-
-    <h2>Organization Generator</h2>
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/organization.PNG') }}"> Organization Generator</h2>
     <p>This generates a fantasy organization.</p>
     <p><button v-on:click="generateOrganization">Generate New Organization</button></p>
-    <blockquote>{{ organizationDescription }}</blockquote>
-    @endverbatim
+    <blockquote>@{{ organizationDescription }}</blockquote>
+
+    <h2><img class="art-icon" src="{{ asset('img/art-icons/town_medium.PNG') }}"> Town Generator</h2>
+    <p>Need a quick town? Click here.</p>
+    <p><button v-on:click="generateTown">Generate New Town</button></p>
+    <blockquote>@{{ townDescription }}</blockquote>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
 @endsection
 
 @section('javascript')
@@ -100,6 +105,7 @@ var app = new Vue({
     el: '#app',
     data: {
         chopShopDescription: '',
+        drinkDescription: '',
         languageDescription: '',
         languageName: '',
         organizationDescription: '',
@@ -110,38 +116,51 @@ var app = new Vue({
             description = getCSFront() + " " + getCSEntry() + " " + getCSProductDisplays() + " " + getCSCustomers() + " " + getCSBack()
             this.chopShopDescription = description
         },
-        generateLanguage: function (event) {
-            url = 'https://worldapi.ironarachne.com/language'
+        generateDrink: function (event) {
+            this.drinkDescription = 'Generating...'
+
+            url = '{{ route('api.alcoholic_drink.random') }}'
 
             fetch(url)
             .then(response => response.json())
             .then(response => {
-                this.languageDescription = response.description
+            this.drinkDescription = response.alcoholic_drink.description
+            })
+            .catch(error => console.error(error));
+        },
+        generateLanguage: function (event) {
+            this.languageDescription = 'Generating...'
+
+            url = '{{ route('api.language.random') }}'
+
+            fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                this.languageDescription = response.language.description
             })
             .catch(error => console.error(error));
         },
         generateOrganization: function (event) {
-            id = getRandomInt(1000000)
-            url = 'https://worldapi.ironarachne.com/organization/' + id
+            this.organizationDescription = 'Generating...'
+
+            url = '{{ route('api.organization.random') }}'
 
             fetch(url)
             .then(response => response.json())
             .then(response => {
-                this.organizationDescription = response.description
+                this.organizationDescription = response.organization.description
             })
             .catch(error => console.error(error));
         },
         generateTown: function (event) {
-            id = getRandomInt(1000000)
-            url = 'https://worldapi.ironarachne.com/town/' + id
+            this.townDescription = 'Generating...'
+
+            url = '{{ route('api.town.random') }}'
 
             fetch(url)
             .then(response => response.json())
             .then(response => {
-                this.townDescription = response.name + ' is a ' + response.category + ' of ' + response.population + ' people. '
-                this.townDescription = response.building_style + ' '
-                this.townDescription += 'It exports ' + response.exports[0] + ' and imports ' + response.imports[0] + '. '
-                this.townDescription += 'The mayor is ' + response.mayor.name + '. ' + response.mayor.description
+                this.townDescription = response.town.description
             })
             .catch(error => console.error(error));
         }
@@ -149,6 +168,7 @@ var app = new Vue({
 })
 
 app.generateChopShop()
+app.generateDrink()
 app.generateLanguage()
 app.generateOrganization()
 app.generateTown()

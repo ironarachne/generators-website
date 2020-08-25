@@ -4,6 +4,10 @@
     Heraldry Generator
 @endsection
 
+@section('subtitle')
+    A coat-of-arms generator
+@endsection
+
 @section('content')
     <p>This generator creates a fictional coat-of-arms and accompanying blazon.<p>
 

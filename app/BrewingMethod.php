@@ -23,4 +23,8 @@ class BrewingMethod
     public static function fromObject(\stdClass $data): BrewingMethod {
         return new BrewingMethod($data->name, $data->base_tag);
     }
+
+    public static function random(array $methods): BrewingMethod {
+        return random_item($methods);
+    }
 }

@@ -60,10 +60,14 @@
 }
 
 $ironarachnegreen: #76E841;
+$tan: #5C5031;
+$gold: #FAD037;
 
 html, body {
+    background: rgb(199,196,184);
+    background: linear-gradient(90deg, rgba(199,196,184,1) 0%, rgba(247,243,228,1) 15%, rgba(247,243,228,1) 85%, rgba(199,196,184,1) 100%);
     font-family: 'libre_baskerville', Georgia, serif;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1.5rem;
 }
 
@@ -72,21 +76,35 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+    color: $ironarachnegreen;
+    font-weight: 700;
+    text-shadow: 2px 2px 1px #000;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #220;
     font-size: 48px;
     line-height: 1rem;
     margin: 0;
+}
+
+h2 {
+    background: rgb(87,72,34);
+    background: linear-gradient(42deg, rgba(87,72,34,1) 0%, rgba(170,145,73,1) 13%, rgba(247,243,228,1) 50%, rgba(247,243,228,1) 100%);
+    color: #000;
+    font-weight: 500;
+    line-height: 64px;
+    padding: 3px;
 }
 
 a {
     color: $ironarachnegreen;
 }
 
-a:hover {
-    color: #0f0;
-}
-
 a:visited {
     color: #337711;
+}
+
+a:hover, a:active {
+    color: #0f0;
 }
 
 article.heraldry-list {
@@ -99,26 +117,47 @@ article.heraldry-list {
     margin-bottom: 0.5rem;
 }
 
+article.post {
+    p.date {
+        font-style: italic;
+        font-size: 0.75rem;
+        margin: 0;
+    }
+    div {
+        border-left: 3px solid $tan;
+        padding: 0 0 0 1rem;
+        p:first-child:first-letter {
+            float: left;
+            font-family: 'eczar', Helvetica, sans-serif;
+            font-size: 75px;
+            line-height: 60px;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 3px;
+        }
+    }
+}
+
 blockquote {
-    background: #F5FCF2;
-    border-left: 2px solid $ironarachnegreen;
+    background: #E3D5A1;
+    border-left: 2px solid $tan;
     padding: 0.5rem 1rem;
 }
 
 button, input[type=submit] {
-    background: rgb(37,163,14);
-    background: linear-gradient(0deg, rgba(37,163,14,1) 0%, rgba(118,232,65,1) 100%);
-    border: none;
+    background: rgb(92,86,73);
+    background: linear-gradient(165deg, rgba(92,86,73,1) 0%, rgba(10,10,10,1) 100%);
+    border: 3px solid $tan;
     border-radius: 3px;
-    color: #000;
+    color: #fff;
     padding: 0.5rem 1rem;
 }
 
 button:active, input[type=submit]:active {
-    background: rgb(37,163,14);
-    background: linear-gradient(180deg, rgba(37,163,14,1) 0%, rgba(118,232,65,1) 100%);
+    background: rgb(92,86,73);
+    background: linear-gradient(339deg, rgba(92,86,73,1) 0%, rgba(10,10,10,1) 100%);
     color: $ironarachnegreen;
-    transform: translateY(4px);
+    transform: translateY(2px);
 }
 
 button:hover, input[type=submit]:hover {
@@ -153,35 +192,49 @@ figure.heraldry {
 }
 
 nav {
-    border-bottom: 3px double #eee;
-    border-top: 3px double #eee;
+    background-image: url("/img/stone_bg.png");
+    border-bottom: 3px solid #000;
+    border-top: 3px solid #000;
     ul {
         list-style: none;
         display: flex;
         width: 100%;
+        margin: 0;
         li {
             font-family: 'eczar', Helvetica, sans-serif;
-            display: inline-block;
-            margin: 0 0.5rem;
+            font-size: 1.15rem;
+            margin: 0.5rem 0.35rem;
             a {
                 text-decoration: none;
+                color: #fff;
             }
+            a:visited {
+                color: #fff;
+            }
+        }
+        li:after {
+            color: $ironarachnegreen;
+            content: " \25C8";
         }
     }
 }
 
-header, nav, section, footer {
+section {
     width: 968px;
     margin: 0 auto;
 }
 
 @media (max-width: 968px) {
-    header, nav, section, footer {
+    section {
         width: 100%;
     }
 }
 
 header {
+    background: rgb(156,128,58);
+    background: radial-gradient(circle, rgba(156,128,58,1) 0%, rgba(92,80,49,1) 100%);
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
     display: flex;
     align-items: center;
     img.logo {
@@ -189,14 +242,40 @@ header {
         width: 128px;
     }
     p.subtitle {
-        margin: 0;
+        color: $gold;
+        margin: 1rem 0 0 0;
+        text-shadow: 1px 1px 1px #000;
     }
 }
 
+img.art-icon {
+    float: left;
+    height: 64px;
+    width: 64px;
+    margin-right: 1rem;
+}
+
 footer {
-    border-top: 1px solid #eee;
-    margin-top: 1rem;
+    background-color: #9C9374;
     font-size: 0.75rem;
+    border-top: 1px solid $tan;
+    margin-top: 2rem;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+    text-align: center;
+    p.logo-name {
+        font-family: "eczar", Helvetica, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        display: block;
+    }
+    img.logo {
+        width: 128px;
+        margin: 0 auto;
+    }
+    p {
+        margin: 0.25rem;
+    }
 }
 
 

@@ -35,12 +35,12 @@ class AlcoholicDrinkGenerator
             throw new Exception('no applicable resources');
         }
 
-        $method = random_item($methods);
+        $method = BrewingMethod::random($methods);
 
         $strength = $this->randomStrength();
 
         $baseOptions = Resource::byTag($resources, $method->base_tag);
-        $baseResource = random_item($baseOptions);
+        $baseResource = Resource::random($baseOptions);
         $base = $baseResource->name;
 
         $description = trim("$strength beverage called $name, which is " . $method->name . " from $base");
@@ -66,7 +66,7 @@ class AlcoholicDrinkGenerator
         return $drink;
     }
 
-    public function randomName()
+    public function randomName(): string
     {
         $prefixes = [
             'fire',
@@ -85,7 +85,7 @@ class AlcoholicDrinkGenerator
         return random_item($prefixes) . random_item($suffixes);
     }
 
-    public function randomStrength()
+    public function randomStrength(): string
     {
         $strengths = [
             'very weak',
