@@ -3,7 +3,7 @@
 
 <p>They originally came from a {{ $culture->geography->biome->name }} region.</p>
 
-<h2><img class="art-icon" src="{{ asset('img/art-icons/names.PNG') }}"> Common Names</h2>
+<h2><img class="art-icon" src="{{ asset('img/art-icons/names.png') }}"> Common Names</h2>
 
 <div class="columns">
     <div class="column">
@@ -38,11 +38,11 @@
     </div>
 </div>
 
-<h2><img class="art-icon" src="{{ asset('img/art-icons/music.PNG') }}"> Music</h2>
+<h2><img class="art-icon" src="{{ asset('img/art-icons/music.png') }}"> Music</h2>
 
 <p>{{ $culture->music->description }}</p>
 
-<h2><img class="art-icon" src="{{ asset('img/art-icons/clothing.PNG') }}"> Clothing</h2>
+<h2><img class="art-icon" src="{{ asset('img/art-icons/clothing.png') }}"> Clothing</h2>
 
 <p>As the {{ $culture->adjective }} hail originally from a {{ $culture->geography->biome->name }} region, their clothing
     style is appropriate for that kind of place. They often wear the following:
@@ -56,13 +56,13 @@
 
 <p>Women usually wear {{ $culture->clothing->female_outfit }}.</p>
 
-<h2><img class="art-icon" src="{{ asset('img/art-icons/food.PNG') }}"> Food and Drink</h2>
+<h2><img class="art-icon" src="{{ asset('img/art-icons/food.png') }}"> Food and Drink</h2>
 
 <p>{{ $culture->cuisine->description }}</p>
 
 <p>They have {{ $culture->drink->description }}.</p>
 
-<h2><img class="art-icon" src="{{ asset('img/art-icons/religion.PNG') }}"> Religion</h2>
+<h2><img class="art-icon" src="{{ asset('img/art-icons/religion.png') }}"> Religion</h2>
 <p>The {{ $culture->adjective }} have a {{ $culture->religion->category->name }} outlook. They gather in
     {{ $culture->religion->gathering_place }}s.</p>
 @if ($culture->religion->category->has_pantheon)
