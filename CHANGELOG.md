@@ -1,5 +1,27 @@
 # Change Log
 
+## 1.0.4 (2020-08-26)
+
+- Fix the wrapping on the nav bar and columns
+
+## 1.0.3 (2020-08-25)
+
+- Fix image file extensions, for real this time
+
+## 1.0.2 (2020-08-25)
+
+- Fix image file extensions
+
+## 1.0.1 (2020-08-25)
+
+- Restore missing CSS
+
+## 1.0.0 (2020-08-25)
+
+- Rewrite almost the _entire_ World API as part of this application
+- Redesign everything
+- Have a beer
+
 ## 0.6.6 (2020-04-20)
 
 - Add the same cache bug fix to culture and region
