@@ -82,7 +82,7 @@ h1 {
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #220;
     font-size: 48px;
-    line-height: 1rem;
+    line-height: 2.5rem;
     margin: 0;
 }
 
@@ -166,6 +166,7 @@ button:hover, input[type=submit]:hover {
 
 div.columns {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     div.column {
         margin: 0 0.5rem;
@@ -198,6 +199,7 @@ nav {
     ul {
         list-style: none;
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         margin: 0;
         li {
