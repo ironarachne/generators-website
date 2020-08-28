@@ -1,0 +1,14 @@
+docker-build:
+  image: docker
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD" registry.gitlab.com
+  script:
+    - VERSION_TAG=`cat VERSION`
+    - docker build -t registry.gitlab.com/benovermyer/ironarachne:$VERSION_TAG -t registry.gitlab.com/benovermyer/ironarachne:latest .
+    - docker push registry.gitlab.com/benovermyer/ironarachne:$VERSION_TAG
+    - docker push registry.gitlab.com/benovermyer/ironarachne:latest
+  only:
+    - master
